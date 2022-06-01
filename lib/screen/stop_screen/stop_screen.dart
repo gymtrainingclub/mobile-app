@@ -1,4 +1,8 @@
+// ignore_for_file: deprecated_member_use
+
 import 'package:flutter/material.dart';
+
+import '../register_screen/register_screen.dart';
 
 class StopScreen extends StatelessWidget {
   const StopScreen({Key? key}) : super(key: key);
@@ -59,16 +63,20 @@ class StopScreen extends StatelessWidget {
             child: Column(
               mainAxisAlignment: MainAxisAlignment.end,
               children: [
-                ElevatedButton(
-                  onPressed: () {},
-                  child: const Text(
-                    'Login',
+                SizedBox(
+                  width: 140,
+                  child: RaisedButton(
+                    onPressed: () {},
+                    child: const Text('Login'),
                   ),
                 ),
-                ElevatedButton(
-                  onPressed: () {},
-                  child: const Text(
-                    'Registrasi',
+                SizedBox(
+                  width: 140,
+                  child: RaisedButton(
+                    onPressed: () {
+                      Navigator.of(context).pushNamed(RegisterScreen.route);
+                    },
+                    child: const Text('Register'),
                   ),
                 ),
                 const SizedBox(height: 20),

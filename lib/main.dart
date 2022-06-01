@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'screen/register_screen/register_screen.dart';
 import 'package:provider/provider.dart';
 import 'screen/logo_screen/logo_screen.dart';
 import 'screen/splash_screen/splash_screen.dart';
@@ -54,6 +55,8 @@ class MyApp extends StatelessWidget {
             return routeBuilder(const SplashScreen(), set);
           case StopScreen.route:
             return routeBuilder(const StopScreen(), set);
+          case RegisterScreen.route:
+            return routeBuilder(const RegisterScreen(), set);
           default:
             return routeBuilder(const LogoScreen(), set);
         }
