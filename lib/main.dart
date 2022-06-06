@@ -1,5 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'screen/home_screen/home_screen.dart';
+import 'screen/login_screen/login_screen.dart';
+import 'screen/profile_screen/profile_screen.dart';
 import 'screen/register_screen/register_screen.dart';
 import 'package:provider/provider.dart';
 import 'screen/logo_screen/logo_screen.dart';
@@ -57,6 +60,12 @@ class MyApp extends StatelessWidget {
             return routeBuilder(const StopScreen(), set);
           case RegisterScreen.route:
             return routeBuilder(const RegisterScreen(), set);
+          case LoginScreen.route:
+            return routeBuilder(const LoginScreen(), set);
+          case HomeScreen.route:
+            return routeBuilder(const HomeScreen(), set);
+          case ProfileScreen.route:
+            return routeBuilder(const ProfileScreen(), set);
           default:
             return routeBuilder(const LogoScreen(), set);
         }

@@ -1,6 +1,7 @@
 // ignore_for_file: deprecated_member_use
 
 import 'package:flutter/material.dart';
+import 'package:mobileapp2/screen/login_screen/login_screen.dart';
 
 import '../register_screen/register_screen.dart';
 
@@ -66,7 +67,9 @@ class StopScreen extends StatelessWidget {
                 SizedBox(
                   width: 140,
                   child: RaisedButton(
-                    onPressed: () {},
+                    onPressed: () {
+                      Navigator.of(context).pushNamed(LoginScreen.route);
+                    },
                     child: const Text('Login'),
                   ),
                 ),

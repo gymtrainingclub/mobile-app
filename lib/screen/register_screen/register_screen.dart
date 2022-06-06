@@ -1,3 +1,5 @@
+// ignore_for_file: deprecated_member_use
+
 import 'package:flutter/material.dart';
 
 class RegisterScreen extends StatefulWidget {
@@ -153,6 +155,33 @@ class _RegisterScreenState extends State<RegisterScreen> {
               }
               return null;
             },
+          ),
+          const SizedBox(
+            height: 16,
+          ),
+          SizedBox(
+            width: 140,
+            child: RaisedButton(
+              onPressed: () {
+                Navigator.of(context).pushNamed(RegisterScreen.route);
+              },
+              child: const Text('Register'),
+            ),
+          ),
+          const SizedBox(
+            height: 40,
+          ),
+          GestureDetector(
+            child: const Text(
+              'Skip',
+              style: TextStyle(
+                decoration: TextDecoration.underline,
+              ),
+            ),
+            onTap: () => Navigator.of(context).pushReplacementNamed('/stop'),
+          ),
+          const SizedBox(
+            height: 40,
           ),
         ],
       ),
