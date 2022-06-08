@@ -1,8 +1,8 @@
 // ignore_for_file: deprecated_member_use
 
 import 'package:flutter/material.dart';
-import 'package:mobileapp2/screen/login_screen/login_screen.dart';
 
+import '../login_screen/login_screen.dart';
 import '../register_screen/register_screen.dart';
 
 class StopScreen extends StatelessWidget {
@@ -33,8 +33,8 @@ class StopScreen extends StatelessWidget {
         children: [
           AnimatedContainer(
             duration: const Duration(milliseconds: 100),
-            child: Image.network(
-              'https://source.unsplash.com/random/800x600/',
+            child: Image.asset(
+              'assets/images/stop_background.png',
               fit: BoxFit.cover,
               height: double.infinity,
               width: double.infinity,
@@ -52,38 +52,61 @@ class StopScreen extends StatelessWidget {
               ),
             ),
           ),
-          const Center(
-            child: Icon(
-              Icons.sports_gymnastics,
-              size: 128,
-              color: Colors.black87,
-            ),
-          ),
-          Container(
-            alignment: Alignment.bottomCenter,
-            child: Column(
-              mainAxisAlignment: MainAxisAlignment.end,
-              children: [
-                SizedBox(
-                  width: 140,
-                  child: RaisedButton(
+          // const Center(
+          //   child: Icon(
+          //     Icons.sports_gymnastics,
+          //     size: 128,
+          //     color: Colors.black87,
+          //   ),
+          // ),
+          Padding(
+            padding: const EdgeInsets.all(20),
+            child: Container(
+              alignment: Alignment.bottomCenter,
+              child: Column(
+                mainAxisAlignment: MainAxisAlignment.end,
+                crossAxisAlignment: CrossAxisAlignment.stretch,
+                children: [
+                  RaisedButton(
                     onPressed: () {
                       Navigator.of(context).pushNamed(LoginScreen.route);
                     },
-                    child: const Text('Login'),
+                    color: const Color.fromRGBO(0, 103, 132, 1),
+                    padding: const EdgeInsets.all(15),
+                    shape: RoundedRectangleBorder(
+                      borderRadius: BorderRadius.circular(30),
+                    ),
+                    child: const Text(
+                      'Login',
+                      style: TextStyle(
+                        color: Colors.white,
+                      ),
+                    ),
                   ),
-                ),
-                SizedBox(
-                  width: 140,
-                  child: RaisedButton(
+                  const SizedBox(height: 20),
+                  RaisedButton(
                     onPressed: () {
                       Navigator.of(context).pushNamed(RegisterScreen.route);
                     },
-                    child: const Text('Register'),
+                    color: Colors.transparent,
+                    shape: RoundedRectangleBorder(
+                      borderRadius: BorderRadius.circular(30),
+                      side: const BorderSide(
+                        color: Color.fromRGBO(0, 103, 132, 1),
+                        width: 1,
+                      ),
+                    ),
+                    padding: const EdgeInsets.all(15),
+                    child: const Text(
+                      'Register',
+                      style: TextStyle(
+                        color: Colors.white,
+                      ),
+                    ),
                   ),
-                ),
-                const SizedBox(height: 20),
-              ],
+                  const SizedBox(height: 60),
+                ],
+              ),
             ),
           )
         ],

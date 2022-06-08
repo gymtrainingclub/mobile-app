@@ -1,5 +1,9 @@
+// ignore_for_file: deprecated_member_use
+
 import 'package:flutter/material.dart';
-import 'package:mobileapp2/widget/splash_widget.dart';
+
+import '../../widget/slider_dot.dart';
+import '../../widget/splash_widget.dart';
 
 class SplashScreen extends StatefulWidget {
   const SplashScreen({Key? key}) : super(key: key);
@@ -37,14 +41,30 @@ class _SplashScreenState extends State<SplashScreen> {
         backgroundColor: Colors.transparent,
         automaticallyImplyLeading: false,
         elevation: 0,
+        leading: IconButton(
+          icon: const Icon(
+            Icons.arrow_back,
+            color: Colors.white,
+            size: 18,
+          ),
+          onPressed: () {
+            setState(() {
+              _currentPage++;
+              if (_currentPage == 3) {
+                _currentPage = 0;
+              }
+              _onPageChanged(_currentPage);
+            });
+          },
+        ),
       ),
       body: Builder(builder: (context) {
         return Stack(
           children: [
             AnimatedContainer(
               duration: const Duration(milliseconds: 100),
-              child: Image.network(
-                'https://source.unsplash.com/random/800x600/?index=$_currentPage',
+              child: Image.asset(
+                'assets/images/splash_background$_currentPage.png',
                 fit: BoxFit.cover,
                 height: double.infinity,
                 width: double.infinity,
@@ -66,12 +86,82 @@ class _SplashScreenState extends State<SplashScreen> {
               scrollDirection: Axis.horizontal,
               itemCount: 3,
               onPageChanged: _onPageChanged,
+              controller: PageController(
+                initialPage: _currentPage,
+                keepPage: false,
+              ),
               itemBuilder: (context, index) {
                 return SplashWidget(
                   index: index,
                   currentPage: _currentPage,
                 );
               },
+            ),
+            Padding(
+              padding: const EdgeInsets.symmetric(horizontal: 16),
+              child: Column(
+                mainAxisAlignment: MainAxisAlignment.end,
+                crossAxisAlignment: CrossAxisAlignment.stretch,
+                children: [
+                  Row(
+                    crossAxisAlignment: CrossAxisAlignment.center,
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: [
+                      for (int index = 0; index < 3; index++)
+                        if (index == _currentPage)
+                          SliderDotWidget(
+                            isActive: true,
+                          )
+                        else
+                          SliderDotWidget(
+                            isActive: false,
+                          ),
+                    ],
+                  ),
+                  const SizedBox(height: 40),
+                  SizedBox(
+                    height: 40,
+                    child: RaisedButton(
+                      onPressed: () {
+                        setState(() {
+                          _currentPage++;
+                          if (_currentPage == 3) {
+                            _currentPage = 0;
+                          }
+                          _onPageChanged(_currentPage);
+                        });
+                      },
+                      color: const Color.fromRGBO(0, 103, 132, 1),
+                      shape: const RoundedRectangleBorder(
+                        borderRadius: BorderRadius.all(
+                          Radius.circular(20),
+                        ),
+                      ),
+                      child: const Text(
+                        'Next',
+                        style: TextStyle(
+                          color: Colors.white,
+                        ),
+                      ),
+                    ),
+                  ),
+                  const SizedBox(
+                    height: 20,
+                  ),
+                  GestureDetector(
+                    child: const Text(
+                      'Skip',
+                      style: TextStyle(
+                        color: Color.fromRGBO(0, 103, 132, 1),
+                        decoration: TextDecoration.underline,
+                      ),
+                      textAlign: TextAlign.center,
+                    ),
+                    onTap: () => Navigator.of(context).pushNamed('/stop'),
+                  ),
+                  const SizedBox(height: 20),
+                ],
+              ),
             ),
           ],
         );

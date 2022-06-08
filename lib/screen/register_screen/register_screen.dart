@@ -1,6 +1,8 @@
-// ignore_for_file: deprecated_member_use
+// ignore_for_file: deprecated_member_use, prefer_const_constructors
 
 import 'package:flutter/material.dart';
+
+import '../success_screen/success_screen.dart';
 
 class RegisterScreen extends StatefulWidget {
   const RegisterScreen({Key? key}) : super(key: key);
@@ -11,22 +13,40 @@ class RegisterScreen extends StatefulWidget {
 }
 
 class _RegisterScreenState extends State<RegisterScreen> {
-  List<DropdownMenuItem<String>> get dropdownItems {
+  List<DropdownMenuItem<String>> get dropdownItemsGender {
     List<DropdownMenuItem<String>> menuItems = [
-      const DropdownMenuItem(value: "USA", child: Text("USA")),
-      const DropdownMenuItem(value: "Canada", child: Text("Canada")),
-      const DropdownMenuItem(value: "Mexico", child: Text("Mexico")),
-      const DropdownMenuItem(
-          value: "United Kingdom", child: Text("United Kingdom")),
+      const DropdownMenuItem(value: "Male", child: Text("Male")),
+      const DropdownMenuItem(value: "Female", child: Text("Female")),
     ];
     return menuItems;
   }
 
-  String selectedValue = "USA";
+  String selectedValueGender = "Male";
   Widget buildDropdown(BuildContext context) {
     return DropdownButton(
-      value: selectedValue,
-      items: dropdownItems,
+      value: selectedValueGender,
+      items: dropdownItemsGender,
+      onChanged: (String? value) {},
+    );
+  }
+
+  List<DropdownMenuItem<String>> get dropdownItemsCity {
+    List<DropdownMenuItem<String>> menuItems = [
+      const DropdownMenuItem(value: "Bekasi", child: Text("Bekasi")),
+      const DropdownMenuItem(value: "Jakarta", child: Text("Jakarta")),
+      const DropdownMenuItem(value: "Surabaya", child: Text("Surabaya")),
+      const DropdownMenuItem(value: "Bandung", child: Text("Bandung")),
+      const DropdownMenuItem(value: "Medan", child: Text("Medan")),
+      const DropdownMenuItem(value: "Palembang", child: Text("Palembang")),
+    ];
+    return menuItems;
+  }
+
+  String selectedValueCity = "Bekasi";
+  Widget buildDropdown2(BuildContext context) {
+    return DropdownButton(
+      value: selectedValueCity,
+      items: dropdownItemsCity,
       onChanged: (String? value) {},
     );
   }
@@ -48,17 +68,17 @@ class _RegisterScreenState extends State<RegisterScreen> {
             const SizedBox(
               height: 60,
             ),
-            const Center(
-              child: Icon(
-                Icons.sports_gymnastics,
-                size: 52,
-                color: Colors.black87,
+            Center(
+              child: Image.asset(
+                'assets/images/logo2.png',
+                height: 128,
+                width: 128,
               ),
             ),
             const Text(
               'Registration',
               style: TextStyle(
-                fontSize: 32,
+                fontSize: 24,
                 fontWeight: FontWeight.bold,
               ),
             ),
@@ -79,18 +99,44 @@ class _RegisterScreenState extends State<RegisterScreen> {
     return Padding(
       padding: const EdgeInsets.symmetric(horizontal: 16),
       child: Column(
+        crossAxisAlignment: CrossAxisAlignment.stretch,
         children: [
           TextFormField(
-            decoration: const InputDecoration(
+            decoration: InputDecoration(
               labelText: 'Full Name',
-              border: OutlineInputBorder(),
+              labelStyle: const TextStyle(
+                color: Colors.black87,
+              ),
+              focusedBorder: OutlineInputBorder(
+                borderSide: BorderSide(
+                  color: Colors.black87,
+                ),
+              ),
+              enabledBorder: const OutlineInputBorder(
+                borderSide: BorderSide(color: Colors.black87),
+              ),
             ),
-            validator: (value) {
-              if (value!.isEmpty) {
-                return 'Please enter your name';
-              }
-              return null;
+            style: TextStyle(color: Colors.black87),
+            // controller: _passwordController,
+          ),
+          const SizedBox(
+            height: 16,
+          ),
+          DropdownButtonFormField(
+            isExpanded: true,
+            decoration: const InputDecoration(
+                enabledBorder: OutlineInputBorder(),
+                border: OutlineInputBorder(),
+                label: Text('Gender')),
+            itemHeight: 50,
+            value: selectedValueGender,
+            hint: const Text('Gender'),
+            onChanged: (String? newValue) {
+              setState(() {
+                selectedValueGender = newValue!;
+              });
             },
+            items: dropdownItemsGender,
           ),
           const SizedBox(
             height: 16,
@@ -100,16 +146,16 @@ class _RegisterScreenState extends State<RegisterScreen> {
             decoration: const InputDecoration(
               enabledBorder: OutlineInputBorder(),
               border: OutlineInputBorder(),
-              filled: true,
             ),
             itemHeight: 50,
-            value: selectedValue,
+            value: selectedValueCity,
+            hint: const Text('Gender'),
             onChanged: (String? newValue) {
               setState(() {
-                selectedValue = newValue!;
+                selectedValueCity = newValue!;
               });
             },
-            items: dropdownItems,
+            items: dropdownItemsCity,
           ),
           const SizedBox(
             height: 16,
@@ -117,7 +163,17 @@ class _RegisterScreenState extends State<RegisterScreen> {
           TextFormField(
             decoration: const InputDecoration(
               labelText: 'Phone Number',
-              border: OutlineInputBorder(),
+              labelStyle: TextStyle(
+                color: Colors.black87,
+              ),
+              focusedBorder: OutlineInputBorder(
+                borderSide: BorderSide(
+                  color: Colors.black87,
+                ),
+              ),
+              enabledBorder: OutlineInputBorder(
+                borderSide: BorderSide(color: Colors.black87),
+              ),
             ),
             validator: (value) {
               if (value!.isEmpty) {
@@ -132,7 +188,17 @@ class _RegisterScreenState extends State<RegisterScreen> {
           TextFormField(
             decoration: const InputDecoration(
               labelText: 'Email',
-              border: OutlineInputBorder(),
+              labelStyle: TextStyle(
+                color: Colors.black87,
+              ),
+              focusedBorder: OutlineInputBorder(
+                borderSide: BorderSide(
+                  color: Colors.black87,
+                ),
+              ),
+              enabledBorder: OutlineInputBorder(
+                borderSide: BorderSide(color: Colors.black87),
+              ),
             ),
             validator: (value) {
               if (value!.isEmpty) {
@@ -145,10 +211,30 @@ class _RegisterScreenState extends State<RegisterScreen> {
             height: 16,
           ),
           TextFormField(
-            decoration: const InputDecoration(
+            decoration: InputDecoration(
               labelText: 'Password',
-              border: OutlineInputBorder(),
+              labelStyle: TextStyle(
+                color: Colors.black87,
+              ),
+              focusedBorder: OutlineInputBorder(
+                borderSide: BorderSide(
+                  color: Colors.black87,
+                ),
+              ),
+              enabledBorder: OutlineInputBorder(
+                borderSide: BorderSide(color: Colors.black87),
+              ),
+              floatingLabelBehavior: FloatingLabelBehavior.auto,
+              filled: false,
+              suffixIcon: GestureDetector(
+                onTap: () {},
+                child: Icon(
+                  Icons.visibility,
+                  color: Colors.black87,
+                ),
+              ),
             ),
+            obscureText: true,
             validator: (value) {
               if (value!.isEmpty) {
                 return 'Please enter your password';
@@ -157,28 +243,35 @@ class _RegisterScreenState extends State<RegisterScreen> {
             },
           ),
           const SizedBox(
-            height: 16,
+            height: 20,
           ),
-          SizedBox(
-            width: 140,
-            child: RaisedButton(
-              onPressed: () {
-                Navigator.of(context).pushNamed(RegisterScreen.route);
-              },
-              child: const Text('Register'),
+          RaisedButton(
+            onPressed: () {
+              Navigator.of(context).pushNamed(SuccessScreen.route);
+            },
+            color: const Color.fromRGBO(0, 103, 132, 1),
+            padding: const EdgeInsets.all(15),
+            shape: RoundedRectangleBorder(
+              borderRadius: BorderRadius.circular(30),
+            ),
+            child: const Text(
+              'Register',
+              style: TextStyle(
+                color: Colors.white,
+              ),
             ),
           ),
           const SizedBox(
-            height: 40,
+            height: 20,
           ),
           GestureDetector(
             child: const Text(
-              'Skip',
+              'Help?',
               style: TextStyle(
                 decoration: TextDecoration.underline,
               ),
+              textAlign: TextAlign.center,
             ),
-            onTap: () => Navigator.of(context).pushReplacementNamed('/stop'),
           ),
           const SizedBox(
             height: 40,

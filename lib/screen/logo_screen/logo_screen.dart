@@ -18,13 +18,13 @@ class _LogoScreenState extends State<LogoScreen> {
       const Duration(seconds: 2),
       () => Navigator.of(context).pushReplacementNamed(SplashScreen.route),
     );
-    return const Scaffold(
-      backgroundColor: Colors.white,
+    return Scaffold(
+      backgroundColor: const Color.fromRGBO(12, 48, 61, 1),
       body: Center(
-        child: Icon(
-          Icons.sports_gymnastics,
-          size: 128,
-          color: Colors.black87,
+        child: Image.asset(
+          'assets/images/logo.png',
+          width: 200,
+          height: 200,
         ),
       ),
     );

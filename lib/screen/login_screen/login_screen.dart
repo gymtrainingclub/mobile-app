@@ -1,3 +1,5 @@
+// ignore_for_file: deprecated_member_use
+
 import 'package:flutter/material.dart';
 
 import '../home_screen/home_screen.dart';
@@ -37,13 +39,20 @@ class _LoginScreenState extends State<LoginScreen> {
         child: Column(
           children: [
             const SizedBox(
-              height: 100,
+              height: 60,
             ),
-            const Center(
-              child: Icon(
-                Icons.sports_gymnastics,
-                size: 128,
-                color: Colors.black87,
+            Center(
+              child: Image.asset(
+                'assets/images/logo2.png',
+                height: 128,
+                width: 128,
+              ),
+            ),
+            const Text(
+              'Login',
+              style: TextStyle(
+                fontSize: 24,
+                fontWeight: FontWeight.bold,
               ),
             ),
             const SizedBox(
@@ -63,6 +72,7 @@ class _LoginScreenState extends State<LoginScreen> {
     return Padding(
       padding: const EdgeInsets.symmetric(horizontal: 16),
       child: Column(
+        crossAxisAlignment: CrossAxisAlignment.stretch,
         children: [
           TextFormField(
             decoration: const InputDecoration(
@@ -80,10 +90,30 @@ class _LoginScreenState extends State<LoginScreen> {
             height: 16,
           ),
           TextFormField(
-            decoration: const InputDecoration(
+            decoration: InputDecoration(
               labelText: 'Password',
-              border: OutlineInputBorder(),
+              labelStyle: const TextStyle(
+                color: Colors.black87,
+              ),
+              focusedBorder: const OutlineInputBorder(
+                borderSide: BorderSide(
+                  color: Colors.black87,
+                ),
+              ),
+              enabledBorder: const OutlineInputBorder(
+                borderSide: BorderSide(color: Colors.black87),
+              ),
+              floatingLabelBehavior: FloatingLabelBehavior.auto,
+              filled: false,
+              suffixIcon: GestureDetector(
+                onTap: () {},
+                child: const Icon(
+                  Icons.visibility,
+                  color: Colors.black87,
+                ),
+              ),
             ),
+            obscureText: true,
             validator: (value) {
               if (value!.isEmpty) {
                 return 'Please enter your password';
@@ -110,24 +140,34 @@ class _LoginScreenState extends State<LoginScreen> {
           const SizedBox(
             height: 16,
           ),
-          ElevatedButton(
+          RaisedButton(
             onPressed: () {
               Navigator.of(context).pushNamed(HomeScreen.route);
             },
-            child: const Text('Login'),
+            color: const Color.fromRGBO(0, 103, 132, 1),
+            padding: const EdgeInsets.all(15),
+            shape: RoundedRectangleBorder(
+              borderRadius: BorderRadius.circular(30),
+            ),
+            child: const Text(
+              'Login',
+              style: TextStyle(
+                color: Colors.white,
+              ),
+            ),
           ),
           const SizedBox(
             height: 40,
           ),
           GestureDetector(
             child: const Text(
-              'Skip',
+              'Help?',
               style: TextStyle(
                 decoration: TextDecoration.underline,
               ),
               textAlign: TextAlign.center,
             ),
-            onTap: () => Navigator.of(context).pushReplacementNamed('/stop'),
+            onTap: () {},
           ),
           const SizedBox(
             height: 40,

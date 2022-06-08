@@ -8,6 +8,8 @@ import 'package:provider/provider.dart';
 import 'screen/logo_screen/logo_screen.dart';
 import 'screen/splash_screen/splash_screen.dart';
 import 'screen/stop_screen/stop_screen.dart';
+import 'screen/success_screen/success_screen.dart';
+import 'screen/welcome_screen/welcome_screen.dart';
 
 void main() {
   runApp(
@@ -45,7 +47,7 @@ class MyApp extends StatelessWidget {
       theme: ThemeData(
         primarySwatch: Colors.blue,
         visualDensity: VisualDensity.adaptivePlatformDensity,
-        textTheme: GoogleFonts.openSansTextTheme(
+        textTheme: GoogleFonts.interTextTheme(
           Theme.of(context).textTheme,
         ),
       ),
@@ -66,6 +68,10 @@ class MyApp extends StatelessWidget {
             return routeBuilder(const HomeScreen(), set);
           case ProfileScreen.route:
             return routeBuilder(const ProfileScreen(), set);
+          case WelcomeScreen.route:
+            return routeBuilder(const WelcomeScreen(), set);
+          case SuccessScreen.route:
+            return routeBuilder(const SuccessScreen(), set);
           default:
             return routeBuilder(const LogoScreen(), set);
         }
