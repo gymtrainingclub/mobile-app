@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'screen/home_screen/home_screen.dart';
 import 'screen/login_screen/login_screen.dart';
+import 'screen/login_screen/login_viewmodel.dart';
 import 'screen/profile_screen/profile_screen.dart';
 import 'screen/register_screen/register_screen.dart';
 import 'package:provider/provider.dart';
@@ -13,7 +14,20 @@ import 'screen/welcome_screen/welcome_screen.dart';
 
 void main() {
   runApp(
-    const MyApp(),
+    MultiProvider(
+      providers: [
+        // ChangeNotifierProvider(create: (_) => LogoViewModel()),
+        // ChangeNotifierProvider(create: (_) => SplashViewModel()),
+        ChangeNotifierProvider(create: (_) => LoginViewModel()),
+        // ChangeNotifierProvider(create: (_) => RegisterViewModel()),
+        // ChangeNotifierProvider(create: (_) => HomeViewModel()),
+        // ChangeNotifierProvider(create: (_) => ProfileViewModel()),
+        // ChangeNotifierProvider(create: (_) => StopViewModel()),
+        // ChangeNotifierProvider(create: (_) => SuccessViewModel()),
+        // ChangeNotifierProvider(create: (_) => WelcomeViewModel()),
+      ],
+      child: const MyApp(),
+    ),
   );
 }
 

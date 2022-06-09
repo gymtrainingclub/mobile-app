@@ -1,8 +1,10 @@
-// ignore_for_file: deprecated_member_use
+// ignore_for_file: deprecated_member_use, avoid_print
 
+import 'package:email_validator/email_validator.dart';
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 
-import '../home_screen/home_screen.dart';
+import 'login_viewmodel.dart';
 
 class LoginScreen extends StatefulWidget {
   const LoginScreen({Key? key}) : super(key: key);
@@ -16,7 +18,33 @@ class _LoginScreenState extends State<LoginScreen> {
   final _formKey = GlobalKey<FormState>();
 
   @override
+  void initState() {
+    super.initState();
+    // Provider.of<LoginViewModel>(context, listen: false).getLoginResponse();
+  }
+
+  Widget stateBody(LoginViewModel vm) {
+    final isLoading = vm.state == LoginViewState.loading;
+    final isLoaded = vm.state == LoginViewState.loaded;
+    final isError = vm.state == LoginViewState.error;
+    if (isLoading) {
+      return const Center(child: CircularProgressIndicator());
+    } else if (isError) {
+      return const Center(child: Text('Error'));
+    }
+    return Scaffold(
+      body: isLoaded ? _buildLoadedBody(vm) : _buildInitialBody(vm),
+    );
+  }
+
+  @override
   Widget build(BuildContext context) {
+    final loginProvider = Provider.of<LoginViewModel>(context);
+    // TextEditingController currentEmail = loginProvider.emailController;
+    // TextEditingController currentPassword = loginProvider.passwordController;
+    // print('test API');
+    // print(loginProvider.state);
+    // print(loginProvider.loginresponse.data?.token);
     return Scaffold(
       backgroundColor: Colors.white,
       extendBodyBehindAppBar: true,
@@ -35,40 +63,50 @@ class _LoginScreenState extends State<LoginScreen> {
           ),
         ],
       ),
-      body: SingleChildScrollView(
-        child: Column(
-          children: [
-            const SizedBox(
-              height: 60,
+      body: stateBody(loginProvider),
+    );
+  }
+
+  Widget _buildInitialBody(LoginViewModel vm) {
+    final loginProvider = Provider.of<LoginViewModel>(context);
+    TextEditingController currentEmail = loginProvider.emailController;
+    TextEditingController currentPassword = loginProvider.passwordController;
+    print('test API');
+    print(loginProvider.state);
+    print(loginProvider.loginresponse.data?.token);
+    return SingleChildScrollView(
+      child: Column(
+        children: [
+          const SizedBox(
+            height: 60,
+          ),
+          Center(
+            child: Image.asset(
+              'assets/images/logo2.png',
+              height: 128,
+              width: 128,
             ),
-            Center(
-              child: Image.asset(
-                'assets/images/logo2.png',
-                height: 128,
-                width: 128,
-              ),
+          ),
+          const Text(
+            'Login',
+            style: TextStyle(
+              fontSize: 24,
+              fontWeight: FontWeight.bold,
             ),
-            const Text(
-              'Login',
-              style: TextStyle(
-                fontSize: 24,
-                fontWeight: FontWeight.bold,
-              ),
-            ),
-            const SizedBox(
-              height: 20,
-            ),
-            Form(
-              key: _formKey,
-              child: _buildForm(),
-            ),
-          ],
-        ),
+          ),
+          const SizedBox(
+            height: 20,
+          ),
+          Form(
+            key: _formKey,
+            child: _buildForm(currentEmail, currentPassword),
+          ),
+        ],
       ),
     );
   }
 
-  _buildForm() {
+  _buildForm(TextEditingController email, TextEditingController password) {
     return Padding(
       padding: const EdgeInsets.symmetric(horizontal: 16),
       child: Column(
@@ -77,11 +115,29 @@ class _LoginScreenState extends State<LoginScreen> {
           TextFormField(
             decoration: const InputDecoration(
               labelText: 'Email / No. Handphone',
-              border: OutlineInputBorder(),
+              labelStyle: TextStyle(
+                color: Colors.black87,
+              ),
+              focusedBorder: OutlineInputBorder(
+                borderSide: BorderSide(
+                  color: Colors.black87,
+                ),
+              ),
+              enabledBorder: OutlineInputBorder(
+                borderSide: BorderSide(color: Colors.black87),
+              ),
             ),
+            controller: email,
             validator: (value) {
               if (value!.isEmpty) {
                 return 'Please enter your email or phone number';
+              }
+              if (!value.contains('@') || value.length < 6) {
+                return 'Please enter a valid email address';
+              }
+              final bool isValid = EmailValidator.validate(value);
+              if (!isValid) {
+                return 'Please enter a valid email address';
               }
               return null;
             },
@@ -113,10 +169,14 @@ class _LoginScreenState extends State<LoginScreen> {
                 ),
               ),
             ),
+            controller: password,
             obscureText: true,
             validator: (value) {
               if (value!.isEmpty) {
                 return 'Please enter your password';
+              }
+              if (value.length < 6) {
+                return 'Password must be at least 6 characters';
               }
               return null;
             },
@@ -142,7 +202,11 @@ class _LoginScreenState extends State<LoginScreen> {
           ),
           RaisedButton(
             onPressed: () {
-              Navigator.of(context).pushNamed(HomeScreen.route);
+              if (_formKey.currentState!.validate()) {
+                print('valid');
+                Provider.of<LoginViewModel>(context, listen: false)
+                    .getLoginResponse(email.text, password.text);
+              }
             },
             color: const Color.fromRGBO(0, 103, 132, 1),
             padding: const EdgeInsets.all(15),
@@ -175,5 +239,9 @@ class _LoginScreenState extends State<LoginScreen> {
         ],
       ),
     );
+  }
+
+  _buildLoadedBody(LoginViewModel vm) {
+    return Center(child: Text('$vm'));
   }
 }

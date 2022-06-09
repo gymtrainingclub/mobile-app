@@ -1,6 +1,7 @@
 // ignore_for_file: deprecated_member_use, prefer_const_constructors
 
 import 'package:flutter/material.dart';
+import 'package:mobileapp/screen/home_screen/home_screen.dart';
 
 import '../success_screen/success_screen.dart';
 
@@ -247,7 +248,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
           ),
           RaisedButton(
             onPressed: () {
-              Navigator.of(context).pushNamed(SuccessScreen.route);
+              Navigator.of(context).pushNamed(HomeScreen.route);
             },
             color: const Color.fromRGBO(0, 103, 132, 1),
             padding: const EdgeInsets.all(15),

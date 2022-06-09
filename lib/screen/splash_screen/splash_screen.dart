@@ -1,6 +1,7 @@
 // ignore_for_file: deprecated_member_use
 
 import 'package:flutter/material.dart';
+import 'package:mobileapp/screen/stop_screen/stop_screen.dart';
 
 import '../../widget/slider_dot.dart';
 import '../../widget/splash_widget.dart';
@@ -127,6 +128,7 @@ class _SplashScreenState extends State<SplashScreen> {
                           _currentPage++;
                           if (_currentPage == 3) {
                             _currentPage = 0;
+                            Navigator.of(context).pushNamed(StopScreen.route);
                           }
                           _onPageChanged(_currentPage);
                         });
