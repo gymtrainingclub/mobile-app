@@ -1,6 +1,11 @@
+// ignore_for_file: deprecated_member_use
+
 import 'package:flutter/material.dart';
+import 'package:mobileapp/screen/login_screen/login_screen.dart';
+import 'package:provider/provider.dart';
 
 import '../../widget/bottom_navigation_widget.dart';
+import '../login_screen/login_viewmodel.dart';
 
 class ProfileScreen extends StatefulWidget {
   const ProfileScreen({Key? key}) : super(key: key);
@@ -13,6 +18,7 @@ class ProfileScreen extends StatefulWidget {
 class _ProfileScreenState extends State<ProfileScreen> {
   @override
   Widget build(BuildContext context) {
+    final loginProvider = Provider.of<LoginViewModel>(context);
     return Scaffold(
       backgroundColor: Colors.white,
       extendBodyBehindAppBar: true,
@@ -175,6 +181,59 @@ class _ProfileScreenState extends State<ProfileScreen> {
                   Icons.settings,
                   size: 32,
                 ),
+              ),
+              const ListTile(
+                title: Text(
+                  'Help',
+                  style: TextStyle(
+                    fontSize: 16,
+                  ),
+                ),
+                trailing: Icon(
+                  Icons.arrow_forward_ios,
+                  size: 14,
+                ),
+                leading: Icon(
+                  Icons.help,
+                  size: 32,
+                ),
+              ),
+              ListTile(
+                title: const Text(
+                  'Logout',
+                  style: TextStyle(
+                    fontSize: 16,
+                  ),
+                ),
+                leading: const Icon(
+                  Icons.exit_to_app,
+                  size: 32,
+                ),
+                onTap: () {
+                  showDialog(
+                    context: context,
+                    builder: (context) => AlertDialog(
+                      title: const Text('Are you sure?'),
+                      content: const Text('Do you want to logout?'),
+                      actions: [
+                        FlatButton(
+                          child: const Text('No'),
+                          onPressed: () => Navigator.of(context).pop(),
+                        ),
+                        FlatButton(
+                          child: const Text('Yes'),
+                          onPressed: () {
+                            loginProvider.logout();
+                            Navigator.of(context).pop();
+                            Navigator.of(context).pushReplacementNamed(
+                              LoginScreen.route,
+                            );
+                          },
+                        ),
+                      ],
+                    ),
+                  );
+                },
               ),
             ],
           ),

@@ -1,12 +1,17 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:mobileapp/screen/category_screen/category_screen.dart';
+import 'package:mobileapp/screen/class_screen/class_screen.dart';
+import 'package:mobileapp/screen/newspaper_screen/newspaper_screen.dart';
 import 'screen/home_screen/home_screen.dart';
 import 'screen/login_screen/login_screen.dart';
 import 'screen/login_screen/login_viewmodel.dart';
+import 'screen/newspaper_detail_screen/newspaper_detail_screen.dart';
 import 'screen/profile_screen/profile_screen.dart';
 import 'screen/register_screen/register_screen.dart';
 import 'package:provider/provider.dart';
 import 'screen/logo_screen/logo_screen.dart';
+import 'screen/register_screen/register_viewmodel.dart';
 import 'screen/splash_screen/splash_screen.dart';
 import 'screen/stop_screen/stop_screen.dart';
 import 'screen/success_screen/success_screen.dart';
@@ -19,7 +24,7 @@ void main() {
         // ChangeNotifierProvider(create: (_) => LogoViewModel()),
         // ChangeNotifierProvider(create: (_) => SplashViewModel()),
         ChangeNotifierProvider(create: (_) => LoginViewModel()),
-        // ChangeNotifierProvider(create: (_) => RegisterViewModel()),
+        ChangeNotifierProvider(create: (_) => RegisterViewModel()),
         // ChangeNotifierProvider(create: (_) => HomeViewModel()),
         // ChangeNotifierProvider(create: (_) => ProfileViewModel()),
         // ChangeNotifierProvider(create: (_) => StopViewModel()),
@@ -86,6 +91,14 @@ class MyApp extends StatelessWidget {
             return routeBuilder(const WelcomeScreen(), set);
           case SuccessScreen.route:
             return routeBuilder(const SuccessScreen(), set);
+          case CategoryScreen.route:
+            return routeBuilder(const CategoryScreen(), set);
+          case ClassScreen.route:
+            return routeBuilder(const ClassScreen(), set);
+          case NewspaperScreen.route:
+            return routeBuilder(const NewspaperScreen(), set);
+          case NewspaperDetailScreen.route:
+            return routeBuilder(const NewspaperDetailScreen(), set);
           default:
             return routeBuilder(const LogoScreen(), set);
         }

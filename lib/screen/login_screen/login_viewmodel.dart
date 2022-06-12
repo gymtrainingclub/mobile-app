@@ -53,4 +53,20 @@ class LoginViewModel with ChangeNotifier {
       changeState(LoginViewState.error);
     }
   }
+
+  logout() {
+    _loginresponse = LoginResponse(
+      status: '',
+      code: 0,
+      message: '',
+      data: Data(
+        name: '',
+        email: '',
+        token: '',
+      ),
+    );
+    emailController.clear();
+    passwordController.clear();
+    changeState(LoginViewState.initial);
+  }
 }

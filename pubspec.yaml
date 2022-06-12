@@ -71,6 +71,9 @@ flutter:
   assets:
     - assets/images/
     - assets/icon/
+    - assets/card/
+    - assets/class/
+    - assets/category/
     # - images/a_dot_burr.jpeg
     # - images/a_dot_ham.jpeg
 

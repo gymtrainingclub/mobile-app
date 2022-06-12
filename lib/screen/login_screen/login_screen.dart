@@ -1,7 +1,11 @@
 // ignore_for_file: deprecated_member_use, avoid_print
 
+import 'dart:async';
+
 import 'package:email_validator/email_validator.dart';
 import 'package:flutter/material.dart';
+import 'package:mobileapp/screen/home_screen/home_screen.dart';
+import 'package:mobileapp/screen/stop_screen/stop_screen.dart';
 import 'package:provider/provider.dart';
 
 import 'login_viewmodel.dart';
@@ -37,6 +41,8 @@ class _LoginScreenState extends State<LoginScreen> {
     );
   }
 
+  bool isVisible = false;
+  bool isChecked = false;
   @override
   Widget build(BuildContext context) {
     final loginProvider = Provider.of<LoginViewModel>(context);
@@ -62,6 +68,14 @@ class _LoginScreenState extends State<LoginScreen> {
             onPressed: () => Navigator.of(context).pop(),
           ),
         ],
+        leading: IconButton(
+          icon: const Icon(
+            Icons.arrow_back,
+            color: Colors.black87,
+            size: 18,
+          ),
+          onPressed: () => Navigator.of(context).pushNamed(StopScreen.route),
+        ),
       ),
       body: stateBody(loginProvider),
     );
@@ -107,6 +121,18 @@ class _LoginScreenState extends State<LoginScreen> {
   }
 
   _buildForm(TextEditingController email, TextEditingController password) {
+    Color getColor(Set<MaterialState> states) {
+      const Set<MaterialState> interactiveStates = <MaterialState>{
+        MaterialState.pressed,
+        MaterialState.hovered,
+        MaterialState.focused,
+      };
+      if (states.any(interactiveStates.contains)) {
+        return Colors.blue;
+      }
+      return const Color.fromRGBO(0, 103, 132, 1);
+    }
+
     return Padding(
       padding: const EdgeInsets.symmetric(horizontal: 16),
       child: Column(
@@ -162,15 +188,24 @@ class _LoginScreenState extends State<LoginScreen> {
               floatingLabelBehavior: FloatingLabelBehavior.auto,
               filled: false,
               suffixIcon: GestureDetector(
-                onTap: () {},
-                child: const Icon(
-                  Icons.visibility,
-                  color: Colors.black87,
-                ),
+                onTap: () {
+                  setState(() {
+                    isVisible = !isVisible;
+                  });
+                },
+                child: isVisible
+                    ? const Icon(
+                        Icons.visibility,
+                        color: Colors.black87,
+                      )
+                    : const Icon(
+                        Icons.visibility_off,
+                        color: Colors.black87,
+                      ),
               ),
             ),
             controller: password,
-            obscureText: true,
+            obscureText: isVisible,
             validator: (value) {
               if (value!.isEmpty) {
                 return 'Please enter your password';
@@ -184,18 +219,44 @@ class _LoginScreenState extends State<LoginScreen> {
           const SizedBox(
             height: 16,
           ),
-          GestureDetector(
-            child: const Text(
-              'Forgot password?',
-              style: TextStyle(
-                color: Colors.black87,
-                fontSize: 12,
+          Row(
+            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            children: [
+              Row(
+                children: [
+                  Checkbox(
+                    value: isChecked,
+                    onChanged: (bool? value) {
+                      setState(() {
+                        isChecked = value!;
+                      });
+                    },
+                    checkColor: Colors.white,
+                    fillColor: MaterialStateProperty.resolveWith(getColor),
+                  ),
+                  const Text(
+                    'Remember me',
+                    style: TextStyle(
+                      color: Colors.black87,
+                      fontSize: 12,
+                    ),
+                  ),
+                ],
               ),
-              textAlign: TextAlign.end,
-            ),
-            onTap: () {
-              Navigator.of(context).pushNamed('/forgot-password');
-            },
+              GestureDetector(
+                child: const Text(
+                  'Forgot password?',
+                  style: TextStyle(
+                    color: Colors.black87,
+                    fontSize: 12,
+                  ),
+                  textAlign: TextAlign.end,
+                ),
+                onTap: () {
+                  Navigator.of(context).pushNamed('/forgot-password');
+                },
+              ),
+            ],
           ),
           const SizedBox(
             height: 16,
@@ -242,6 +303,54 @@ class _LoginScreenState extends State<LoginScreen> {
   }
 
   _buildLoadedBody(LoginViewModel vm) {
-    return Center(child: Text('$vm'));
+    Timer(
+      const Duration(seconds: 2),
+      () => Navigator.of(context).pushReplacementNamed(HomeScreen.route),
+    );
+    return Scaffold(
+      backgroundColor: Colors.white,
+      body: Center(
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.center,
+          crossAxisAlignment: CrossAxisAlignment.center,
+          children: [
+            Container(
+              height: 200,
+              width: 200,
+              decoration: BoxDecoration(
+                border: Border.all(
+                    color: const Color.fromRGBO(204, 210, 227, 1), width: 2),
+              ),
+              child: Image.asset(
+                'assets/icon/Subtract.png',
+              ),
+            ),
+            const SizedBox(
+              height: 20,
+            ),
+            const Text(
+              'Logging in...',
+              style: TextStyle(
+                fontSize: 20,
+                fontWeight: FontWeight.bold,
+              ),
+            ),
+            const SizedBox(
+              height: 10,
+            ),
+            Text(
+              'Selamat datang kak, ${vm.loginresponse.data?.name}',
+              style: const TextStyle(
+                fontSize: 16,
+                fontWeight: FontWeight.normal,
+              ),
+            ),
+            const SizedBox(
+              height: 10,
+            ),
+          ],
+        ),
+      ),
+    );
   }
 }
