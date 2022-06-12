@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:mobileapp/screen/newspaper_detail_screen/newspaper_detail_screen.dart';
 
+import '../../widget/bottom_navigation_widget.dart';
 import '../category_screen/category_screen.dart';
 
 class NewspaperScreen extends StatefulWidget {
@@ -194,6 +195,7 @@ class _NewspaperScreenState extends State<NewspaperScreen> {
           ],
         ),
       ),
+      bottomNavigationBar: BottomNavigationWidget(index: 1),
     );
   }
 

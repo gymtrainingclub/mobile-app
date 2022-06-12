@@ -2,10 +2,15 @@ import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:mobileapp/screen/category_screen/category_screen.dart';
 import 'package:mobileapp/screen/class_screen/class_screen.dart';
+import 'package:mobileapp/screen/membership_payment_screen/membership_payment_screen.dart';
+import 'package:mobileapp/screen/membership_register_screen/membership_register_screen.dart';
+import 'package:mobileapp/screen/membership_screen/membership_screen.dart';
 import 'package:mobileapp/screen/newspaper_screen/newspaper_screen.dart';
 import 'screen/home_screen/home_screen.dart';
 import 'screen/login_screen/login_screen.dart';
 import 'screen/login_screen/login_viewmodel.dart';
+import 'screen/membership_detail_screen/membership_detail_screen.dart';
+import 'screen/my_membership_screen/my_membership_screen.dart';
 import 'screen/newspaper_detail_screen/newspaper_detail_screen.dart';
 import 'screen/profile_screen/profile_screen.dart';
 import 'screen/register_screen/register_screen.dart';
@@ -99,6 +104,16 @@ class MyApp extends StatelessWidget {
             return routeBuilder(const NewspaperScreen(), set);
           case NewspaperDetailScreen.route:
             return routeBuilder(const NewspaperDetailScreen(), set);
+          case MembershipScreen.route:
+            return routeBuilder(const MembershipScreen(), set);
+          case MembershipDetailScreen.route:
+            return routeBuilder(const MembershipDetailScreen(), set);
+          case MembershipRegisterScreen.route:
+            return routeBuilder(const MembershipRegisterScreen(), set);
+          case MembershipPaymentScreen.route:
+            return routeBuilder(const MembershipPaymentScreen(), set);
+          case MyMembershipScreen.route:
+            return routeBuilder(const MyMembershipScreen(), set);
           default:
             return routeBuilder(const LogoScreen(), set);
         }

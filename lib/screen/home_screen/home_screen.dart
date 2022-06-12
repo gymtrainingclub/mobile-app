@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:mobileapp/screen/category_screen/category_screen.dart';
+import 'package:mobileapp/screen/my_membership_screen/my_membership_screen.dart';
 
 import '../../widget/bottom_navigation_widget.dart';
 import '../class_screen/class_screen.dart';
@@ -101,102 +102,107 @@ class _HomeScreenState extends State<HomeScreen> {
                   //   ),
                   // ),
                   Center(
-                    child: Container(
-                      height: 200,
-                      padding: const EdgeInsets.all(16.0),
-                      width: double.infinity,
-                      decoration: BoxDecoration(
-                        borderRadius: BorderRadius.circular(10),
-                        color: Colors.white,
-                        border: Border.all(
-                          color: const Color.fromRGBO(217, 217, 217, 1),
-                          width: 1,
-                        ),
-                        image: const DecorationImage(
-                          image: AssetImage('assets/card/Platinum.png'),
-                          fit: BoxFit.cover,
-                        ),
+                    child: GestureDetector(
+                      onTap: () => Navigator.of(context).pushNamed(
+                        MyMembershipScreen.route,
                       ),
-                      child: Column(
-                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        children: [
-                          Row(
-                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                            children: [
-                              const Text(
-                                'Membership Card',
-                                style: TextStyle(
-                                  fontSize: 18,
-                                  color: Colors.white,
-                                ),
-                              ),
-                              Image.asset(
-                                'assets/images/logo.png',
-                                height: 40,
-                                width: 40,
-                              ),
-                            ],
+                      child: Container(
+                        height: 200,
+                        padding: const EdgeInsets.all(16.0),
+                        width: double.infinity,
+                        decoration: BoxDecoration(
+                          borderRadius: BorderRadius.circular(10),
+                          color: Colors.white,
+                          border: Border.all(
+                            color: const Color.fromRGBO(217, 217, 217, 1),
+                            width: 1,
                           ),
-                          Column(
-                            crossAxisAlignment: CrossAxisAlignment.start,
-                            children: const [
-                              Text(
-                                'PLATINUM MEMBER',
-                                style: TextStyle(
-                                  fontSize: 20,
-                                  color: Colors.white,
-                                  fontWeight: FontWeight.w600,
-                                ),
-                              ),
-                              SizedBox(
-                                width: 8,
-                              ),
-                              Text(
-                                '00000001',
-                                style: TextStyle(
-                                  color: Colors.white,
-                                  fontWeight: FontWeight.w600,
-                                ),
-                              ),
-                            ],
+                          image: const DecorationImage(
+                            image: AssetImage('assets/card/Platinum.png'),
+                            fit: BoxFit.cover,
                           ),
-                          Row(
-                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                            children: [
-                              const Text(
-                                'Muhammad Ibnu',
-                                style: TextStyle(
-                                  fontSize: 14,
-                                  color: Colors.white,
+                        ),
+                        child: Column(
+                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: [
+                            Row(
+                              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                              children: [
+                                const Text(
+                                  'Membership Card',
+                                  style: TextStyle(
+                                    fontSize: 18,
+                                    color: Colors.white,
+                                  ),
                                 ),
-                              ),
-                              Row(
-                                children: const [
-                                  Text(
-                                    'exp',
-                                    style: TextStyle(
-                                      fontSize: 12,
-                                      color: Colors.white,
-                                      fontWeight: FontWeight.normal,
+                                Image.asset(
+                                  'assets/images/logo.png',
+                                  height: 40,
+                                  width: 40,
+                                ),
+                              ],
+                            ),
+                            Column(
+                              crossAxisAlignment: CrossAxisAlignment.start,
+                              children: const [
+                                Text(
+                                  'PLATINUM MEMBER',
+                                  style: TextStyle(
+                                    fontSize: 20,
+                                    color: Colors.white,
+                                    fontWeight: FontWeight.w600,
+                                  ),
+                                ),
+                                SizedBox(
+                                  width: 8,
+                                ),
+                                Text(
+                                  '00000001',
+                                  style: TextStyle(
+                                    color: Colors.white,
+                                    fontWeight: FontWeight.w600,
+                                  ),
+                                ),
+                              ],
+                            ),
+                            Row(
+                              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                              children: [
+                                const Text(
+                                  'Muhammad Ibnu',
+                                  style: TextStyle(
+                                    fontSize: 14,
+                                    color: Colors.white,
+                                  ),
+                                ),
+                                Row(
+                                  children: const [
+                                    Text(
+                                      'exp',
+                                      style: TextStyle(
+                                        fontSize: 12,
+                                        color: Colors.white,
+                                        fontWeight: FontWeight.normal,
+                                      ),
                                     ),
-                                  ),
-                                  SizedBox(
-                                    width: 4,
-                                  ),
-                                  Text(
-                                    '12/23',
-                                    style: TextStyle(
-                                      fontSize: 14,
-                                      color: Colors.white,
-                                      fontWeight: FontWeight.bold,
+                                    SizedBox(
+                                      width: 4,
                                     ),
-                                  ),
-                                ],
-                              )
-                            ],
-                          )
-                        ],
+                                    Text(
+                                      '12/23',
+                                      style: TextStyle(
+                                        fontSize: 14,
+                                        color: Colors.white,
+                                        fontWeight: FontWeight.bold,
+                                      ),
+                                    ),
+                                  ],
+                                )
+                              ],
+                            )
+                          ],
+                        ),
                       ),
                     ),
                   ),

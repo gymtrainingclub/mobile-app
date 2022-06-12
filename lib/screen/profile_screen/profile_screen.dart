@@ -2,6 +2,7 @@
 
 import 'package:flutter/material.dart';
 import 'package:mobileapp/screen/login_screen/login_screen.dart';
+import 'package:mobileapp/screen/membership_screen/membership_screen.dart';
 import 'package:provider/provider.dart';
 
 import '../../widget/bottom_navigation_widget.dart';
@@ -118,18 +119,21 @@ class _ProfileScreenState extends State<ProfileScreen> {
                   size: 32,
                 ),
               ),
-              const ListTile(
-                title: Text(
+              ListTile(
+                onTap: () {
+                  Navigator.of(context).pushNamed(MembershipScreen.route);
+                },
+                title: const Text(
                   'Membership',
                   style: TextStyle(
                     fontSize: 16,
                   ),
                 ),
-                trailing: Icon(
+                trailing: const Icon(
                   Icons.arrow_forward_ios,
                   size: 14,
                 ),
-                leading: Icon(
+                leading: const Icon(
                   Icons.card_membership,
                   size: 32,
                 ),
