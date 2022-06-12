@@ -2,6 +2,7 @@
 
 import 'package:flutter/material.dart';
 
+import '../../widget/bottom_navigation_widget.dart';
 import '../schedule_detail_screen/schedule_detail_screen.dart';
 
 class ScheduleScreen extends StatefulWidget {
@@ -215,6 +216,10 @@ class _ScheduleScreenState extends State<ScheduleScreen> {
             ),
           ),
         ],
+      ),
+      bottomNavigationBar: BottomNavigationWidget(
+        index: 2,
+        role: 'member',
       ),
     );
   }

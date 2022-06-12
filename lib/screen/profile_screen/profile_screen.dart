@@ -20,6 +20,13 @@ class _ProfileScreenState extends State<ProfileScreen> {
   @override
   Widget build(BuildContext context) {
     final loginProvider = Provider.of<LoginViewModel>(context);
+    String role = 'admin';
+    int index = 3;
+    if (role == 'admin') {
+      index = 4;
+    } else if (role == 'member' || role == 'operator') {
+      index = 3;
+    }
     return Scaffold(
       backgroundColor: Colors.white,
       extendBodyBehindAppBar: true,
@@ -259,7 +266,10 @@ class _ProfileScreenState extends State<ProfileScreen> {
           ),
         ),
       ),
-      bottomNavigationBar: BottomNavigationWidget(index: 3),
+      bottomNavigationBar: BottomNavigationWidget(
+        index: index,
+        role: role,
+      ),
     );
   }
 }

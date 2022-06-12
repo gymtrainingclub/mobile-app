@@ -382,6 +382,7 @@ class _HomeScreenState extends State<HomeScreen> {
       ),
       bottomNavigationBar: BottomNavigationWidget(
         index: 0,
+        role: 'member',
       ),
     );
   }

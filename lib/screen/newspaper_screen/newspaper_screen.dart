@@ -195,7 +195,10 @@ class _NewspaperScreenState extends State<NewspaperScreen> {
           ],
         ),
       ),
-      bottomNavigationBar: BottomNavigationWidget(index: 1),
+      bottomNavigationBar: BottomNavigationWidget(
+        index: 1,
+        role: 'member',
+      ),
     );
   }
 

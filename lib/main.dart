@@ -1,13 +1,17 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
-import 'package:mobileapp/screen/category_screen/category_screen.dart';
-import 'package:mobileapp/screen/class_screen/class_screen.dart';
-import 'package:mobileapp/screen/membership_payment_screen/membership_payment_screen.dart';
-import 'package:mobileapp/screen/membership_register_screen/membership_register_screen.dart';
-import 'package:mobileapp/screen/membership_screen/membership_screen.dart';
-import 'package:mobileapp/screen/newspaper_screen/newspaper_screen.dart';
-import 'package:mobileapp/screen/schedule_detail_screen/schedule_detail_screen.dart';
-import 'package:mobileapp/screen/schedule_screen/schedule_screen.dart';
+import 'package:mobileapp/screen/admin_administrator_screen/admin_administrator_screen.dart';
+import 'package:mobileapp/screen/admin_content_screen/admin_content_screnn.dart';
+import 'package:mobileapp/screen/admin_membership_screen/admin_membership_screen.dart';
+import '/screen/admin_dashboard_screen/admin_dashboard_screen.dart';
+import '/screen/category_screen/category_screen.dart';
+import '/screen/class_screen/class_screen.dart';
+import '/screen/membership_payment_screen/membership_payment_screen.dart';
+import '/screen/membership_register_screen/membership_register_screen.dart';
+import '/screen/membership_screen/membership_screen.dart';
+import '/screen/newspaper_screen/newspaper_screen.dart';
+import '/screen/schedule_detail_screen/schedule_detail_screen.dart';
+import '/screen/schedule_screen/schedule_screen.dart';
 import 'screen/home_screen/home_screen.dart';
 import 'screen/login_screen/login_screen.dart';
 import 'screen/login_screen/login_viewmodel.dart';
@@ -120,6 +124,14 @@ class MyApp extends StatelessWidget {
             return routeBuilder(const ScheduleScreen(), set);
           case ScheduleDetailScreen.route:
             return routeBuilder(const ScheduleDetailScreen(), set);
+          case AdminDashboardScreen.route:
+            return routeBuilder(const AdminDashboardScreen(), set);
+          case AdminAdministratorScreen.route:
+            return routeBuilder(const AdminAdministratorScreen(), set);
+          case AdminMembershipScreen.route:
+            return routeBuilder(const AdminMembershipScreen(), set);
+          case AdminContentScreen.route:
+            return routeBuilder(const AdminContentScreen(), set);
           default:
             return routeBuilder(const LogoScreen(), set);
         }

@@ -8,6 +8,7 @@ import 'package:mobileapp/screen/home_screen/home_screen.dart';
 import 'package:mobileapp/screen/stop_screen/stop_screen.dart';
 import 'package:provider/provider.dart';
 
+import '../admin_dashboard_screen/admin_dashboard_screen.dart';
 import 'login_viewmodel.dart';
 
 class LoginScreen extends StatefulWidget {
@@ -27,7 +28,11 @@ class _LoginScreenState extends State<LoginScreen> {
     // Provider.of<LoginViewModel>(context, listen: false).getLoginResponse();
   }
 
-  Widget stateBody(LoginViewModel vm) {
+  bool isVisible = false;
+  bool isChecked = false;
+  bool isAdmin = false;
+
+  Widget stateBody(BuildContext context, LoginViewModel vm) {
     final isLoading = vm.state == LoginViewState.loading;
     final isLoaded = vm.state == LoginViewState.loaded;
     final isError = vm.state == LoginViewState.error;
@@ -37,12 +42,12 @@ class _LoginScreenState extends State<LoginScreen> {
       return const Center(child: Text('Error'));
     }
     return Scaffold(
-      body: isLoaded ? _buildLoadedBody(vm) : _buildInitialBody(vm),
+      body: isLoaded
+          ? _buildLoadedBody(context, vm)
+          : _buildInitialBody(context, vm),
     );
   }
 
-  bool isVisible = false;
-  bool isChecked = false;
   @override
   Widget build(BuildContext context) {
     final loginProvider = Provider.of<LoginViewModel>(context);
@@ -77,11 +82,11 @@ class _LoginScreenState extends State<LoginScreen> {
           onPressed: () => Navigator.of(context).pushNamed(StopScreen.route),
         ),
       ),
-      body: stateBody(loginProvider),
+      body: stateBody(context, loginProvider),
     );
   }
 
-  Widget _buildInitialBody(LoginViewModel vm) {
+  Widget _buildInitialBody(BuildContext context, LoginViewModel vm) {
     final loginProvider = Provider.of<LoginViewModel>(context);
     TextEditingController currentEmail = loginProvider.emailController;
     TextEditingController currentPassword = loginProvider.passwordController;
@@ -90,6 +95,7 @@ class _LoginScreenState extends State<LoginScreen> {
     print(loginProvider.loginresponse.data?.token);
     return SingleChildScrollView(
       child: Column(
+        crossAxisAlignment: CrossAxisAlignment.stretch,
         children: [
           const SizedBox(
             height: 60,
@@ -101,11 +107,64 @@ class _LoginScreenState extends State<LoginScreen> {
               width: 128,
             ),
           ),
-          const Text(
-            'Login',
-            style: TextStyle(
-              fontSize: 24,
-              fontWeight: FontWeight.bold,
+          if (isAdmin)
+            const Text(
+              'Login Admin',
+              style: TextStyle(
+                fontSize: 24,
+                fontWeight: FontWeight.bold,
+              ),
+              textAlign: TextAlign.center,
+            ),
+          if (!isAdmin)
+            const Text(
+              'Login',
+              style: TextStyle(
+                fontSize: 24,
+                fontWeight: FontWeight.bold,
+              ),
+              textAlign: TextAlign.center,
+            ),
+          const SizedBox(
+            height: 20,
+          ),
+          GestureDetector(
+            onTap: () {
+              setState(() {
+                isAdmin = !isAdmin;
+              });
+            },
+            child: Container(
+              padding: const EdgeInsets.symmetric(horizontal: 20),
+              child: Row(
+                mainAxisAlignment: MainAxisAlignment.end,
+                children: [
+                  if (isAdmin)
+                    const Text(
+                      'Login User',
+                      style: TextStyle(
+                        fontSize: 14,
+                      ),
+                      textAlign: TextAlign.center,
+                    ),
+                  if (!isAdmin)
+                    const Text(
+                      'Login Admin',
+                      style: TextStyle(
+                        fontSize: 14,
+                      ),
+                      textAlign: TextAlign.center,
+                    ),
+                  const SizedBox(
+                    width: 10,
+                  ),
+                  const Icon(
+                    Icons.arrow_forward,
+                    color: Colors.black87,
+                    size: 18,
+                  ),
+                ],
+              ),
             ),
           ),
           const SizedBox(
@@ -302,11 +361,19 @@ class _LoginScreenState extends State<LoginScreen> {
     );
   }
 
-  _buildLoadedBody(LoginViewModel vm) {
-    Timer(
-      const Duration(seconds: 2),
-      () => Navigator.of(context).pushReplacementNamed(HomeScreen.route),
-    );
+  _buildLoadedBody(BuildContext context, LoginViewModel vm) {
+    if (isAdmin) {
+      Timer(
+        const Duration(seconds: 2),
+        () => Navigator.of(context)
+            .pushReplacementNamed(AdminDashboardScreen.route),
+      );
+    } else {
+      Timer(
+        const Duration(seconds: 2),
+        () => Navigator.of(context).pushReplacementNamed(HomeScreen.route),
+      );
+    }
     return Scaffold(
       backgroundColor: Colors.white,
       body: Center(
