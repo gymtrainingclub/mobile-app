@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:mobileapp/screen/home_screen/home_screen.dart';
 import 'package:mobileapp/screen/profile_screen/profile_screen.dart';
+import 'package:mobileapp/screen/schedule_screen/schedule_screen.dart';
 
 import '../screen/newspaper_screen/newspaper_screen.dart';
 
@@ -42,17 +43,19 @@ class _BottomNavigationWidgetState extends State<BottomNavigationWidget> {
       unselectedItemColor: Colors.grey[600],
       currentIndex: widget.index,
       onTap: (int index) {
-        if (index == 0) {
-          Navigator.of(context).pushNamed(HomeScreen.route);
-        }
-        if (index == 1) {
-          Navigator.of(context).pushNamed(NewspaperScreen.route);
-        }
-        if (index == 2) {
-          Navigator.of(context).pushNamed('/schedule');
-        }
-        if (index == 3) {
-          Navigator.of(context).pushNamed(ProfileScreen.route);
+        switch (index) {
+          case 0:
+            Navigator.pushNamed(context, HomeScreen.route);
+            break;
+          case 1:
+            Navigator.pushNamed(context, NewspaperScreen.route);
+            break;
+          case 2:
+            Navigator.pushNamed(context, ScheduleScreen.route);
+            break;
+          case 3:
+            Navigator.pushNamed(context, ProfileScreen.route);
+            break;
         }
       },
     );

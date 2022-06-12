@@ -559,13 +559,17 @@ class _ClassScreenState extends State<ClassScreen> {
                       ),
                     ),
                   ),
-                  const SizedBox(height: 8.0),
+                  const SizedBox(height: 16.0),
                   RaisedButton(
-                    onPressed: () {},
+                    onPressed: () {
+                      _bookingDialog();
+                    },
                     color: const Color.fromRGBO(0, 103, 132, 1),
                     shape: RoundedRectangleBorder(
                       borderRadius: BorderRadius.circular(50.0),
                     ),
+                    padding: const EdgeInsets.symmetric(
+                        horizontal: 16.0, vertical: 16.0),
                     child: const Text(
                       'Booking',
                       style: TextStyle(
@@ -584,6 +588,70 @@ class _ClassScreenState extends State<ClassScreen> {
           ],
         ),
       ),
+    );
+  }
+
+  void _bookingDialog() {
+    showDialog(
+      context: context,
+      builder: (BuildContext context) {
+        return AlertDialog(
+          title: const Text(
+            'Booking Class',
+            style: TextStyle(
+              fontSize: 20,
+              fontWeight: FontWeight.bold,
+              color: Colors.black,
+            ),
+          ),
+          actions: [
+            FlatButton(
+              child: const Text(
+                'Cancel',
+                style: TextStyle(
+                  fontSize: 16,
+                  fontWeight: FontWeight.bold,
+                  color: Colors.black,
+                ),
+              ),
+              onPressed: () {
+                Navigator.pop(context);
+              },
+            ),
+            FlatButton(
+              child: const Text(
+                'Booking',
+                style: TextStyle(
+                  fontSize: 16,
+                  fontWeight: FontWeight.bold,
+                  color: Colors.black,
+                ),
+              ),
+              onPressed: () {
+                Navigator.pop(context);
+              },
+            ),
+          ],
+          content: SizedBox(
+            height: 400,
+            width: MediaQuery.of(context).size.width * 0.8,
+            child: Column(
+              children: const <Widget>[
+                SizedBox(height: 8.0),
+                Text(
+                  'Select Date',
+                  style: TextStyle(
+                    fontSize: 16,
+                    fontWeight: FontWeight.bold,
+                    color: Colors.black,
+                  ),
+                ),
+                SizedBox(height: 8.0),
+              ],
+            ),
+          ),
+        );
+      },
     );
   }
 }

@@ -6,6 +6,8 @@ import 'package:mobileapp/screen/membership_payment_screen/membership_payment_sc
 import 'package:mobileapp/screen/membership_register_screen/membership_register_screen.dart';
 import 'package:mobileapp/screen/membership_screen/membership_screen.dart';
 import 'package:mobileapp/screen/newspaper_screen/newspaper_screen.dart';
+import 'package:mobileapp/screen/schedule_detail_screen/schedule_detail_screen.dart';
+import 'package:mobileapp/screen/schedule_screen/schedule_screen.dart';
 import 'screen/home_screen/home_screen.dart';
 import 'screen/login_screen/login_screen.dart';
 import 'screen/login_screen/login_viewmodel.dart';
@@ -114,6 +116,10 @@ class MyApp extends StatelessWidget {
             return routeBuilder(const MembershipPaymentScreen(), set);
           case MyMembershipScreen.route:
             return routeBuilder(const MyMembershipScreen(), set);
+          case ScheduleScreen.route:
+            return routeBuilder(const ScheduleScreen(), set);
+          case ScheduleDetailScreen.route:
+            return routeBuilder(const ScheduleDetailScreen(), set);
           default:
             return routeBuilder(const LogoScreen(), set);
         }

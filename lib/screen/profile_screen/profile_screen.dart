@@ -172,6 +172,22 @@ class _ProfileScreenState extends State<ProfileScreen> {
               ),
               const ListTile(
                 title: Text(
+                  'Activity',
+                  style: TextStyle(
+                    fontSize: 16,
+                  ),
+                ),
+                trailing: Icon(
+                  Icons.arrow_forward_ios,
+                  size: 14,
+                ),
+                leading: Icon(
+                  Icons.accessibility,
+                  size: 32,
+                ),
+              ),
+              const ListTile(
+                title: Text(
                   'Settings',
                   style: TextStyle(
                     fontSize: 16,
