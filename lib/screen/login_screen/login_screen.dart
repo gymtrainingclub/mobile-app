@@ -51,11 +51,6 @@ class _LoginScreenState extends State<LoginScreen> {
   @override
   Widget build(BuildContext context) {
     final loginProvider = Provider.of<LoginViewModel>(context);
-    // TextEditingController currentEmail = loginProvider.emailController;
-    // TextEditingController currentPassword = loginProvider.passwordController;
-    // print('test API');
-    // print(loginProvider.state);
-    // print(loginProvider.loginresponse.data?.token);
     return Scaffold(
       backgroundColor: Colors.white,
       extendBodyBehindAppBar: true,

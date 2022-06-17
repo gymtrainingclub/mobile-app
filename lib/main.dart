@@ -15,6 +15,7 @@ import '/screen/schedule_screen/schedule_screen.dart';
 import 'screen/home_screen/home_screen.dart';
 import 'screen/login_screen/login_screen.dart';
 import 'screen/login_screen/login_viewmodel.dart';
+import 'screen/logo_screen/logo_viewmodel.dart';
 import 'screen/membership_detail_screen/membership_detail_screen.dart';
 import 'screen/my_membership_screen/my_membership_screen.dart';
 import 'screen/newspaper_detail_screen/newspaper_detail_screen.dart';
@@ -32,15 +33,9 @@ void main() {
   runApp(
     MultiProvider(
       providers: [
-        // ChangeNotifierProvider(create: (_) => LogoViewModel()),
-        // ChangeNotifierProvider(create: (_) => SplashViewModel()),
+        ChangeNotifierProvider(create: (_) => LogoViewModel()),
         ChangeNotifierProvider(create: (_) => LoginViewModel()),
         ChangeNotifierProvider(create: (_) => RegisterViewModel()),
-        // ChangeNotifierProvider(create: (_) => HomeViewModel()),
-        // ChangeNotifierProvider(create: (_) => ProfileViewModel()),
-        // ChangeNotifierProvider(create: (_) => StopViewModel()),
-        // ChangeNotifierProvider(create: (_) => SuccessViewModel()),
-        // ChangeNotifierProvider(create: (_) => WelcomeViewModel()),
       ],
       child: const MyApp(),
     ),

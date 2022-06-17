@@ -39,84 +39,56 @@ class _NewspaperScreenState extends State<NewspaperScreen> {
           ),
         ),
       ),
-      body: SingleChildScrollView(
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          mainAxisAlignment: MainAxisAlignment.start,
-          children: [
-            Container(
-              height: 228,
-              decoration: const BoxDecoration(
-                image: DecorationImage(
-                  image: AssetImage('assets/category/category.png'),
-                  fit: BoxFit.cover,
-                ),
-              ),
-              child: const Center(
-                child: Text(
-                  'News',
-                  style: TextStyle(
-                    fontSize: 24,
-                    fontWeight: FontWeight.bold,
-                    color: Colors.white,
-                  ),
-                ),
+      body: ListView(
+        // crossAxisAlignment: CrossAxisAlignment.start,
+        // mainAxisAlignment: MainAxisAlignment.start,
+        children: [
+          Container(
+            height: 228,
+            decoration: const BoxDecoration(
+              image: DecorationImage(
+                image: AssetImage('assets/category/category.png'),
+                fit: BoxFit.cover,
               ),
             ),
-            const SizedBox(
-              height: 30,
-            ),
-            Container(
-              padding: const EdgeInsets.symmetric(horizontal: 16),
-              child: const Text(
-                'Category',
+            child: const Center(
+              child: Text(
+                'News',
                 style: TextStyle(
-                  fontSize: 20,
-                  fontWeight: FontWeight.w600,
+                  fontSize: 24,
+                  fontWeight: FontWeight.bold,
+                  color: Colors.white,
                 ),
-                textAlign: TextAlign.left,
               ),
             ),
-            Container(
-              margin: const EdgeInsets.symmetric(vertical: 20.0),
-              height: 150.0,
-              padding: const EdgeInsets.symmetric(horizontal: 16.0),
-              child: ListView(
-                // This next line does the trick.
-                scrollDirection: Axis.horizontal,
-                children: <Widget>[
-                  GestureDetector(
-                    onTap: () {
-                      Navigator.pushNamed(context, CategoryScreen.route);
-                    },
-                    child: Container(
-                      width: 240.0,
-                      padding: const EdgeInsets.all(12.0),
-                      decoration: BoxDecoration(
-                        color: Colors.black.withOpacity(0.1),
-                        border: Border.all(
-                          color: Colors.black.withOpacity(0.2),
-                        ),
-                        borderRadius: BorderRadius.circular(8.0),
-                        image: const DecorationImage(
-                          image: AssetImage('assets/category/bg_cardio.png'),
-                          fit: BoxFit.cover,
-                        ),
-                      ),
-                      child: const Center(
-                        child: Text(
-                          'Cardio',
-                          style: TextStyle(
-                            fontSize: 20,
-                            color: Colors.white,
-                            fontWeight: FontWeight.bold,
-                          ),
-                        ),
-                      ),
-                    ),
-                  ),
-                  const SizedBox(width: 10.0),
-                  Container(
+          ),
+          const SizedBox(
+            height: 30,
+          ),
+          Container(
+            padding: const EdgeInsets.symmetric(horizontal: 16),
+            child: const Text(
+              'Category',
+              style: TextStyle(
+                fontSize: 20,
+                fontWeight: FontWeight.w600,
+              ),
+              textAlign: TextAlign.left,
+            ),
+          ),
+          Container(
+            margin: const EdgeInsets.symmetric(vertical: 20.0),
+            height: 150.0,
+            padding: const EdgeInsets.symmetric(horizontal: 16.0),
+            child: ListView(
+              // This next line does the trick.
+              scrollDirection: Axis.horizontal,
+              children: <Widget>[
+                GestureDetector(
+                  onTap: () {
+                    Navigator.pushNamed(context, CategoryScreen.route);
+                  },
+                  child: Container(
                     width: 240.0,
                     padding: const EdgeInsets.all(12.0),
                     decoration: BoxDecoration(
@@ -126,13 +98,13 @@ class _NewspaperScreenState extends State<NewspaperScreen> {
                       ),
                       borderRadius: BorderRadius.circular(8.0),
                       image: const DecorationImage(
-                        image: AssetImage('assets/category/bg_bodyandmind.png'),
+                        image: AssetImage('assets/category/bg_cardio.png'),
                         fit: BoxFit.cover,
                       ),
                     ),
                     child: const Center(
                       child: Text(
-                        'Body & Mind',
+                        'Cardio',
                         style: TextStyle(
                           fontSize: 20,
                           color: Colors.white,
@@ -141,59 +113,81 @@ class _NewspaperScreenState extends State<NewspaperScreen> {
                       ),
                     ),
                   ),
-                  const SizedBox(width: 10.0),
-                  Container(
-                    width: 240.0,
-                    padding: const EdgeInsets.all(12.0),
-                    decoration: BoxDecoration(
-                      color: Colors.black.withOpacity(0.1),
-                      border: Border.all(
-                        color: Colors.black.withOpacity(0.2),
-                      ),
-                      borderRadius: BorderRadius.circular(8.0),
-                      image: const DecorationImage(
-                        image: AssetImage('assets/category/bg_strength.png'),
-                        fit: BoxFit.cover,
-                      ),
-                    ),
-                    child: const Center(
-                      child: Text(
-                        'Strength',
-                        style: TextStyle(
-                          fontSize: 20,
-                          color: Colors.white,
-                          fontWeight: FontWeight.bold,
-                        ),
-                      ),
-                    ),
-                  ),
-                ],
-              ),
-            ),
-            const SizedBox(
-              height: 10,
-            ),
-            Container(
-              padding: const EdgeInsets.symmetric(horizontal: 16),
-              child: const Text(
-                'Latest News',
-                style: TextStyle(
-                  fontSize: 20,
-                  fontWeight: FontWeight.w600,
                 ),
-                textAlign: TextAlign.left,
-              ),
+                const SizedBox(width: 10.0),
+                Container(
+                  width: 240.0,
+                  padding: const EdgeInsets.all(12.0),
+                  decoration: BoxDecoration(
+                    color: Colors.black.withOpacity(0.1),
+                    border: Border.all(
+                      color: Colors.black.withOpacity(0.2),
+                    ),
+                    borderRadius: BorderRadius.circular(8.0),
+                    image: const DecorationImage(
+                      image: AssetImage('assets/category/bg_bodyandmind.png'),
+                      fit: BoxFit.cover,
+                    ),
+                  ),
+                  child: const Center(
+                    child: Text(
+                      'Body & Mind',
+                      style: TextStyle(
+                        fontSize: 20,
+                        color: Colors.white,
+                        fontWeight: FontWeight.bold,
+                      ),
+                    ),
+                  ),
+                ),
+                const SizedBox(width: 10.0),
+                Container(
+                  width: 240.0,
+                  padding: const EdgeInsets.all(12.0),
+                  decoration: BoxDecoration(
+                    color: Colors.black.withOpacity(0.1),
+                    border: Border.all(
+                      color: Colors.black.withOpacity(0.2),
+                    ),
+                    borderRadius: BorderRadius.circular(8.0),
+                    image: const DecorationImage(
+                      image: AssetImage('assets/category/bg_strength.png'),
+                      fit: BoxFit.cover,
+                    ),
+                  ),
+                  child: const Center(
+                    child: Text(
+                      'Strength',
+                      style: TextStyle(
+                        fontSize: 20,
+                        color: Colors.white,
+                        fontWeight: FontWeight.bold,
+                      ),
+                    ),
+                  ),
+                ),
+              ],
             ),
-            Padding(
-              padding: const EdgeInsets.symmetric(horizontal: 16),
-              child: MediaQuery.removePadding(
-                context: context,
-                removeTop: true,
-                child: _buildList(),
+          ),
+          const SizedBox(
+            height: 10,
+          ),
+          Container(
+            padding: const EdgeInsets.symmetric(horizontal: 16),
+            child: const Text(
+              'Latest News',
+              style: TextStyle(
+                fontSize: 20,
+                fontWeight: FontWeight.w600,
               ),
+              textAlign: TextAlign.left,
             ),
-          ],
-        ),
+          ),
+          Padding(
+            padding: const EdgeInsets.symmetric(horizontal: 16),
+            child: _buildList(),
+          ),
+        ],
       ),
       bottomNavigationBar: BottomNavigationWidget(
         index: 1,
@@ -203,17 +197,23 @@ class _NewspaperScreenState extends State<NewspaperScreen> {
   }
 
   Widget _buildList() {
-    return ListView.builder(
-      shrinkWrap: true,
-      scrollDirection: Axis.vertical,
-      itemBuilder: (context, index) {
-        if (index % 2 == 0) {
-          return _contentA(context);
-        } else {
-          return _contentB(context);
-        }
-      },
-      itemCount: 10,
+    // return ListView.builder(
+    //   shrinkWrap: false,
+    //   physics: const NeverScrollableScrollPhysics(),
+    //   itemBuilder: (context, index) {
+    //     if (index % 2 == 0) {
+    //       return _contentA(context);
+    //     } else {
+    //       return _contentB(context);
+    //     }
+    //   },
+    //   itemCount: 10,
+    // );
+    return Column(
+      children: <Widget>[
+        for (var i = 0; i < 10; i++)
+          if (i % 2 == 0) _contentA(context) else _contentB(context),
+      ],
     );
   }
 
