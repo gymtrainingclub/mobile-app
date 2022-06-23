@@ -1,14 +1,14 @@
 // ignore_for_file: prefer_collection_literals
 
-class ProfileResponse {
+class ProfileGetResponse {
   String? status;
   int? code;
   String? message;
   Data? data;
 
-  ProfileResponse({this.status, this.code, this.message, this.data});
+  ProfileGetResponse({this.status, this.code, this.message, this.data});
 
-  ProfileResponse.fromJson(Map<String, dynamic> json) {
+  ProfileGetResponse.fromJson(Map<String, dynamic> json) {
     status = json['status'];
     code = json['code'];
     message = json['message'];

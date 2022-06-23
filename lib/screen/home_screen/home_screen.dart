@@ -1,3 +1,5 @@
+// ignore_for_file: prefer_const_literals_to_create_immutables
+
 import 'package:flutter/material.dart';
 import 'package:mobileapp/screen/category_screen/category_screen.dart';
 import 'package:mobileapp/screen/my_membership_screen/my_membership_screen.dart';
@@ -37,17 +39,7 @@ class _HomeScreenState extends State<HomeScreen> {
       body: SingleChildScrollView(
         child: Stack(
           children: [
-            Container(
-              width: double.infinity,
-              height: 270,
-              decoration: const BoxDecoration(
-                borderRadius: BorderRadius.only(
-                    // bottomLeft: Radius.circular(40),
-                    // bottomRight: Radius.circular(40),
-                    ),
-                color: Color.fromRGBO(18, 106, 138, 1),
-              ),
-            ),
+            const BackgroundStyle(),
             Padding(
               padding: const EdgeInsets.symmetric(horizontal: 16.0),
               child: Column(
@@ -57,50 +49,43 @@ class _HomeScreenState extends State<HomeScreen> {
                   const SizedBox(
                     height: 80,
                   ),
-                  const Text(
-                    'Hello,',
-                    style: TextStyle(
-                      fontSize: 24,
-                      fontWeight: FontWeight.w600,
-                      color: Colors.white,
-                    ),
-                  ),
-                  const SizedBox(
-                    height: 8,
-                  ),
-                  const Text(
-                    'Muhammad Ibnu',
-                    style: TextStyle(
-                      fontSize: 22,
-                      color: Colors.white,
-                    ),
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    children: [
+                      Column(
+                        mainAxisAlignment: MainAxisAlignment.start,
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          const Text(
+                            'Hello,',
+                            style: TextStyle(
+                              fontSize: 24,
+                              fontWeight: FontWeight.w600,
+                              color: Colors.white,
+                            ),
+                          ),
+                          const SizedBox(
+                            height: 8,
+                          ),
+                          const Text(
+                            'Muhammad Ibnu',
+                            style: TextStyle(
+                              fontSize: 22,
+                              color: Colors.white,
+                            ),
+                          ),
+                        ],
+                      ),
+                      Image.asset(
+                        'assets/icon/notification.png',
+                        width: 80,
+                        height: 80,
+                      ),
+                    ],
                   ),
                   const SizedBox(
                     height: 20,
                   ),
-                  // Center(
-                  //   child: Container(
-                  //     height: 200,
-                  //     decoration: BoxDecoration(
-                  //       borderRadius: BorderRadius.circular(10),
-                  //       color: Colors.white,
-                  //       border: Border.all(
-                  //         color: const Color.fromRGBO(217, 217, 217, 1),
-                  //         width: 1,
-                  //       ),
-                  //     ),
-                  //     child: const Center(
-                  //       child: Text(
-                  //         'Unactive Membership',
-                  //         style: TextStyle(
-                  //           fontSize: 28,
-                  //           color: Colors.black,
-                  //         ),
-                  //         textAlign: TextAlign.center,
-                  //       ),
-                  //     ),
-                  //   ),
-                  // ),
                   Center(
                     child: GestureDetector(
                       onTap: () => Navigator.of(context).pushNamed(
@@ -492,6 +477,27 @@ class _HomeScreenState extends State<HomeScreen> {
             ),
           ],
         ),
+      ),
+    );
+  }
+}
+
+class BackgroundStyle extends StatelessWidget {
+  const BackgroundStyle({
+    Key? key,
+  }) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    return Container(
+      width: double.infinity,
+      height: 270,
+      decoration: const BoxDecoration(
+        borderRadius: BorderRadius.only(
+            // bottomLeft: Radius.circular(40),
+            // bottomRight: Radius.circular(40),
+            ),
+        color: Color.fromRGBO(18, 106, 138, 1),
       ),
     );
   }

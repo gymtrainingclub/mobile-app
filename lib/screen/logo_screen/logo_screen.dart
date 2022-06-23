@@ -1,9 +1,10 @@
-// ignore_for_file: unnecessary_null_comparison, use_build_context_synchronously
+// ignore_for_file: unnecessary_null_comparison, use_build_context_synchronously, avoid_print
 
 import 'dart:async';
 
 import 'package:flutter/material.dart';
 import 'package:mobileapp/screen/admin_dashboard_screen/admin_dashboard_screen.dart';
+import 'package:mobileapp/screen/splash_screen/splash_screen.dart';
 import 'package:provider/provider.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
@@ -32,8 +33,8 @@ class _LogoScreenState extends State<LogoScreen> {
     token = prefs.getString('token') ?? 'kosong';
     print('token woe: $token');
     print('role woe: $role');
-    Provider.of<LogoViewModel>(context, listen: false).token = token;
-    Provider.of<LogoViewModel>(context, listen: false).getVerifyResponse(token);
+    // Provider.of<LogoViewModel>(context, listen: false).token = token;
+    // Provider.of<LogoViewModel>(context, listen: false).getVerifyResponse(token);
   }
 
   @override
@@ -149,6 +150,30 @@ class _LogoScreenState extends State<LogoScreen> {
         ),
       );
     } else {
+      if (role == 'admin') {
+        Timer(
+          const Duration(seconds: 2),
+          () => Navigator.of(context).pushNamed(AdminDashboardScreen.route),
+        );
+      } else if (role == 'operator') {
+        Timer(
+          const Duration(seconds: 2),
+          () => Navigator.of(context).pushNamed(AdminDashboardScreen.route),
+        );
+      } else if (role == 'user') {
+        Timer(
+          const Duration(seconds: 2),
+          () => Navigator.of(context).pushNamed(HomeScreen.route),
+        );
+      } else if (role == 'kosong') {
+        Timer(
+          const Duration(seconds: 2),
+          () => Navigator.of(context).pushNamedAndRemoveUntil(
+            SplashScreen.route,
+            (route) => false,
+          ),
+        );
+      }
       return Scaffold(
         backgroundColor: const Color.fromRGBO(12, 48, 61, 1),
         body: Center(

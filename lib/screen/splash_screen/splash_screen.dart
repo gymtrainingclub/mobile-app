@@ -42,12 +42,23 @@ class _SplashScreenState extends State<SplashScreen> {
         backgroundColor: Colors.transparent,
         automaticallyImplyLeading: false,
         elevation: 0,
-        leading: IconButton(
-          icon: const Icon(
-            Icons.arrow_back,
-            color: Colors.white,
-            size: 18,
-          ),
+        // leading: IconButton(
+        //   icon: const Icon(
+        //     Icons.arrow_back,
+        //     color: Colors.white,
+        //     size: 18,
+        //   ),
+        //   onPressed: () {
+        //     setState(() {
+        //       _currentPage++;
+        //       if (_currentPage == 3) {
+        //         _currentPage = 0;
+        //       }
+        //       _onPageChanged(_currentPage);
+        //     });
+        //   },
+        // ),
+        leading: TextButton(
           onPressed: () {
             setState(() {
               _currentPage++;
@@ -57,6 +68,13 @@ class _SplashScreenState extends State<SplashScreen> {
               _onPageChanged(_currentPage);
             });
           },
+          child: const Text(
+            'Back',
+            style: TextStyle(
+              color: Colors.white,
+              fontSize: 14,
+            ),
+          ),
         ),
       ),
       body: Builder(builder: (context) {
@@ -154,7 +172,7 @@ class _SplashScreenState extends State<SplashScreen> {
                     child: const Text(
                       'Skip',
                       style: TextStyle(
-                        color: Color.fromRGBO(0, 103, 132, 1),
+                        color: Colors.white,
                         decoration: TextDecoration.underline,
                       ),
                       textAlign: TextAlign.center,
