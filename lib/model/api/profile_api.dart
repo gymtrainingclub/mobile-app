@@ -2,8 +2,7 @@ import 'package:dio/dio.dart';
 import 'package:mobileapp/model/profile_model.dart';
 
 class ProfileAPI {
-  Future<ProfileGetResponse> getProfileGetResponse(
-      String email, String password) async {
+  Future<ProfileGetResponse> getProfileGetResponse() async {
     try {
       final response = await Dio().get(
         'https://virtserver.swaggerhub.com/imanuelpay/gym-api/1.0.0/profile',

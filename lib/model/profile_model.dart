@@ -4,7 +4,7 @@ class ProfileGetResponse {
   String? status;
   int? code;
   String? message;
-  Data? data;
+  DataProfileGetResponse? data;
 
   ProfileGetResponse({this.status, this.code, this.message, this.data});
 
@@ -12,7 +12,9 @@ class ProfileGetResponse {
     status = json['status'];
     code = json['code'];
     message = json['message'];
-    data = json['data'] != null ? Data.fromJson(json['data']) : null;
+    data = json['data'] != null
+        ? DataProfileGetResponse.fromJson(json['data'])
+        : null;
   }
 
   Map<String, dynamic> toJson() {
@@ -27,7 +29,7 @@ class ProfileGetResponse {
   }
 }
 
-class Data {
+class DataProfileGetResponse {
   int? id;
   String? name;
   String? gender;
@@ -41,7 +43,7 @@ class Data {
   String? createdAt;
   String? updatedAt;
 
-  Data(
+  DataProfileGetResponse(
       {this.id,
       this.name,
       this.gender,
@@ -55,7 +57,7 @@ class Data {
       this.createdAt,
       this.updatedAt});
 
-  Data.fromJson(Map<String, dynamic> json) {
+  DataProfileGetResponse.fromJson(Map<String, dynamic> json) {
     id = json['id'];
     name = json['name'];
     gender = json['gender'];
@@ -164,7 +166,7 @@ class ProfileUpdateResponse {
   String? status;
   int? code;
   String? message;
-  Data? data;
+  DataProfileGetResponse? data;
 
   ProfileUpdateResponse({this.status, this.code, this.message, this.data});
 
@@ -172,7 +174,9 @@ class ProfileUpdateResponse {
     status = json['status'];
     code = json['code'];
     message = json['message'];
-    data = json['data'] != null ? Data.fromJson(json['data']) : null;
+    data = json['data'] != null
+        ? DataProfileGetResponse.fromJson(json['data'])
+        : null;
   }
 
   Map<String, dynamic> toJson() {
@@ -310,7 +314,7 @@ class ProfileChangePasswordResponse {
   String? status;
   int? code;
   String? message;
-  Data? data;
+  DataProfileGetResponse? data;
 
   ProfileChangePasswordResponse(
       {this.status, this.code, this.message, this.data});
@@ -319,7 +323,9 @@ class ProfileChangePasswordResponse {
     status = json['status'];
     code = json['code'];
     message = json['message'];
-    data = json['data'] != null ? Data.fromJson(json['data']) : null;
+    data = json['data'] != null
+        ? DataProfileGetResponse.fromJson(json['data'])
+        : null;
   }
 
   Map<String, dynamic> toJson() {

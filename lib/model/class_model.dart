@@ -2,7 +2,7 @@ class ClassGetResponse {
   String? status;
   int? code;
   String? message;
-  List<Data>? data;
+  List<DataClassGetResponse>? data;
 
   ClassGetResponse({this.status, this.code, this.message, this.data});
 
@@ -11,9 +11,9 @@ class ClassGetResponse {
     code = json['code'];
     message = json['message'];
     if (json['data'] != null) {
-      data = <Data>[];
+      data = <DataClassGetResponse>[];
       json['data'].forEach((v) {
-        data!.add(Data.fromJson(v));
+        data!.add(DataClassGetResponse.fromJson(v));
       });
     }
   }
@@ -30,9 +30,9 @@ class ClassGetResponse {
   }
 }
 
-class Data {
+class DataClassGetResponse {
   Category? category;
-  Instructor? instructor;
+  InstructorClassGetResponse? instructor;
   int? id;
   String? name;
   String? type;
@@ -44,14 +44,14 @@ class Data {
   String? address;
   String? image;
   String? description;
-  int? price;
+  double? price;
   String? startDate;
   String? createdBy;
   String? updatedBy;
   String? createdAt;
   String? updatedAt;
 
-  Data(
+  DataClassGetResponse(
       {this.category,
       this.instructor,
       this.id,
@@ -72,11 +72,11 @@ class Data {
       this.createdAt,
       this.updatedAt});
 
-  Data.fromJson(Map<String, dynamic> json) {
+  DataClassGetResponse.fromJson(Map<String, dynamic> json) {
     category =
         json['category'] != null ? Category.fromJson(json['category']) : null;
     instructor = json['instructor'] != null
-        ? Instructor.fromJson(json['instructor'])
+        ? InstructorClassGetResponse.fromJson(json['instructor'])
         : null;
     id = json['id'];
     name = json['name'];
@@ -151,7 +151,7 @@ class Category {
   }
 }
 
-class Instructor {
+class InstructorClassGetResponse {
   int? id;
   String? name;
   String? gender;
@@ -159,7 +159,7 @@ class Instructor {
   String? email;
   String? photo;
 
-  Instructor(
+  InstructorClassGetResponse(
       {this.id,
       this.name,
       this.gender,
@@ -167,7 +167,7 @@ class Instructor {
       this.email,
       this.photo});
 
-  Instructor.fromJson(Map<String, dynamic> json) {
+  InstructorClassGetResponse.fromJson(Map<String, dynamic> json) {
     id = json['id'];
     name = json['name'];
     gender = json['gender'];
@@ -261,7 +261,7 @@ class ClassPostResponse {
   String? status;
   int? code;
   String? message;
-  Data? data;
+  DataClassGetResponse? data;
 
   ClassPostResponse({this.status, this.code, this.message, this.data});
 
@@ -269,7 +269,9 @@ class ClassPostResponse {
     status = json['status'];
     code = json['code'];
     message = json['message'];
-    data = json['data'] != null ? Data.fromJson(json['data']) : null;
+    data = json['data'] != null
+        ? DataClassGetResponse.fromJson(json['data'])
+        : null;
   }
 
   Map<String, dynamic> toJson() {
@@ -286,7 +288,7 @@ class ClassPostResponse {
 
 class Data2 {
   Category? category;
-  Instructor? instructor;
+  InstructorClassGetResponse? instructor;
   int? id;
   String? name;
   String? type;
@@ -330,7 +332,7 @@ class Data2 {
     category =
         json['category'] != null ? Category.fromJson(json['category']) : null;
     instructor = json['instructor'] != null
-        ? Instructor.fromJson(json['instructor'])
+        ? InstructorClassGetResponse.fromJson(json['instructor'])
         : null;
     id = json['id'];
     name = json['name'];
@@ -446,7 +448,7 @@ class ClassGetByIdResponse {
   String? status;
   int? code;
   String? message;
-  Data? data;
+  DataClassGetResponse? data;
 
   ClassGetByIdResponse({this.status, this.code, this.message, this.data});
 
@@ -454,7 +456,9 @@ class ClassGetByIdResponse {
     status = json['status'];
     code = json['code'];
     message = json['message'];
-    data = json['data'] != null ? Data.fromJson(json['data']) : null;
+    data = json['data'] != null
+        ? DataClassGetResponse.fromJson(json['data'])
+        : null;
   }
 
   Map<String, dynamic> toJson() {
@@ -471,7 +475,7 @@ class ClassGetByIdResponse {
 
 class Data3 {
   Category? category;
-  Instructor? instructor;
+  InstructorClassGetResponse? instructor;
   int? id;
   String? name;
   String? type;
@@ -515,7 +519,7 @@ class Data3 {
     category =
         json['category'] != null ? Category.fromJson(json['category']) : null;
     instructor = json['instructor'] != null
-        ? Instructor.fromJson(json['instructor'])
+        ? InstructorClassGetResponse.fromJson(json['instructor'])
         : null;
     id = json['id'];
     name = json['name'];
@@ -700,7 +704,7 @@ class ClassPutByIdResponse {
   String? status;
   int? code;
   String? message;
-  Data? data;
+  DataClassGetResponse? data;
 
   ClassPutByIdResponse({this.status, this.code, this.message, this.data});
 
@@ -708,7 +712,9 @@ class ClassPutByIdResponse {
     status = json['status'];
     code = json['code'];
     message = json['message'];
-    data = json['data'] != null ? Data.fromJson(json['data']) : null;
+    data = json['data'] != null
+        ? DataClassGetResponse.fromJson(json['data'])
+        : null;
   }
 
   Map<String, dynamic> toJson() {
@@ -725,7 +731,7 @@ class ClassPutByIdResponse {
 
 class Data4 {
   Category? category;
-  Instructor? instructor;
+  InstructorClassGetResponse? instructor;
   int? id;
   String? name;
   String? type;
@@ -769,7 +775,7 @@ class Data4 {
     category =
         json['category'] != null ? Category.fromJson(json['category']) : null;
     instructor = json['instructor'] != null
-        ? Instructor.fromJson(json['instructor'])
+        ? InstructorClassGetResponse.fromJson(json['instructor'])
         : null;
     id = json['id'];
     name = json['name'];
@@ -885,7 +891,7 @@ class ClassDeleteByIdResponse {
   String? status;
   int? code;
   String? message;
-  Data? data;
+  DataClassGetResponse? data;
 
   ClassDeleteByIdResponse({this.status, this.code, this.message, this.data});
 
@@ -893,7 +899,9 @@ class ClassDeleteByIdResponse {
     status = json['status'];
     code = json['code'];
     message = json['message'];
-    data = json['data'] != null ? Data.fromJson(json['data']) : null;
+    data = json['data'] != null
+        ? DataClassGetResponse.fromJson(json['data'])
+        : null;
   }
 
   Map<String, dynamic> toJson() {
@@ -910,7 +918,7 @@ class ClassDeleteByIdResponse {
 
 class Data5 {
   Category? category;
-  Instructor? instructor;
+  InstructorClassGetResponse? instructor;
   int? id;
   String? name;
   String? type;
@@ -954,7 +962,7 @@ class Data5 {
     category =
         json['category'] != null ? Category.fromJson(json['category']) : null;
     instructor = json['instructor'] != null
-        ? Instructor.fromJson(json['instructor'])
+        ? InstructorClassGetResponse.fromJson(json['instructor'])
         : null;
     id = json['id'];
     name = json['name'];

@@ -2,7 +2,7 @@ class CategoryGetResponse {
   String? status;
   int? code;
   String? message;
-  List<Data>? data;
+  List<DataCategoryGetResponse>? data;
 
   CategoryGetResponse({this.status, this.code, this.message, this.data});
 
@@ -11,9 +11,9 @@ class CategoryGetResponse {
     code = json['code'];
     message = json['message'];
     if (json['data'] != null) {
-      data = <Data>[];
+      data = <DataCategoryGetResponse>[];
       json['data'].forEach((v) {
-        data!.add(Data.fromJson(v));
+        data!.add(DataCategoryGetResponse.fromJson(v));
       });
     }
   }
@@ -30,7 +30,7 @@ class CategoryGetResponse {
   }
 }
 
-class Data {
+class DataCategoryGetResponse {
   int? id;
   String? name;
   String? image;
@@ -38,7 +38,7 @@ class Data {
   String? createdAt;
   String? updatedAt;
 
-  Data(
+  DataCategoryGetResponse(
       {this.id,
       this.name,
       this.image,
@@ -46,7 +46,7 @@ class Data {
       this.createdAt,
       this.updatedAt});
 
-  Data.fromJson(Map<String, dynamic> json) {
+  DataCategoryGetResponse.fromJson(Map<String, dynamic> json) {
     id = json['id'];
     name = json['name'];
     image = json['image'];
@@ -93,7 +93,7 @@ class CategoryPostResponse {
   String? status;
   int? code;
   String? message;
-  Data? data;
+  DataCategoryGetResponse? data;
 
   CategoryPostResponse({this.status, this.code, this.message, this.data});
 
@@ -101,7 +101,9 @@ class CategoryPostResponse {
     status = json['status'];
     code = json['code'];
     message = json['message'];
-    data = json['data'] != null ? Data.fromJson(json['data']) : null;
+    data = json['data'] != null
+        ? DataCategoryGetResponse.fromJson(json['data'])
+        : null;
   }
 
   Map<String, dynamic> toJson() {
@@ -157,7 +159,7 @@ class CategoryGetByIdResponse {
   String? status;
   int? code;
   String? message;
-  Data? data;
+  DataCategoryGetResponse? data;
 
   CategoryGetByIdResponse({this.status, this.code, this.message, this.data});
 
@@ -165,7 +167,9 @@ class CategoryGetByIdResponse {
     status = json['status'];
     code = json['code'];
     message = json['message'];
-    data = json['data'] != null ? Data.fromJson(json['data']) : null;
+    data = json['data'] != null
+        ? DataCategoryGetResponse.fromJson(json['data'])
+        : null;
   }
 
   Map<String, dynamic> toJson() {
@@ -243,7 +247,7 @@ class CategoryPutByIdResponse {
   String? status;
   int? code;
   String? message;
-  Data? data;
+  DataCategoryGetResponse? data;
 
   CategoryPutByIdResponse({this.status, this.code, this.message, this.data});
 
@@ -251,7 +255,9 @@ class CategoryPutByIdResponse {
     status = json['status'];
     code = json['code'];
     message = json['message'];
-    data = json['data'] != null ? Data.fromJson(json['data']) : null;
+    data = json['data'] != null
+        ? DataCategoryGetResponse.fromJson(json['data'])
+        : null;
   }
 
   Map<String, dynamic> toJson() {
@@ -307,7 +313,7 @@ class CategoryDeleteByIdResponse {
   String? status;
   int? code;
   String? message;
-  Data? data;
+  DataCategoryGetResponse? data;
 
   CategoryDeleteByIdResponse({this.status, this.code, this.message, this.data});
 
@@ -315,7 +321,9 @@ class CategoryDeleteByIdResponse {
     status = json['status'];
     code = json['code'];
     message = json['message'];
-    data = json['data'] != null ? Data.fromJson(json['data']) : null;
+    data = json['data'] != null
+        ? DataCategoryGetResponse.fromJson(json['data'])
+        : null;
   }
 
   Map<String, dynamic> toJson() {

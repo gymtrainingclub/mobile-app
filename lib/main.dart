@@ -3,22 +3,23 @@ import 'package:google_fonts/google_fonts.dart';
 import 'package:mobileapp/screen/admin_administrator_screen/admin_administrator_screen.dart';
 import 'package:mobileapp/screen/admin_content_screen/admin_content_screnn.dart';
 import 'package:mobileapp/screen/admin_membership_screen/admin_membership_screen.dart';
+import 'package:mobileapp/screen/newsletter_detail_screen/newsletter_detail_screen.dart';
+import 'package:mobileapp/screen/newsletter_screen/newsletter_screen.dart';
 import '/screen/admin_dashboard_screen/admin_dashboard_screen.dart';
 import '/screen/category_screen/category_screen.dart';
 import '/screen/class_screen/class_screen.dart';
 import '/screen/membership_payment_screen/membership_payment_screen.dart';
 import '/screen/membership_register_screen/membership_register_screen.dart';
 import '/screen/membership_screen/membership_screen.dart';
-import '/screen/newspaper_screen/newspaper_screen.dart';
 import '/screen/schedule_detail_screen/schedule_detail_screen.dart';
 import '/screen/schedule_screen/schedule_screen.dart';
 import 'screen/home_screen/home_screen.dart';
+import 'screen/home_screen/home_viewmodel.dart';
 import 'screen/login_screen/login_screen.dart';
 import 'screen/login_screen/login_viewmodel.dart';
 import 'screen/logo_screen/logo_viewmodel.dart';
 import 'screen/membership_detail_screen/membership_detail_screen.dart';
 import 'screen/my_membership_screen/my_membership_screen.dart';
-import 'screen/newspaper_detail_screen/newspaper_detail_screen.dart';
 import 'screen/profile_screen/profile_screen.dart';
 import 'screen/register_screen/register_screen.dart';
 import 'package:provider/provider.dart';
@@ -33,9 +34,18 @@ void main() {
   runApp(
     MultiProvider(
       providers: [
-        ChangeNotifierProvider(create: (_) => LogoViewModel()),
-        ChangeNotifierProvider(create: (_) => LoginViewModel()),
-        ChangeNotifierProvider(create: (_) => RegisterViewModel()),
+        ChangeNotifierProvider(
+          create: (_) => LogoViewModel(),
+        ),
+        ChangeNotifierProvider(
+          create: (_) => LoginViewModel(),
+        ),
+        ChangeNotifierProvider(
+          create: (_) => RegisterViewModel(),
+        ),
+        ChangeNotifierProvider(
+          create: (_) => HomeViewModel(),
+        ),
       ],
       child: const MyApp(),
     ),
@@ -101,10 +111,10 @@ class MyApp extends StatelessWidget {
             return routeBuilder(const CategoryScreen(), set);
           case ClassScreen.route:
             return routeBuilder(const ClassScreen(), set);
-          case NewspaperScreen.route:
-            return routeBuilder(const NewspaperScreen(), set);
-          case NewspaperDetailScreen.route:
-            return routeBuilder(const NewspaperDetailScreen(), set);
+          case NewsletterDetailScreen.route:
+            return routeBuilder(const NewsletterDetailScreen(), set);
+          case NewsletterScreen.route:
+            return routeBuilder(const NewsletterScreen(), set);
           case MembershipScreen.route:
             return routeBuilder(const MembershipScreen(), set);
           case MembershipDetailScreen.route:

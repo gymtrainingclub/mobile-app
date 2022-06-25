@@ -32,6 +32,15 @@ class LoginViewModel with ChangeNotifier {
     ),
   );
 
+  String _role = '';
+
+  String get role => _role;
+
+  setRole(String value) {
+    _role = value;
+    notifyListeners();
+  }
+
   LoginResponse get loginresponse => _loginresponse;
 
   var emailController = TextEditingController();
@@ -43,11 +52,12 @@ class LoginViewModel with ChangeNotifier {
     passwordController.dispose();
   }
 
-  getLoginResponse(String email, String password) async {
+  getLoginResponse(String email, String password, String isRole) async {
     changeState(LoginViewState.loading);
     try {
       final loginresponse = await LoginAPI().getLoginResponse(email, password);
       _loginresponse = loginresponse;
+      _role = isRole;
       changeState(LoginViewState.loaded);
     } catch (e) {
       changeState(LoginViewState.error);

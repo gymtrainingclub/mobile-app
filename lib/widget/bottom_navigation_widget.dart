@@ -7,7 +7,7 @@ import 'package:mobileapp/screen/profile_screen/profile_screen.dart';
 import 'package:mobileapp/screen/schedule_screen/schedule_screen.dart';
 
 import '../screen/admin_dashboard_screen/admin_dashboard_screen.dart';
-import '../screen/newspaper_screen/newspaper_screen.dart';
+import '../screen/newsletter_screen/newsletter_screen.dart';
 
 // ignore: must_be_immutable
 class BottomNavigationWidget extends StatefulWidget {
@@ -34,12 +34,12 @@ class _BottomNavigationWidgetState extends State<BottomNavigationWidget> {
             label: 'Home',
           ),
           const BottomNavigationBarItem(
-            icon: Icon(Icons.newspaper),
-            label: 'News',
-          ),
-          const BottomNavigationBarItem(
             icon: Icon(Icons.calendar_month),
             label: 'Schedule',
+          ),
+          const BottomNavigationBarItem(
+            icon: Icon(Icons.newspaper),
+            label: 'News',
           ),
           const BottomNavigationBarItem(
             icon: Icon(Icons.person),
@@ -80,10 +80,10 @@ class _BottomNavigationWidgetState extends State<BottomNavigationWidget> {
               Navigator.pushNamed(context, HomeScreen.route);
               break;
             case 1:
-              Navigator.pushNamed(context, NewspaperScreen.route);
+              Navigator.pushNamed(context, ScheduleScreen.route);
               break;
             case 2:
-              Navigator.pushNamed(context, ScheduleScreen.route);
+              Navigator.pushNamed(context, NewsletterScreen.route);
               break;
             case 3:
               Navigator.pushNamed(context, ProfileScreen.route);

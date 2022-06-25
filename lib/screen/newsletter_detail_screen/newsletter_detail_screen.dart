@@ -1,14 +1,14 @@
 import 'package:flutter/material.dart';
 
-class NewspaperDetailScreen extends StatefulWidget {
-  const NewspaperDetailScreen({Key? key}) : super(key: key);
+class NewsletterDetailScreen extends StatefulWidget {
+  const NewsletterDetailScreen({Key? key}) : super(key: key);
   static const String route = '/newspaper_detail';
 
   @override
-  State<NewspaperDetailScreen> createState() => _NewspaperDetailScreenState();
+  State<NewsletterDetailScreen> createState() => _NewsletterDetailScreenState();
 }
 
-class _NewspaperDetailScreenState extends State<NewspaperDetailScreen> {
+class _NewsletterDetailScreenState extends State<NewsletterDetailScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(

@@ -30,7 +30,7 @@ class _LoginScreenState extends State<LoginScreen> {
 
   bool isVisible = false;
   bool isChecked = false;
-  bool isAdmin = false;
+  String isRole = 'member';
 
   Widget stateBody(BuildContext context, LoginViewModel vm) {
     final isLoading = vm.state == LoginViewState.loading;
@@ -102,7 +102,7 @@ class _LoginScreenState extends State<LoginScreen> {
               width: 128,
             ),
           ),
-          if (isAdmin)
+          if (isRole == 'admin' || isRole == 'operator')
             const Text(
               'Login Admin',
               style: TextStyle(
@@ -111,7 +111,7 @@ class _LoginScreenState extends State<LoginScreen> {
               ),
               textAlign: TextAlign.center,
             ),
-          if (!isAdmin)
+          if (isRole == 'member')
             const Text(
               'Login',
               style: TextStyle(
@@ -126,7 +126,13 @@ class _LoginScreenState extends State<LoginScreen> {
           GestureDetector(
             onTap: () {
               setState(() {
-                isAdmin = !isAdmin;
+                if (isRole == 'member') {
+                  isRole = 'admin';
+                } else if (isRole == 'admin') {
+                  isRole = 'operator';
+                } else if (isRole == 'operator') {
+                  isRole = 'member';
+                }
               });
             },
             child: Container(
@@ -134,7 +140,7 @@ class _LoginScreenState extends State<LoginScreen> {
               child: Row(
                 mainAxisAlignment: MainAxisAlignment.end,
                 children: [
-                  if (isAdmin)
+                  if (isRole == 'member')
                     const Text(
                       'Login User',
                       style: TextStyle(
@@ -142,7 +148,7 @@ class _LoginScreenState extends State<LoginScreen> {
                       ),
                       textAlign: TextAlign.center,
                     ),
-                  if (!isAdmin)
+                  if (isRole == 'admin' || isRole == 'operator')
                     const Text(
                       'Login Admin',
                       style: TextStyle(
@@ -167,14 +173,15 @@ class _LoginScreenState extends State<LoginScreen> {
           ),
           Form(
             key: _formKey,
-            child: _buildForm(currentEmail, currentPassword),
+            child: _buildForm(currentEmail, currentPassword, isRole),
           ),
         ],
       ),
     );
   }
 
-  _buildForm(TextEditingController email, TextEditingController password) {
+  _buildForm(TextEditingController email, TextEditingController password,
+      String isRole) {
     Color getColor(Set<MaterialState> states) {
       const Set<MaterialState> interactiveStates = <MaterialState>{
         MaterialState.pressed,
@@ -320,7 +327,7 @@ class _LoginScreenState extends State<LoginScreen> {
               if (_formKey.currentState!.validate()) {
                 print('valid');
                 Provider.of<LoginViewModel>(context, listen: false)
-                    .getLoginResponse(email.text, password.text);
+                    .getLoginResponse(email.text, password.text, isRole);
               }
             },
             color: const Color.fromRGBO(0, 103, 132, 1),
@@ -357,7 +364,12 @@ class _LoginScreenState extends State<LoginScreen> {
   }
 
   _buildLoadedBody(BuildContext context, LoginViewModel vm) {
-    if (isAdmin) {
+    if (isRole == 'member') {
+      Timer(
+        const Duration(seconds: 2),
+        () => Navigator.of(context).pushReplacementNamed(HomeScreen.route),
+      );
+    } else if (isRole == 'admin') {
       Timer(
         const Duration(seconds: 2),
         () => Navigator.of(context)
@@ -366,7 +378,8 @@ class _LoginScreenState extends State<LoginScreen> {
     } else {
       Timer(
         const Duration(seconds: 2),
-        () => Navigator.of(context).pushReplacementNamed(HomeScreen.route),
+        () => Navigator.of(context)
+            .pushReplacementNamed(AdminDashboardScreen.route),
       );
     }
     return Scaffold(

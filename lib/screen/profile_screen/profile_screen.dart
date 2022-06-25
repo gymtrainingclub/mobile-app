@@ -2,10 +2,8 @@
 
 import 'package:flutter/material.dart';
 import 'package:mobileapp/screen/login_screen/login_screen.dart';
-import 'package:mobileapp/screen/logo_screen/logo_viewmodel.dart';
 import 'package:mobileapp/screen/membership_screen/membership_screen.dart';
 import 'package:provider/provider.dart';
-import 'package:shared_preferences/shared_preferences.dart';
 
 import '../../widget/bottom_navigation_widget.dart';
 import '../login_screen/login_viewmodel.dart';
@@ -23,22 +21,14 @@ class _ProfileScreenState extends State<ProfileScreen> {
 
   @override
   Widget build(BuildContext context) {
-    final loginProvider = Provider.of<LoginViewModel>(context);
-    String role = 'admin';
-    int index = 3;
-    if (role == 'admin') {
-      index = 4;
-    } else if (role == 'member' || role == 'operator') {
-      index = 3;
-    }
-    String token = 'kosong';
-    SharedPreferences.getInstance().then((value) {
-      token = value.getString('token') ?? 'kosong';
-      role = value.getString('role') ?? 'kosong';
-    });
-    print('token: $token');
-    print('role: $role');
-    return Consumer(builder: (context, LogoViewModel logoProvider, _) {
+    return Consumer(builder: (context, LoginViewModel loginProvider, _) {
+      int index = 3;
+      if (loginProvider.role == 'admin') {
+        index = 4;
+      } else if (loginProvider.role == 'member' ||
+          loginProvider.role == 'operator') {
+        index = 3;
+      }
       return Scaffold(
         backgroundColor: Colors.white,
         extendBodyBehindAppBar: true,
@@ -280,7 +270,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
         ),
         bottomNavigationBar: BottomNavigationWidget(
           index: index,
-          role: role,
+          role: loginProvider.role,
         ),
       );
     });
