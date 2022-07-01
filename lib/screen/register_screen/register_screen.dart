@@ -387,6 +387,28 @@ class _RegisterScreenState extends State<RegisterScreen> {
                   const SizedBox(
                     height: 40,
                   ),
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: [
+                      Text('Don\'t have an account? '),
+                      GestureDetector(
+                        child: const Text(
+                          'Sign up',
+                          style: TextStyle(
+                            color: Color.fromRGBO(18, 106, 138, 1),
+                            fontWeight: FontWeight.bold,
+                          ),
+                          textAlign: TextAlign.center,
+                        ),
+                        onTap: () {
+                          Navigator.of(context).pushNamed('/register');
+                        },
+                      ),
+                    ],
+                  ),
+                  SizedBox(
+                    height: 30,
+                  ),
                 ],
               ),
             ),

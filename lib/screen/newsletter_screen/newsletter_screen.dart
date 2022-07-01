@@ -1,4 +1,7 @@
+// ignore_for_file: prefer_const_constructors
+
 import 'package:flutter/material.dart';
+import 'package:mobileapp/screen/home_screen/home_viewmodel.dart';
 import 'package:provider/provider.dart';
 
 import '../../widget/bottom_navigation_widget.dart';
@@ -9,7 +12,7 @@ import 'newsletter_viewmodel.dart';
 
 class NewsletterScreen extends StatefulWidget {
   const NewsletterScreen({Key? key}) : super(key: key);
-  static const String route = '/newspaper';
+  static const String route = '/newsletter';
 
   @override
   State<NewsletterScreen> createState() => _NewsletterScreenState();
@@ -20,6 +23,7 @@ class _NewsletterScreenState extends State<NewsletterScreen> {
   Widget build(BuildContext context) {
     final newsletterProvider =
         Provider.of<NewsletterViewModel>(context, listen: false);
+    newsletterProvider.getHomeGetResponse();
     return Consumer(builder: (context, LoginViewModel loginProvider, _) {
       int index = 2;
       if (loginProvider.role == 'admin') {
@@ -28,6 +32,7 @@ class _NewsletterScreenState extends State<NewsletterScreen> {
           loginProvider.role == 'operator') {
         index = 2;
       }
+
       return Scaffold(
         backgroundColor: Colors.white,
         extendBodyBehindAppBar: true,
@@ -52,7 +57,7 @@ class _NewsletterScreenState extends State<NewsletterScreen> {
             ),
           ),
         ),
-        body: stateBody(context, newsletterProvider),
+        body: stateBody(context),
         bottomNavigationBar: BottomNavigationWidget(
           index: index,
           role: loginProvider.role,
@@ -61,9 +66,34 @@ class _NewsletterScreenState extends State<NewsletterScreen> {
     });
   }
 
-  Widget stateBody(BuildContext context, NewsletterViewModel newsl) {}
+  stateBody(BuildContext context) {
+    final newsletterProvider = Provider.of<NewsletterViewModel>(context);
+    final isLoading = newsletterProvider.state == HomeViewState.loading;
+    final isError = newsletterProvider.state == HomeViewState.error;
+    final isLoaded = newsletterProvider.state == HomeViewState.loaded;
+    final isInitial = newsletterProvider.state == HomeViewState.initial;
+    print(newsletterProvider.state);
+    if (isLoading) {
+      return Center(
+        child: CircularProgressIndicator(),
+      );
+    } else if (isError) {
+      return Center(
+        child: Text('Error'),
+      );
+    } else if (isLoaded) {
+      return Center(child: Text('Loaded'));
+    } else if (isInitial) {
+      print('initial');
+      return Center(
+        child: _initialBody(context, newsletterProvider),
+      );
+    } else {
+      return _initialBody(context, newsletterProvider);
+    }
+  }
 
-  Widget _initialBody(BuildContext context) {
+  _initialBody(BuildContext context, NewsletterViewModel newsletterProvider) {
     return ListView(
       // crossAxisAlignment: CrossAxisAlignment.start,
       // mainAxisAlignment: MainAxisAlignment.start,
@@ -118,7 +148,7 @@ class _NewsletterScreenState extends State<NewsletterScreen> {
         ),
         Padding(
           padding: const EdgeInsets.symmetric(horizontal: 16),
-          child: _buildList(),
+          child: _buildList(context, newsletterProvider),
         ),
       ],
     );
@@ -220,16 +250,20 @@ class _NewsletterScreenState extends State<NewsletterScreen> {
     );
   }
 
-  Widget _buildList() {
+  Widget _buildList(
+      BuildContext context, NewsletterViewModel newsletterProvider) {
     return Column(
       children: <Widget>[
         for (var i = 0; i < 10; i++)
-          if (i % 2 == 0) _contentA(context) else _contentB(context),
+          if (i % 2 == 0)
+            _contentA(context, newsletterProvider)
+          else
+            _contentB(context, newsletterProvider),
       ],
     );
   }
 
-  Widget _contentA(BuildContext context) {
+  _contentA(BuildContext context, NewsletterViewModel newsletterProvider) {
     return GestureDetector(
       onTap: () {
         Navigator.pushNamed(context, NewsletterDetailScreen.route);
@@ -278,8 +312,8 @@ class _NewsletterScreenState extends State<NewsletterScreen> {
                   crossAxisAlignment: CrossAxisAlignment.stretch,
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
-                    const Text(
-                      'Menjaga Kesehatan Kulit dengan rutin yoga',
+                    Text(
+                      '${newsletterProvider.newsletterGetResponse.data?[0].title}',
                       style: TextStyle(
                         fontSize: 16,
                         fontWeight: FontWeight.bold,
@@ -304,7 +338,7 @@ class _NewsletterScreenState extends State<NewsletterScreen> {
     );
   }
 
-  Widget _contentB(BuildContext context) {
+  _contentB(BuildContext context, NewsletterViewModel newsletterProvider) {
     return GestureDetector(
       onTap: () {
         Navigator.pushNamed(context, NewsletterDetailScreen.route);

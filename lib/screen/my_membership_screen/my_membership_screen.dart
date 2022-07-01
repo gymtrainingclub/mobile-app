@@ -1,6 +1,7 @@
 // ignore_for_file: deprecated_member_use
 
 import 'package:flutter/material.dart';
+import 'package:mobileapp/screen/membership_screen/membership_screen.dart';
 
 class MyMembershipScreen extends StatefulWidget {
   const MyMembershipScreen({Key? key}) : super(key: key);
@@ -287,17 +288,59 @@ class _MyMembershipScreenState extends State<MyMembershipScreen> {
               const SizedBox(
                 height: 20,
               ),
-              RaisedButton(
-                onPressed: () {},
-                child: const Text('Upgrade Membership'),
-              ),
-              RaisedButton(
-                onPressed: () {},
-                child: const Text('History Payment'),
-              ),
-              const SizedBox(
-                height: 20,
-              ),
+              Column(
+                crossAxisAlignment: CrossAxisAlignment.stretch,
+                children: [
+                  RaisedButton(
+                    onPressed: () {
+                      Navigator.pushNamed(context, MembershipScreen.route);
+                    },
+                    color: const Color.fromRGBO(0, 103, 132, 1),
+                    shape: RoundedRectangleBorder(
+                      borderRadius: BorderRadius.circular(50.0),
+                    ),
+                    padding: const EdgeInsets.symmetric(
+                        horizontal: 16.0, vertical: 16.0),
+                    child: const Text(
+                      'Upgrade Membership',
+                      style: TextStyle(
+                        fontSize: 16,
+                        fontWeight: FontWeight.bold,
+                        color: Colors.white,
+                      ),
+                    ),
+                  ),
+                  const SizedBox(
+                    height: 10,
+                  ),
+                  RaisedButton(
+                    onPressed: () {
+                      Navigator.pop(context);
+                    },
+                    color: Colors.white,
+                    shape: RoundedRectangleBorder(
+                      borderRadius: BorderRadius.circular(50.0),
+                      side: const BorderSide(
+                        color: Color.fromRGBO(121, 116, 126, 1),
+                        width: 1,
+                      ),
+                    ),
+                    padding: const EdgeInsets.symmetric(
+                        horizontal: 16.0, vertical: 16.0),
+                    child: const Text(
+                      'History Payment',
+                      style: TextStyle(
+                        fontSize: 16,
+                        fontWeight: FontWeight.bold,
+                        color: Color.fromRGBO(0, 103, 132, 1),
+                      ),
+                    ),
+                  ),
+                  const SizedBox(
+                    height: 20,
+                  ),
+                ],
+              )
             ],
           ),
         ),

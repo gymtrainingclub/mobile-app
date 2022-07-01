@@ -1,4 +1,4 @@
-// ignore_for_file: deprecated_member_use, avoid_print
+// ignore_for_file: deprecated_member_use, avoid_print, prefer_const_constructors
 
 import 'dart:async';
 
@@ -142,7 +142,7 @@ class _LoginScreenState extends State<LoginScreen> {
                 children: [
                   if (isRole == 'member')
                     const Text(
-                      'Login User',
+                      'Login Admin',
                       style: TextStyle(
                         fontSize: 14,
                       ),
@@ -150,7 +150,7 @@ class _LoginScreenState extends State<LoginScreen> {
                     ),
                   if (isRole == 'admin' || isRole == 'operator')
                     const Text(
-                      'Login Admin',
+                      'Login User',
                       style: TextStyle(
                         fontSize: 14,
                       ),
@@ -358,6 +358,25 @@ class _LoginScreenState extends State<LoginScreen> {
           const SizedBox(
             height: 40,
           ),
+          Row(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: [
+              Text('Don\'t have an account? '),
+              GestureDetector(
+                child: const Text(
+                  'Sign up',
+                  style: TextStyle(
+                    color: Color.fromRGBO(18, 106, 138, 1),
+                    fontWeight: FontWeight.bold,
+                  ),
+                  textAlign: TextAlign.center,
+                ),
+                onTap: () {
+                  Navigator.of(context).pushNamed('/register');
+                },
+              ),
+            ],
+          )
         ],
       ),
     );

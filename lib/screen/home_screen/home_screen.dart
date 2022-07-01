@@ -10,6 +10,7 @@ import 'package:provider/provider.dart';
 import '../../widget/bottom_navigation_widget.dart';
 import '../class_screen/class_screen.dart';
 import '../login_screen/login_viewmodel.dart';
+import '../membership_screen/membership_screen.dart';
 import 'home_viewmodel.dart';
 
 class HomeScreen extends StatefulWidget {
@@ -100,6 +101,7 @@ class _HomeScreenState extends State<HomeScreen> {
             crossAxisAlignment: CrossAxisAlignment.center,
             children: [
               CircularProgressIndicator(),
+              SizedBox(height: 10),
               Text('Loading...It will take few seconds'),
             ],
           ),
@@ -195,6 +197,7 @@ class _HomeScreenState extends State<HomeScreen> {
         for (var i = 0; i < jumclass; i++)
           if (kurang)
             classCard(
+              id: homeProvider.classGetResponse.data![0].id,
               icon: 'assets/icon/strength.png',
               title: '${homeProvider.classGetResponse.data![0].name}',
               image: '${homeProvider.classGetResponse.data![0].image}',
@@ -207,6 +210,7 @@ class _HomeScreenState extends State<HomeScreen> {
             )
           else
             classCard(
+              id: homeProvider.classGetResponse.data![i].id,
               icon: 'assets/icon/strength.png',
               title: '${homeProvider.classGetResponse.data![i].name}',
               image: 'assets/class/booty_sharping.png',
@@ -304,9 +308,13 @@ class _HomeScreenState extends State<HomeScreen> {
     }
     return Center(
       child: GestureDetector(
-        onTap: () => Navigator.of(context).pushNamed(
-          MyMembershipScreen.route,
-        ),
+        onTap: () {
+          if (id != 1 && id != 2 && id != 3 && id != 4) {
+            Navigator.pushNamed(context, MembershipScreen.route);
+          } else {
+            Navigator.pushNamed(context, MyMembershipScreen.route);
+          }
+        },
         child: Container(
           height: 200,
           padding: const EdgeInsets.all(16.0),
@@ -447,6 +455,7 @@ class _HomeScreenState extends State<HomeScreen> {
   }
 
   Widget classCard({
+    required int? id,
     required String image,
     required String icon,
     required String title,
@@ -473,7 +482,16 @@ class _HomeScreenState extends State<HomeScreen> {
     }
     return GestureDetector(
       onTap: () {
-        Navigator.pushNamed(context, ClassScreen.route);
+        Navigator.pushNamed(context, ClassScreen.route, arguments: {
+          'id': id,
+          'image': image,
+          'icon': icon,
+          'title': title,
+          'category': category,
+          'location': location,
+          'instructor': instructor,
+          'time': time,
+        });
       },
       child: Container(
         margin: const EdgeInsets.symmetric(vertical: 8.0),
@@ -515,7 +533,7 @@ class _HomeScreenState extends State<HomeScreen> {
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 Text(
-                  title,
+                  '$title ${id?.toString() ?? '1'}',
                   style: const TextStyle(
                       fontSize: 24,
                       color: Colors.white,

@@ -74,6 +74,7 @@ flutter:
     - assets/card/
     - assets/class/
     - assets/category/
+    - assets/menu/
     # - images/a_dot_burr.jpeg
     # - images/a_dot_ham.jpeg
 

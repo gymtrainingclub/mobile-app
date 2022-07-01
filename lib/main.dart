@@ -3,8 +3,12 @@ import 'package:google_fonts/google_fonts.dart';
 import 'package:mobileapp/screen/admin_administrator_screen/admin_administrator_screen.dart';
 import 'package:mobileapp/screen/admin_content_screen/admin_content_screnn.dart';
 import 'package:mobileapp/screen/admin_membership_screen/admin_membership_screen.dart';
+import 'package:mobileapp/screen/class_booking_screen/claas_booking_viewmodel.dart';
+import 'package:mobileapp/screen/class_booking_screen/class_booking_screen.dart';
+import 'package:mobileapp/screen/class_screen/class_viewmodel.dart';
 import 'package:mobileapp/screen/newsletter_detail_screen/newsletter_detail_screen.dart';
 import 'package:mobileapp/screen/newsletter_screen/newsletter_screen.dart';
+import 'package:mobileapp/screen/newsletter_screen/newsletter_viewmodel.dart';
 import '/screen/admin_dashboard_screen/admin_dashboard_screen.dart';
 import '/screen/category_screen/category_screen.dart';
 import '/screen/class_screen/class_screen.dart';
@@ -19,6 +23,7 @@ import 'screen/login_screen/login_screen.dart';
 import 'screen/login_screen/login_viewmodel.dart';
 import 'screen/logo_screen/logo_viewmodel.dart';
 import 'screen/membership_detail_screen/membership_detail_screen.dart';
+import 'screen/membership_screen/membership_viewmodel.dart';
 import 'screen/my_membership_screen/my_membership_screen.dart';
 import 'screen/profile_screen/profile_screen.dart';
 import 'screen/register_screen/register_screen.dart';
@@ -45,6 +50,18 @@ void main() {
         ),
         ChangeNotifierProvider(
           create: (_) => HomeViewModel(),
+        ),
+        ChangeNotifierProvider(
+          create: (_) => NewsletterViewModel(),
+        ),
+        ChangeNotifierProvider(
+          create: (_) => ClassViewModel(),
+        ),
+        ChangeNotifierProvider(
+          create: (_) => ClassBookingViewModel(),
+        ),
+        ChangeNotifierProvider(
+          create: (_) => MembershipViewModel(),
         ),
       ],
       child: const MyApp(),
@@ -137,6 +154,10 @@ class MyApp extends StatelessWidget {
             return routeBuilder(const AdminMembershipScreen(), set);
           case AdminContentScreen.route:
             return routeBuilder(const AdminContentScreen(), set);
+          case ClassBookingScreen.route:
+            return routeBuilder(const ClassBookingScreen(), set);
+          case MembershipPaymentScreen.route:
+            return routeBuilder(const MembershipPaymentScreen(), set);
           default:
             return routeBuilder(const LogoScreen(), set);
         }

@@ -448,7 +448,7 @@ class ClassGetByIdResponse {
   String? status;
   int? code;
   String? message;
-  DataClassGetResponse? data;
+  DataClassGetByIdResponse? data;
 
   ClassGetByIdResponse({this.status, this.code, this.message, this.data});
 
@@ -457,7 +457,7 @@ class ClassGetByIdResponse {
     code = json['code'];
     message = json['message'];
     data = json['data'] != null
-        ? DataClassGetResponse.fromJson(json['data'])
+        ? DataClassGetByIdResponse.fromJson(json['data'])
         : null;
   }
 
@@ -473,7 +473,7 @@ class ClassGetByIdResponse {
   }
 }
 
-class Data3 {
+class DataClassGetByIdResponse {
   Category? category;
   InstructorClassGetResponse? instructor;
   int? id;
@@ -487,14 +487,14 @@ class Data3 {
   String? address;
   String? image;
   String? description;
-  int? price;
+  double? price;
   String? startDate;
   String? createdBy;
   String? updatedBy;
   String? createdAt;
   String? updatedAt;
 
-  Data3(
+  DataClassGetByIdResponse(
       {this.category,
       this.instructor,
       this.id,
@@ -515,7 +515,7 @@ class Data3 {
       this.createdAt,
       this.updatedAt});
 
-  Data3.fromJson(Map<String, dynamic> json) {
+  DataClassGetByIdResponse.fromJson(Map<String, dynamic> json) {
     category =
         json['category'] != null ? Category.fromJson(json['category']) : null;
     instructor = json['instructor'] != null
