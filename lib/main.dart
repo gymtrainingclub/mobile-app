@@ -1,7 +1,9 @@
+// ignore_for_file: no_duplicate_case_values
+
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:mobileapp/screen/admin_administrator_screen/admin_administrator_screen.dart';
-import 'package:mobileapp/screen/admin_content_screen/admin_content_screnn.dart';
+import 'package:mobileapp/screen/admin_content_screen/admin_content_screen.dart';
 import 'package:mobileapp/screen/admin_membership_screen/admin_membership_screen.dart';
 import 'package:mobileapp/screen/class_booking_screen/claas_booking_viewmodel.dart';
 import 'package:mobileapp/screen/class_booking_screen/class_booking_screen.dart';
@@ -17,6 +19,7 @@ import '/screen/membership_register_screen/membership_register_screen.dart';
 import '/screen/membership_screen/membership_screen.dart';
 import '/screen/schedule_detail_screen/schedule_detail_screen.dart';
 import '/screen/schedule_screen/schedule_screen.dart';
+import 'screen/category_screen/category_viewmodel.dart';
 import 'screen/home_screen/home_screen.dart';
 import 'screen/home_screen/home_viewmodel.dart';
 import 'screen/login_screen/login_screen.dart';
@@ -62,6 +65,9 @@ void main() {
         ),
         ChangeNotifierProvider(
           create: (_) => MembershipViewModel(),
+        ),
+        ChangeNotifierProvider(
+          create: (_) => CategoryViewModel(),
         ),
       ],
       child: const MyApp(),

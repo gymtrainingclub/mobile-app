@@ -1,4 +1,4 @@
-// ignore_for_file: prefer_const_constructors
+// ignore_for_file: prefer_const_constructors, avoid_print
 
 import 'package:flutter/material.dart';
 import 'package:mobileapp/screen/home_screen/home_viewmodel.dart';
@@ -84,7 +84,6 @@ class _NewsletterScreenState extends State<NewsletterScreen> {
     } else if (isLoaded) {
       return Center(child: Text('Loaded'));
     } else if (isInitial) {
-      print('initial');
       return Center(
         child: _initialBody(context, newsletterProvider),
       );

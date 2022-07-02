@@ -28,10 +28,7 @@ class _ClassScreenState extends State<ClassScreen> {
     if (classProvider.state == ClassViewState.loaded) {
       if (arg['id'] != classProvider.classGetByIdResponse.data?.id) {
         classProvider.state = ClassViewState.initial;
-        print('reload');
-      } else {
-        print('no reload');
-      }
+      } else {}
     }
     return Consumer(builder: (context, LoginViewModel loginProvider, _) {
       return Scaffold(

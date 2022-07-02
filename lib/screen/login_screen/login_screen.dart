@@ -85,9 +85,6 @@ class _LoginScreenState extends State<LoginScreen> {
     final loginProvider = Provider.of<LoginViewModel>(context);
     TextEditingController currentEmail = loginProvider.emailController;
     TextEditingController currentPassword = loginProvider.passwordController;
-    print('test API');
-    print(loginProvider.state);
-    print(loginProvider.loginresponse.data?.token);
     return SingleChildScrollView(
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.stretch,
@@ -325,7 +322,6 @@ class _LoginScreenState extends State<LoginScreen> {
           RaisedButton(
             onPressed: () {
               if (_formKey.currentState!.validate()) {
-                print('valid');
                 Provider.of<LoginViewModel>(context, listen: false)
                     .getLoginResponse(email.text, password.text, isRole);
               }

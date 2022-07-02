@@ -63,10 +63,6 @@ class _HomeScreenState extends State<HomeScreen> {
     final isError = homeProvider.state == HomeViewState.error;
     final isLoaded = homeProvider.state == HomeViewState.loaded;
     final isInitial = homeProvider.state == HomeViewState.initial;
-    print('homeProvider.state: ${homeProvider.state}');
-    print('getprofile: ${homeProvider.profileGetResponse.data?.name}');
-    print('getcategory: ${homeProvider.categoryGetResponse.data?.length}');
-    print('getclass: ${homeProvider.classGetResponse.data?.length}');
     if (isLoading) {
       return Center(
         child: Column(
@@ -223,7 +219,7 @@ class _HomeScreenState extends State<HomeScreen> {
     );
   }
 
-  Container listCategory(BuildContext context, HomeViewModel homeProvider) {
+  listCategory(BuildContext context, HomeViewModel homeProvider) {
     int? category = homeProvider.categoryGetResponse.data?.length;
     bool kurang = false;
     if (category! < 2) {
@@ -254,7 +250,10 @@ class _HomeScreenState extends State<HomeScreen> {
     }
     return GestureDetector(
       onTap: () {
-        Navigator.pushNamed(context, CategoryScreen.route);
+        Navigator.pushNamed(context, CategoryScreen.route, arguments: {
+          'id': homeProvider.categoryGetResponse.data![i].id,
+          'name': homeProvider.categoryGetResponse.data![i].name,
+        });
       },
       child: Container(
         width: 240.0,

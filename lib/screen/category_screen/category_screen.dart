@@ -1,5 +1,11 @@
+// ignore_for_file: prefer_const_constructors, prefer_const_literals_to_create_immutables
+
 import 'package:flutter/material.dart';
 import 'package:mobileapp/screen/class_screen/class_screen.dart';
+import 'package:provider/provider.dart';
+
+import '../login_screen/login_viewmodel.dart';
+import 'category_viewmodel.dart';
 
 class CategoryScreen extends StatefulWidget {
   const CategoryScreen({Key? key}) : super(key: key);
@@ -12,135 +18,176 @@ class CategoryScreen extends StatefulWidget {
 class _CategoryScreenState extends State<CategoryScreen> {
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      backgroundColor: Colors.white,
-      extendBodyBehindAppBar: true,
-      appBar: AppBar(
-        backgroundColor: Colors.transparent,
-        automaticallyImplyLeading: false,
-        elevation: 0,
-        leading: Container(
-          padding: const EdgeInsets.all(2),
-          margin: const EdgeInsets.all(12),
-          decoration: BoxDecoration(
-            color: Colors.white,
-            borderRadius: BorderRadius.circular(4),
-          ),
-          child: IconButton(
-            icon: const Icon(
-              Icons.arrow_back,
-              size: 14,
+    final categoryProvider = Provider.of<CategoryViewModel>(context);
+    final args =
+        ModalRoute.of(context)?.settings.arguments as Map<String, dynamic>;
+    if (categoryProvider.state == CategoryViewState.loaded) {
+      if (args['id'] != categoryProvider.categoryGetByIdResponse.data?.id) {
+        categoryProvider.state = CategoryViewState.initial;
+      }
+    }
+    return Consumer(builder: (context, LoginViewModel loginProvider, _) {
+      return Scaffold(
+        backgroundColor: Colors.white,
+        extendBodyBehindAppBar: true,
+        appBar: AppBar(
+          backgroundColor: Colors.transparent,
+          automaticallyImplyLeading: false,
+          elevation: 0,
+          leading: Container(
+            padding: const EdgeInsets.all(2),
+            margin: const EdgeInsets.all(12),
+            decoration: BoxDecoration(
+              color: Colors.white,
+              borderRadius: BorderRadius.circular(4),
             ),
-            color: Colors.black,
-            onPressed: () => Navigator.pop(context),
+            child: IconButton(
+              icon: const Icon(
+                Icons.arrow_back,
+                size: 14,
+              ),
+              color: Colors.black,
+              onPressed: () => Navigator.pop(context),
+            ),
           ),
         ),
-      ),
-      body: SingleChildScrollView(
+        body: stateBody(context),
+      );
+    });
+  }
+
+  stateBody(BuildContext context) {
+    final categoryProvider = Provider.of<CategoryViewModel>(context);
+    final isLoading = categoryProvider.state == CategoryViewState.loading;
+    final isLoaded = categoryProvider.state == CategoryViewState.loaded;
+    final isError = categoryProvider.state == CategoryViewState.error;
+    final isInitial = categoryProvider.state == CategoryViewState.initial;
+    if (isLoading) {
+      return Center(
+        child: CircularProgressIndicator(),
+      );
+    } else if (isLoaded) {
+      return _loadedBody(context, categoryProvider);
+    } else if (isError) {
+      return Center(
+        child: Text('Error'),
+      );
+    } else if (isInitial) {
+      return Center(
         child: Column(
+          mainAxisAlignment: MainAxisAlignment.center,
           crossAxisAlignment: CrossAxisAlignment.center,
-          mainAxisAlignment: MainAxisAlignment.start,
           children: [
-            Container(
-              height: 228,
-              decoration: const BoxDecoration(
-                image: DecorationImage(
-                  image: AssetImage('assets/category/category.png'),
-                  fit: BoxFit.cover,
-                ),
-              ),
-              child: const Center(
-                child: Text(
-                  'Class',
-                  style: TextStyle(
-                    fontSize: 24,
-                    fontWeight: FontWeight.bold,
-                    color: Colors.white,
-                  ),
-                ),
-              ),
-            ),
-            const SizedBox(height: 16),
-            Padding(
-              padding: const EdgeInsets.symmetric(horizontal: 16),
-              child: Column(
-                children: const [
-                  Text(
-                    'Cardio Classes',
-                    style: TextStyle(
-                      fontSize: 16,
-                      fontWeight: FontWeight.bold,
-                      color: Colors.black,
-                    ),
-                  ),
-                  SizedBox(height: 8),
-                  Text(
-                    'Memenuhi ruangan dengan semangat! Selain mampu memperbaiki fungsi tubuh dan membakar kalori, kelas cardio juga bermanfaat memperbaiki denyut jantung, tekanan darah, dan pernapasan tubuh.',
-                    style: TextStyle(
-                      fontSize: 14,
-                      color: Colors.black,
-                    ),
-                    textAlign: TextAlign.justify,
-                  ),
-                ],
-              ),
-            ),
-            const SizedBox(height: 16),
-            Padding(
-                padding: const EdgeInsets.symmetric(horizontal: 16),
-                child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    const Text(
-                      'Classes',
-                      style: TextStyle(
-                        fontSize: 16,
-                        fontWeight: FontWeight.w600,
-                      ),
-                      textAlign: TextAlign.left,
-                    ),
-                    const SizedBox(
-                      height: 20,
-                    ),
-                    MediaQuery.removePadding(
-                      context: context,
-                      removeTop: true,
-                      child: ListView.builder(
-                        shrinkWrap: true,
-                        scrollDirection: Axis.vertical,
-                        itemBuilder: (context, index) {
-                          return classCard(
-                            icon: 'assets/icon/strength.png',
-                            title: 'Booty Shaping',
-                            image: 'assets/class/booty_sharping.png',
-                            instructor: 'Kenny S. Jones',
-                            time: '60 Min',
-                            location: 'Gym 1 Darmstadt Surabaya',
-                            category: 'Strength',
-                          );
-                        },
-                        itemCount: 10,
-                      ),
-                    ),
-                  ],
-                )),
+            CircularProgressIndicator(),
+            const SizedBox(height: 10),
+            Text('Loading...It will take few seconds'),
           ],
         ),
+      );
+    } else {
+      return Center(
+        child: Text('Unknown'),
+      );
+    }
+  }
+
+  _loadedBody(BuildContext context, CategoryViewModel categoryProvider) {
+    return SingleChildScrollView(
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.center,
+        mainAxisAlignment: MainAxisAlignment.start,
+        children: [
+          Container(
+            height: 228,
+            decoration: const BoxDecoration(
+              image: DecorationImage(
+                image: AssetImage('assets/category/category.png'),
+                fit: BoxFit.cover,
+              ),
+            ),
+            child: Center(
+              child: Text(
+                '${categoryProvider.categoryGetByIdResponse.data?.name}',
+                style: TextStyle(
+                  fontSize: 24,
+                  fontWeight: FontWeight.bold,
+                  color: Colors.white,
+                ),
+              ),
+            ),
+          ),
+          const SizedBox(height: 16),
+          Padding(
+            padding: const EdgeInsets.symmetric(horizontal: 16),
+            child: Column(
+              children: [
+                Text(
+                  '${categoryProvider.categoryGetByIdResponse.data?.name} Class',
+                  style: TextStyle(
+                    fontSize: 16,
+                    fontWeight: FontWeight.bold,
+                    color: Colors.black,
+                  ),
+                ),
+                SizedBox(height: 8),
+                Text(
+                  '${categoryProvider.categoryGetByIdResponse.data?.description}',
+                  style: TextStyle(
+                    fontSize: 14,
+                    color: Colors.black,
+                  ),
+                  textAlign: TextAlign.justify,
+                ),
+              ],
+            ),
+          ),
+          const SizedBox(height: 16),
+          classCategory(context, categoryProvider),
+        ],
       ),
     );
   }
 
-  Widget classCard(
-      {required String icon,
-      required String title,
-      required String image,
-      required String instructor,
-      required String time,
-      required String location,
-      required String category}) {
+  classCategory(BuildContext context, CategoryViewModel categoryProvider) {
+    int? classCount = categoryProvider.classGetResponse.data?.length;
+    bool kurangClass = classCount == null || classCount == 0 ? false : true;
+    if (classCount! < 2) {
+      classCount = 3;
+      kurangClass = true;
+    }
+    return Padding(
+      padding: const EdgeInsets.symmetric(horizontal: 16),
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.stretch,
+        children: [
+          const Text(
+            'Classes',
+            style: TextStyle(
+              fontSize: 16,
+              fontWeight: FontWeight.w600,
+            ),
+            textAlign: TextAlign.left,
+          ),
+          const SizedBox(
+            height: 20,
+          ),
+          for (int i = 0; i < classCount; i++)
+            if (kurangClass == true)
+              classCardItem(context, categoryProvider, 0, kurangClass)
+            else
+              classCardItem(context, categoryProvider, i, kurangClass),
+        ],
+      ),
+    );
+  }
+
+  classCardItem(BuildContext context, CategoryViewModel categoryProvider,
+      int index, bool kurangClass) {
     return GestureDetector(
       onTap: () {
-        Navigator.pushNamed(context, ClassScreen.route);
+        Navigator.pushNamed(context, ClassScreen.route, arguments: {
+          'id': categoryProvider.classGetResponse.data![index].id,
+        });
       },
       child: Container(
         margin: const EdgeInsets.symmetric(vertical: 8.0),
@@ -153,7 +200,9 @@ class _CategoryScreenState extends State<CategoryScreen> {
           ),
           borderRadius: BorderRadius.circular(8.0),
           image: DecorationImage(
-            image: AssetImage(image),
+            image: AssetImage(
+              'assets/class/zumba.png',
+            ),
             fit: BoxFit.cover,
           ),
         ),
@@ -167,11 +216,11 @@ class _CategoryScreenState extends State<CategoryScreen> {
               children: [
                 Image(
                   image: AssetImage(
-                    icon,
+                    'assets/icon/cardio.png',
                   ),
                 ),
                 Text(
-                  category,
+                  '${categoryProvider.classGetResponse.data![index].category?.name}',
                   style: const TextStyle(
                     fontSize: 20,
                     fontWeight: FontWeight.bold,
@@ -185,7 +234,7 @@ class _CategoryScreenState extends State<CategoryScreen> {
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 Text(
-                  title,
+                  '${categoryProvider.classGetResponse.data![index].name}',
                   style: const TextStyle(
                       fontSize: 24,
                       color: Colors.white,
@@ -193,7 +242,7 @@ class _CategoryScreenState extends State<CategoryScreen> {
                 ),
                 const SizedBox(height: 10.0),
                 Text(
-                  location,
+                  '${categoryProvider.classGetResponse.data![index].location}',
                   style: const TextStyle(
                     fontSize: 12,
                     color: Colors.white,
@@ -201,7 +250,7 @@ class _CategoryScreenState extends State<CategoryScreen> {
                 ),
                 const SizedBox(height: 10.0),
                 Text(
-                  'By $instructor',
+                  'By ${categoryProvider.classGetResponse.data![index].instructor?.name}',
                   style: const TextStyle(
                     fontSize: 10,
                     color: Colors.white,
@@ -223,7 +272,7 @@ class _CategoryScreenState extends State<CategoryScreen> {
                     borderRadius: BorderRadius.circular(16.0),
                   ),
                   child: Text(
-                    time,
+                    '${categoryProvider.classGetResponse.data![index].duration} min',
                     style: const TextStyle(
                       fontSize: 10,
                       color: Colors.black,

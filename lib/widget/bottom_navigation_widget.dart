@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:mobileapp/screen/admin_administrator_screen/admin_administrator_screen.dart';
-import 'package:mobileapp/screen/admin_content_screen/admin_content_screnn.dart';
+import 'package:mobileapp/screen/admin_content_screen/admin_content_screen.dart';
 import 'package:mobileapp/screen/admin_membership_screen/admin_membership_screen.dart';
 import 'package:mobileapp/screen/home_screen/home_screen.dart';
 import 'package:mobileapp/screen/profile_screen/profile_screen.dart';

@@ -1,5 +1,3 @@
-import 'package:dio/dio.dart';
-
 import '../newsletter_model.dart';
 import 'api_service.dart';
 
