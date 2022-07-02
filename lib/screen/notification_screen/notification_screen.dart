@@ -70,7 +70,6 @@ class _NotificationScreenState extends State<NotificationScreen> {
     required String subtitle,
     required String date,
   }) {
-    Jiffy jiffy = Jiffy(DateTime.now().subtract(Duration(days: 1)));
     return Padding(
       padding: const EdgeInsets.symmetric(horizontal: 16.0, vertical: 8.0),
       child: Card(
@@ -84,7 +83,7 @@ class _NotificationScreenState extends State<NotificationScreen> {
           title: Padding(
             padding: const EdgeInsets.symmetric(vertical: 8.0),
             child: Text(
-              '$title',
+              title,
               style: TextStyle(
                 fontSize: 16,
                 fontWeight: FontWeight.bold,
@@ -94,7 +93,7 @@ class _NotificationScreenState extends State<NotificationScreen> {
           subtitle: Padding(
             padding: const EdgeInsets.only(bottom: 16.0),
             child: Text(
-              '$subtitle',
+              subtitle,
               style: TextStyle(
                 fontSize: 12,
               ),
@@ -105,7 +104,7 @@ class _NotificationScreenState extends State<NotificationScreen> {
             crossAxisAlignment: CrossAxisAlignment.end,
             children: [
               Text(
-                '$date',
+                date,
                 style: TextStyle(
                   fontSize: 12,
                 ),
