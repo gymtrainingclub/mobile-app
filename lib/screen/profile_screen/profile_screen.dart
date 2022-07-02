@@ -1,12 +1,12 @@
-// ignore_for_file: deprecated_member_use, avoid_print
+// ignore_for_file: deprecated_member_use, avoid_print, prefer_const_constructors
 
 import 'package:flutter/material.dart';
-import 'package:mobileapp/screen/login_screen/login_screen.dart';
-import 'package:mobileapp/screen/membership_screen/membership_screen.dart';
+import 'package:mobileapp/screen/stop_screen/stop_screen.dart';
 import 'package:provider/provider.dart';
 
 import '../../widget/bottom_navigation_widget.dart';
 import '../login_screen/login_viewmodel.dart';
+import '../my_profile_screen/my_profile_screen.dart';
 
 class ProfileScreen extends StatefulWidget {
   const ProfileScreen({Key? key}) : super(key: key);
@@ -47,232 +47,176 @@ class _ProfileScreenState extends State<ProfileScreen> {
             ),
           ],
         ),
-        body: SingleChildScrollView(
-          child: Padding(
-            padding: const EdgeInsets.symmetric(horizontal: 16.0),
-            child: Column(
-              mainAxisAlignment: MainAxisAlignment.start,
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                const SizedBox(
-                  height: 60,
-                ),
-                Row(
-                  children: [
-                    ClipRRect(
-                      borderRadius: BorderRadius.circular(5),
-                      child: Image.network(
-                        'https://images.unsplash.com/photo-1518806118471-f28b20a1d79d?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=500&q=60',
-                        width: 80,
-                        height: 80,
-                        fit: BoxFit.cover,
-                      ),
-                    ),
-                    Expanded(
-                      child: Container(
-                        margin: const EdgeInsets.only(left: 16),
-                        child: Column(
-                          crossAxisAlignment: CrossAxisAlignment.start,
-                          children: const [
-                            Text(
-                              'John Doe',
-                              style: TextStyle(
-                                fontSize: 18,
-                                fontWeight: FontWeight.bold,
-                              ),
-                            ),
-                            SizedBox(
-                              height: 4,
-                            ),
-                            Text('Gold Membership'),
-                            Icon(
-                              Icons.star,
-                              color: Colors.yellow,
-                              size: 16,
-                            ),
-                            SizedBox(
-                              height: 4,
-                            ),
-                            Align(
-                              alignment: Alignment.topRight,
-                              child: Icon(
-                                Icons.more_vert,
-                                color: Colors.black87,
-                                size: 20,
-                              ),
-                            )
-                          ],
-                        ),
-                      ),
-                    ),
-                  ],
-                ),
-                Divider(
-                  color: Colors.black.withOpacity(0.2),
-                  height: 50,
-                  thickness: 1,
-                ),
-                const ListTile(
-                  title: Text(
-                    'Profile',
-                    style: TextStyle(
-                      fontSize: 16,
-                    ),
-                  ),
-                  trailing: Icon(
-                    Icons.arrow_forward_ios,
-                    size: 14,
-                  ),
-                  leading: Icon(
-                    Icons.person,
-                    size: 32,
-                  ),
-                ),
-                ListTile(
-                  onTap: () {
-                    Navigator.of(context).pushNamed(MembershipScreen.route);
-                  },
-                  title: const Text(
-                    'Membership',
-                    style: TextStyle(
-                      fontSize: 16,
-                    ),
-                  ),
-                  trailing: const Icon(
-                    Icons.arrow_forward_ios,
-                    size: 14,
-                  ),
-                  leading: const Icon(
-                    Icons.card_membership,
-                    size: 32,
-                  ),
-                ),
-                const ListTile(
-                  title: Text(
-                    'Classes',
-                    style: TextStyle(
-                      fontSize: 16,
-                    ),
-                  ),
-                  trailing: Icon(
-                    Icons.arrow_forward_ios,
-                    size: 14,
-                  ),
-                  leading: Icon(
-                    Icons.class_,
-                    size: 32,
-                  ),
-                ),
-                const ListTile(
-                  title: Text(
-                    'Payment',
-                    style: TextStyle(
-                      fontSize: 16,
-                    ),
-                  ),
-                  trailing: Icon(
-                    Icons.arrow_forward_ios,
-                    size: 14,
-                  ),
-                  leading: Icon(
-                    Icons.payment,
-                    size: 32,
-                  ),
-                ),
-                const ListTile(
-                  title: Text(
-                    'Activity',
-                    style: TextStyle(
-                      fontSize: 16,
-                    ),
-                  ),
-                  trailing: Icon(
-                    Icons.arrow_forward_ios,
-                    size: 14,
-                  ),
-                  leading: Icon(
-                    Icons.accessibility,
-                    size: 32,
-                  ),
-                ),
-                const ListTile(
-                  title: Text(
-                    'Settings',
-                    style: TextStyle(
-                      fontSize: 16,
-                    ),
-                  ),
-                  trailing: Icon(
-                    Icons.arrow_forward_ios,
-                    size: 14,
-                  ),
-                  leading: Icon(
-                    Icons.settings,
-                    size: 32,
-                  ),
-                ),
-                const ListTile(
-                  title: Text(
-                    'Help',
-                    style: TextStyle(
-                      fontSize: 16,
-                    ),
-                  ),
-                  trailing: Icon(
-                    Icons.arrow_forward_ios,
-                    size: 14,
-                  ),
-                  leading: Icon(
-                    Icons.help,
-                    size: 32,
-                  ),
-                ),
-                ListTile(
-                  title: const Text(
-                    'Logout',
-                    style: TextStyle(
-                      fontSize: 16,
-                    ),
-                  ),
-                  leading: const Icon(
-                    Icons.exit_to_app,
-                    size: 32,
-                  ),
-                  onTap: () {
-                    showDialog(
-                      context: context,
-                      builder: (context) => AlertDialog(
-                        title: const Text('Are you sure?'),
-                        content: const Text('Do you want to logout?'),
-                        actions: [
-                          FlatButton(
-                            child: const Text('No'),
-                            onPressed: () => Navigator.of(context).pop(),
-                          ),
-                          FlatButton(
-                            child: const Text('Yes'),
-                            onPressed: () {
-                              loginProvider.logout();
-                              Navigator.of(context).pop();
-                              Navigator.of(context).pushReplacementNamed(
-                                LoginScreen.route,
-                              );
-                            },
-                          ),
-                        ],
-                      ),
-                    );
-                  },
-                ),
-              ],
-            ),
-          ),
-        ),
+        body: stateBody(context, loginProvider),
         bottomNavigationBar: BottomNavigationWidget(
           index: index,
           role: loginProvider.role,
         ),
       );
     });
+  }
+
+  stateBody(BuildContext context, LoginViewModel loginProvider) {
+    return SingleChildScrollView(
+      child: Padding(
+        padding: const EdgeInsets.symmetric(horizontal: 16.0),
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.start,
+          crossAxisAlignment: CrossAxisAlignment.stretch,
+          children: [
+            const SizedBox(height: 80),
+            const Text(
+              'Profile',
+              style: TextStyle(
+                fontSize: 24,
+                fontWeight: FontWeight.bold,
+              ),
+              textAlign: TextAlign.center,
+            ),
+            const SizedBox(height: 20),
+            Card(
+              elevation: 4,
+              shape: RoundedRectangleBorder(
+                borderRadius: BorderRadius.circular(8),
+              ),
+              shadowColor: Colors.black,
+              child: ListTile(
+                onTap: () {
+                  Navigator.pushNamed(context, MyProfileScreen.route);
+                },
+                title: Text(
+                  'Personal Information',
+                  style: TextStyle(
+                    fontSize: 16,
+                  ),
+                ),
+                trailing: Icon(
+                  Icons.arrow_forward_ios,
+                  size: 14,
+                ),
+              ),
+            ),
+            Card(
+              elevation: 4,
+              shape: RoundedRectangleBorder(
+                borderRadius: BorderRadius.circular(8),
+              ),
+              shadowColor: Colors.black,
+              child: ListTile(
+                title: Text(
+                  'Location',
+                  style: TextStyle(
+                    fontSize: 16,
+                  ),
+                ),
+                trailing: Icon(
+                  Icons.arrow_forward_ios,
+                  size: 14,
+                ),
+              ),
+            ),
+            Card(
+              elevation: 4,
+              shape: RoundedRectangleBorder(
+                borderRadius: BorderRadius.circular(8),
+              ),
+              shadowColor: Colors.black,
+              child: ListTile(
+                title: Text(
+                  'Change Password',
+                  style: TextStyle(
+                    fontSize: 16,
+                  ),
+                ),
+                trailing: Icon(
+                  Icons.arrow_forward_ios,
+                  size: 14,
+                ),
+              ),
+            ),
+            Card(
+              elevation: 4,
+              shape: RoundedRectangleBorder(
+                borderRadius: BorderRadius.circular(8),
+              ),
+              shadowColor: Colors.black,
+              child: ListTile(
+                title: Text(
+                  'Language',
+                  style: TextStyle(
+                    fontSize: 16,
+                  ),
+                ),
+                trailing: Icon(
+                  Icons.arrow_forward_ios,
+                  size: 14,
+                ),
+              ),
+            ),
+            Card(
+              elevation: 4,
+              shape: RoundedRectangleBorder(
+                borderRadius: BorderRadius.circular(8),
+              ),
+              shadowColor: Colors.black,
+              child: ListTile(
+                title: Text(
+                  'About Us',
+                  style: TextStyle(
+                    fontSize: 16,
+                  ),
+                ),
+                trailing: Icon(
+                  Icons.arrow_forward_ios,
+                  size: 14,
+                ),
+              ),
+            ),
+            Card(
+              elevation: 4,
+              shape: RoundedRectangleBorder(
+                borderRadius: BorderRadius.circular(8),
+              ),
+              shadowColor: Colors.black,
+              child: ListTile(
+                onTap: () {
+                  showDialog(
+                    context: context,
+                    builder: (context) => AlertDialog(
+                      title: const Text('Are you sure?'),
+                      content: const Text('This action cannot be undone.'),
+                      actions: [
+                        FlatButton(
+                          child: const Text('Cancel'),
+                          onPressed: () => Navigator.pop(context),
+                        ),
+                        FlatButton(
+                          child: const Text('Logout'),
+                          onPressed: () {
+                            loginProvider.logout();
+                            Navigator.pushNamedAndRemoveUntil(
+                                context, StopScreen.route, (route) => false);
+                          },
+                        ),
+                      ],
+                    ),
+                  );
+                },
+                title: Text(
+                  'Logout',
+                  style: TextStyle(
+                    fontSize: 16,
+                  ),
+                ),
+                trailing: Icon(
+                  Icons.arrow_forward_ios,
+                  size: 14,
+                ),
+              ),
+            ),
+          ],
+        ),
+      ),
+    );
   }
 }

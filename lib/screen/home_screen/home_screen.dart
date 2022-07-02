@@ -5,6 +5,7 @@ import 'dart:async';
 import 'package:flutter/material.dart';
 import 'package:mobileapp/screen/category_screen/category_screen.dart';
 import 'package:mobileapp/screen/my_membership_screen/my_membership_screen.dart';
+import 'package:mobileapp/screen/notification_screen/notification_screen.dart';
 import 'package:provider/provider.dart';
 
 import '../../widget/bottom_navigation_widget.dart';
@@ -444,10 +445,15 @@ class _HomeScreenState extends State<HomeScreen> {
             ),
           ],
         ),
-        Image.asset(
-          'assets/icon/notification.png',
-          width: 80,
-          height: 80,
+        GestureDetector(
+          onTap: () {
+            Navigator.pushNamed(context, NotificationScreen.route);
+          },
+          child: Image.asset(
+            'assets/icon/notification.png',
+            width: 80,
+            height: 80,
+          ),
         ),
       ],
     );

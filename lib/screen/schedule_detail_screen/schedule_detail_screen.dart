@@ -1,4 +1,4 @@
-// ignore_for_file: deprecated_member_use
+// ignore_for_file: deprecated_member_use, prefer_const_constructors, unnecessary_null_comparison
 
 import 'package:flutter/material.dart';
 
@@ -13,6 +13,15 @@ class ScheduleDetailScreen extends StatefulWidget {
 class _ScheduleDetailScreenState extends State<ScheduleDetailScreen> {
   @override
   Widget build(BuildContext context) {
+    final args =
+        ModalRoute.of(context)?.settings.arguments as Map<String, dynamic>;
+    if (args == null) {
+      return Scaffold(
+        body: Center(
+          child: Text('No data'),
+        ),
+      );
+    }
     return Scaffold(
       backgroundColor: Colors.white,
       extendBodyBehindAppBar: true,
@@ -37,211 +46,411 @@ class _ScheduleDetailScreenState extends State<ScheduleDetailScreen> {
           ),
         ),
       ),
-      body: Column(
-        crossAxisAlignment: CrossAxisAlignment.stretch,
-        children: [
-          Container(
-            height: 200,
-            decoration: const BoxDecoration(
-              // image: DecorationImage(
-              //   image: AssetImage("assets/category/category.png"),
-              //   fit: BoxFit.cover,
-              // ),
-              color: Color.fromRGBO(18, 106, 138, 1),
-            ),
-            child: Column(
-              mainAxisAlignment: MainAxisAlignment.center,
-              children: const [
-                SizedBox(height: 20),
-                Center(
-                  child: Text(
-                    "Schedule Detail",
-                    style: TextStyle(
-                      fontSize: 24,
-                      fontWeight: FontWeight.bold,
-                      color: Colors.white,
-                    ),
+      body: stateBody(context, args),
+    );
+  }
+
+  stateBody(BuildContext context, Map<String, dynamic> args) {
+    return Column(
+      crossAxisAlignment: CrossAxisAlignment.stretch,
+      children: [
+        Container(
+          height: 200,
+          decoration: const BoxDecoration(
+            // image: DecorationImage(
+            //   image: AssetImage("assets/category/category.png"),
+            //   fit: BoxFit.cover,
+            // ),
+            color: Color.fromRGBO(18, 106, 138, 1),
+          ),
+          child: Column(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: const [
+              SizedBox(height: 20),
+              Center(
+                child: Text(
+                  "Schedule Detail",
+                  style: TextStyle(
+                    fontSize: 24,
+                    fontWeight: FontWeight.bold,
+                    color: Colors.white,
                   ),
                 ),
-              ],
-            ),
+              ),
+            ],
           ),
-          Expanded(
-            child: SingleChildScrollView(
-              child: Container(
-                padding: const EdgeInsets.symmetric(horizontal: 16.0),
-                child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.stretch,
-                  children: [
-                    const SizedBox(height: 20),
-                    const Text(
-                      'Mat Pilates',
-                      style: TextStyle(
-                        fontSize: 24,
-                        fontWeight: FontWeight.bold,
-                      ),
-                      textAlign: TextAlign.center,
+        ),
+        Expanded(
+          child: SingleChildScrollView(
+            child: Container(
+              padding: const EdgeInsets.symmetric(horizontal: 16.0),
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.stretch,
+                children: [
+                  const SizedBox(height: 20),
+                  Text(
+                    'Fit Rush ${args['id']}',
+                    style: TextStyle(
+                      fontSize: 20,
+                      fontWeight: FontWeight.bold,
                     ),
-                    const SizedBox(height: 20),
-                    const Text(
-                      'Monday | Mrs. Smith | 45 min',
-                      style: TextStyle(
-                        fontSize: 16,
-                      ),
-                      textAlign: TextAlign.center,
-                    ),
-                    const SizedBox(height: 30),
-                    Container(
-                      alignment: Alignment.centerLeft,
-                      padding: const EdgeInsets.symmetric(
-                          horizontal: 16.0, vertical: 8.0),
-                      decoration: BoxDecoration(
-                        color: Colors.grey[200],
-                        borderRadius: BorderRadius.circular(4),
-                        border: Border.all(
-                          color: Colors.grey,
-                          width: 1,
+                    textAlign: TextAlign.center,
+                  ),
+                  const SizedBox(height: 30),
+                  Container(
+                    alignment: Alignment.centerLeft,
+                    padding: const EdgeInsets.symmetric(
+                        horizontal: 8.0, vertical: 8.0),
+                    child: Table(
+                      columnWidths: const {
+                        0: FlexColumnWidth(1.0),
+                        1: FlexColumnWidth(2.0),
+                      },
+                      defaultVerticalAlignment:
+                          TableCellVerticalAlignment.middle,
+                      children: [
+                        TableRow(
+                          children: [
+                            Padding(
+                              padding:
+                                  const EdgeInsets.symmetric(vertical: 4.0),
+                              child: Text(
+                                'Date',
+                                style: TextStyle(
+                                  fontSize: 14,
+                                  fontWeight: FontWeight.bold,
+                                ),
+                              ),
+                            ),
+                            Padding(
+                              padding:
+                                  const EdgeInsets.symmetric(vertical: 4.0),
+                              child: Text(
+                                ':  ${args['classDate']}',
+                                style: TextStyle(
+                                  fontSize: 14,
+                                  fontWeight: FontWeight.normal,
+                                  color: Color.fromRGBO(83, 82, 84, 1),
+                                ),
+                              ),
+                            ),
+                          ],
                         ),
-                        boxShadow: const [
-                          BoxShadow(
-                            color: Colors.blueGrey,
-                            blurRadius: 2,
-                            offset: Offset(0, 1),
-                          ),
-                        ],
-                      ),
-                      child: Column(
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        children: const [
-                          Text(
-                            'Date : 07 June 2022',
-                            style: TextStyle(
-                              fontSize: 14,
+                        TableRow(
+                          children: [
+                            Padding(
+                              padding:
+                                  const EdgeInsets.symmetric(vertical: 4.0),
+                              child: Text(
+                                'Time',
+                                style: TextStyle(
+                                  fontSize: 14,
+                                  fontWeight: FontWeight.bold,
+                                ),
+                              ),
                             ),
-                          ),
-                          SizedBox(height: 4),
-                          Text(
-                            'Time : 12:00 PM',
-                            style: TextStyle(
-                              fontSize: 14,
+                            Padding(
+                              padding:
+                                  const EdgeInsets.symmetric(vertical: 4.0),
+                              child: Text(
+                                ':  ${args['classTime']}',
+                                style: TextStyle(
+                                  fontSize: 14,
+                                  fontWeight: FontWeight.normal,
+                                  color: Color.fromRGBO(83, 82, 84, 1),
+                                ),
+                              ),
                             ),
-                          ),
-                          SizedBox(height: 4),
-                          Text(
-                            'Duration : 1 hour',
-                            style: TextStyle(
-                              fontSize: 14,
-                            ),
-                          ),
-                          SizedBox(height: 4),
-                          Text(
-                            'Instructor : Mr. John Doe',
-                            style: TextStyle(
-                              fontSize: 14,
-                            ),
-                          ),
-                          SizedBox(height: 4),
-                          Text(
-                            'Class : Online',
-                            style: TextStyle(
-                              fontSize: 14,
-                            ),
-                          ),
-                          Text(
-                            'Participant : 10 Member',
-                            style: TextStyle(
-                              fontSize: 14,
-                            ),
-                          ),
-                          Text(
-                            'Status : Confirmed',
-                            style: TextStyle(
-                              fontSize: 14,
-                            ),
-                          ),
-                        ],
-                      ),
-                    ),
-                    const SizedBox(height: 20),
-                    Container(
-                      alignment: Alignment.centerLeft,
-                      padding: const EdgeInsets.symmetric(
-                          horizontal: 16.0, vertical: 8.0),
-                      decoration: BoxDecoration(
-                        color: Colors.grey[200],
-                        borderRadius: BorderRadius.circular(4),
-                        border: Border.all(
-                          color: Colors.grey,
-                          width: 1,
+                          ],
                         ),
-                        boxShadow: const [
-                          BoxShadow(
-                            color: Colors.blueGrey,
-                            blurRadius: 2,
-                            offset: Offset(0, 1),
+                        TableRow(
+                          children: [
+                            Padding(
+                              padding:
+                                  const EdgeInsets.symmetric(vertical: 4.0),
+                              child: Text(
+                                'Duration',
+                                style: TextStyle(
+                                  fontSize: 14,
+                                  fontWeight: FontWeight.bold,
+                                ),
+                              ),
+                            ),
+                            Padding(
+                              padding:
+                                  const EdgeInsets.symmetric(vertical: 4.0),
+                              child: Text(
+                                ':  ${args['classDuration']}',
+                                style: TextStyle(
+                                  fontSize: 14,
+                                  fontWeight: FontWeight.normal,
+                                  color: Color.fromRGBO(83, 82, 84, 1),
+                                ),
+                              ),
+                            ),
+                          ],
+                        ),
+                        TableRow(
+                          children: [
+                            Padding(
+                              padding:
+                                  const EdgeInsets.symmetric(vertical: 4.0),
+                              child: Text(
+                                'Class',
+                                style: TextStyle(
+                                  fontSize: 14,
+                                  fontWeight: FontWeight.bold,
+                                ),
+                              ),
+                            ),
+                            Padding(
+                              padding:
+                                  const EdgeInsets.symmetric(vertical: 4.0),
+                              child: Text(
+                                ':  ${args['classType']}',
+                                style: TextStyle(
+                                  fontSize: 14,
+                                  fontWeight: FontWeight.normal,
+                                  color: Color.fromRGBO(83, 82, 84, 1),
+                                ),
+                              ),
+                            ),
+                          ],
+                        ),
+                        TableRow(
+                          children: [
+                            Padding(
+                              padding:
+                                  const EdgeInsets.symmetric(vertical: 4.0),
+                              child: Text(
+                                'Category',
+                                style: TextStyle(
+                                  fontSize: 14,
+                                  fontWeight: FontWeight.bold,
+                                ),
+                              ),
+                            ),
+                            Padding(
+                              padding:
+                                  const EdgeInsets.symmetric(vertical: 4.0),
+                              child: Text(
+                                ':  ${args['classCategory']}',
+                                style: TextStyle(
+                                  fontSize: 14,
+                                  fontWeight: FontWeight.normal,
+                                  color: Color.fromRGBO(83, 82, 84, 1),
+                                ),
+                              ),
+                            ),
+                          ],
+                        ),
+                        TableRow(
+                          children: [
+                            Padding(
+                              padding:
+                                  const EdgeInsets.symmetric(vertical: 4.0),
+                              child: Text(
+                                'Instructor',
+                                style: TextStyle(
+                                  fontSize: 14,
+                                  fontWeight: FontWeight.bold,
+                                ),
+                              ),
+                            ),
+                            Padding(
+                              padding:
+                                  const EdgeInsets.symmetric(vertical: 4.0),
+                              child: Text(
+                                ':  ${args['classInstructor']}',
+                                style: TextStyle(
+                                  fontSize: 14,
+                                  fontWeight: FontWeight.normal,
+                                  color: Color.fromRGBO(83, 82, 84, 1),
+                                ),
+                              ),
+                            ),
+                          ],
+                        ),
+                        if (args['classType'] == 'Offline')
+                          TableRow(
+                            children: [
+                              Padding(
+                                padding:
+                                    const EdgeInsets.symmetric(vertical: 4.0),
+                                child: Text(
+                                  'Address',
+                                  style: TextStyle(
+                                    fontSize: 14,
+                                    fontWeight: FontWeight.bold,
+                                  ),
+                                ),
+                              ),
+                              Padding(
+                                padding:
+                                    const EdgeInsets.symmetric(vertical: 4.0),
+                                child: Text(
+                                  ':  ${args['classAddress']}',
+                                  style: TextStyle(
+                                    fontSize: 14,
+                                    fontWeight: FontWeight.normal,
+                                    color: Color.fromRGBO(83, 82, 84, 1),
+                                  ),
+                                ),
+                              ),
+                            ],
                           ),
-                        ],
-                      ),
-                      child: Column(
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        children: const [
+                        if (args['classType'] == 'Online')
+                          TableRow(
+                            children: [
+                              Padding(
+                                padding:
+                                    const EdgeInsets.symmetric(vertical: 4.0),
+                                child: Text(
+                                  'Link',
+                                  style: TextStyle(
+                                    fontSize: 14,
+                                    fontWeight: FontWeight.bold,
+                                  ),
+                                ),
+                              ),
+                              Padding(
+                                padding:
+                                    const EdgeInsets.symmetric(vertical: 4.0),
+                                child: Text(
+                                  ':  ${args['classLink']}',
+                                  style: TextStyle(
+                                    fontSize: 14,
+                                    fontWeight: FontWeight.normal,
+                                    color: Color.fromRGBO(83, 82, 84, 1),
+                                  ),
+                                ),
+                              ),
+                            ],
+                          ),
+                      ],
+                    ),
+                  ),
+                  const SizedBox(height: 20),
+                  Container(
+                    alignment: Alignment.centerLeft,
+                    padding: const EdgeInsets.symmetric(horizontal: 8.0),
+                    child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.stretch,
+                      children: [
+                        if (args['classType'] == 'Offline') ...[
                           Text(
-                            'Link Google Meet',
+                            'Maps',
                             style: TextStyle(
                               fontSize: 16,
                               fontWeight: FontWeight.bold,
                             ),
                           ),
-                          SizedBox(height: 4),
-                          Text(
-                            'https://meet.google.com/dasd-dasd-dasd',
-                            style: TextStyle(
-                              fontSize: 14,
+                          SizedBox(height: 16),
+                          maps(
+                            latitude: args['classLatitude'],
+                            longitude: args['classLongitude'],
+                          ),
+                          SizedBox(height: 16),
+                          RaisedButton(
+                            onPressed: () {
+                              launch(
+                                  'https://www.google.com/maps/search/?api=1&query=${args['classLatitude']},${args['classLongitude']}');
+                            },
+                            color: Colors.white,
+                            padding: const EdgeInsets.all(15),
+                            shape: RoundedRectangleBorder(
+                              borderRadius: BorderRadius.circular(30),
+                              side: BorderSide(
+                                  color: Color.fromRGBO(121, 116, 126, 1),
+                                  width: 1),
+                            ),
+                            child: const Text(
+                              'Get Direction',
+                              style: TextStyle(
+                                fontSize: 16,
+                                color: Color.fromRGBO(0, 103, 132, 1),
+                              ),
                             ),
                           ),
                         ],
-                      ),
+                        if (args['classType'] == 'Online') ...[
+                          Text(
+                            'Apps',
+                            style: TextStyle(
+                              fontSize: 16,
+                              fontWeight: FontWeight.bold,
+                            ),
+                          ),
+                          SizedBox(height: 16),
+                          Container(
+                            width: 100,
+                            alignment: Alignment.topLeft,
+                            child: Image.asset(
+                              'assets/meet/gmeet.png',
+                              fit: BoxFit.contain,
+                            ),
+                          ),
+                          SizedBox(height: 16),
+                          RaisedButton(
+                            onPressed: () {
+                              launch(args['classLink']);
+                            },
+                            color: Colors.white,
+                            padding: const EdgeInsets.all(15),
+                            shape: RoundedRectangleBorder(
+                              borderRadius: BorderRadius.circular(30),
+                              side: BorderSide(
+                                  color: Color.fromRGBO(121, 116, 126, 1),
+                                  width: 1),
+                            ),
+                            child: const Text(
+                              'Get App',
+                              style: TextStyle(
+                                fontSize: 16,
+                                color: Color.fromRGBO(0, 103, 132, 1),
+                              ),
+                            ),
+                          ),
+                        ]
+                      ],
                     ),
-                    const SizedBox(height: 20),
-                    RaisedButton(
-                      onPressed: () {},
-                      color: const Color.fromRGBO(0, 103, 132, 1),
-                      padding: const EdgeInsets.all(15),
-                      shape: RoundedRectangleBorder(
-                        borderRadius: BorderRadius.circular(30),
-                      ),
-                      child: const Text(
-                        'Join Meeting',
-                        style: TextStyle(
-                          fontSize: 16,
-                          color: Colors.white,
-                        ),
-                      ),
-                    ),
-                    const SizedBox(height: 20),
-                    RaisedButton(
-                      onPressed: () {},
-                      color: const Color.fromRGBO(0, 103, 132, 1),
-                      padding: const EdgeInsets.all(15),
-                      shape: RoundedRectangleBorder(
-                        borderRadius: BorderRadius.circular(30),
-                      ),
-                      child: const Text(
-                        'Confirm',
-                        style: TextStyle(
-                          fontSize: 16,
-                          color: Colors.white,
-                        ),
-                      ),
-                    ),
-                    const SizedBox(height: 20),
-                  ],
-                ),
+                  ),
+                  const SizedBox(height: 20),
+                ],
               ),
             ),
           ),
-        ],
+        ),
+      ],
+    );
+  }
+
+  maps({required latitude, required longitude}) {
+    // return Container(
+    //   height: 200,
+    //   child: GoogleMap(
+    //     initialCameraPosition: CameraPosition(
+    //       target: LatLng(latitude, longitude),
+    //       zoom: 15,
+    //     ),
+    //     markers: {
+    //       Marker(
+    //         markerId: MarkerId('marker'),
+    //         position: LatLng(latitude, longitude),
+    //       ),
+    //     },
+    //   ),
+    // );
+    return SizedBox(
+      height: 200,
+      child: Image.network(
+        'https://maps.googleapis.com/maps/api/staticmap?center=$latitude,$longitude&zoom=15&size=400x200&markers=color:red%7C$latitude,$longitude&key=AIzaSyD-9tSrke72PouQMnMX-a7eZSW0jkFMBWY',
+        fit: BoxFit.cover,
       ),
     );
+  }
+
+  void launch(String s) {
+    launch(s);
   }
 }

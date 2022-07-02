@@ -17,4 +17,20 @@ class NewsletterAPI {
       );
     }
   }
+
+  Future<NewsletterGetByIdResponse> getNewsletterGetByIdResponse(int id) async {
+    try {
+      final response = await APIService().dio.get(
+            'https://virtserver.swaggerhub.com/imanuelpay/gym-api/1.0.0/newsletter/$id',
+          );
+      return NewsletterGetByIdResponse.fromJson(response.data);
+    } catch (e) {
+      return NewsletterGetByIdResponse(
+        status: 'error',
+        code: 500,
+        message: 'Internal Server Error',
+        data: null,
+      );
+    }
+  }
 }

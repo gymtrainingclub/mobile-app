@@ -99,9 +99,32 @@ class _ScheduleScreenState extends State<ScheduleScreen> {
             physics: const NeverScrollableScrollPhysics(),
             itemCount: 10,
             itemBuilder: (BuildContext context, int index) {
+              String classType = "Online";
+              if (index % 2 == 0) {
+                classType = "Offline";
+              }
               return GestureDetector(
                 onTap: () {
-                  Navigator.pushNamed(context, ScheduleDetailScreen.route);
+                  Navigator.pushNamed(
+                    context,
+                    ScheduleDetailScreen.route,
+                    arguments: {
+                      'id': index,
+                      'classType': classType,
+                      'className': 'Class $index',
+                      'classTime': '08:00 - 09:00',
+                      'classDate':
+                          DateFormat('dd MMMM yyyy').format(DateTime.now()),
+                      'classInstructor': 'Teacher $index',
+                      'classRoom': 'Room $index',
+                      'classCategory': 'Category $index',
+                      'classDuration': '1 hour',
+                      'classAddress': 'Address $index',
+                      'classLogitude': '-6.914744',
+                      'classLatitude': '107.609810',
+                      'classLink': 'https://meet.google.com/',
+                    },
+                  );
                 },
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.stretch,

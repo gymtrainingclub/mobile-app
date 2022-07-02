@@ -1,4 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:mobileapp/model/newsletter_model.dart';
+
+import '../../model/api/newsletter_api.dart';
 
 enum NewsletterDetailViewState {
   loading,
@@ -16,25 +19,26 @@ class NewsletterDetailViewModel with ChangeNotifier {
     notifyListeners();
   }
 
-  // NewsletterDetailGetResponse _newsletterDetailGetResponse =
-  //     NewsletterDetailGetResponse(
-  //   status: '',
-  //   code: 0,
-  //   message: '',
-  //   data: null,
-  // );
-  // NewsletterDetailGetResponse get newsletterDetailGetResponse =>
-  //     _newsletterDetailGetResponse;
+  NewsletterGetByIdResponse _newsletterGetByIdResponse =
+      NewsletterGetByIdResponse(
+    status: '',
+    code: 0,
+    message: '',
+    data: null,
+  );
 
-  // getNewsletterDetailGetResponse() async {
-  //   changeState(NewsletterDetailViewState.loading);
-  //   try {
-  //     final newsletterDetailGetResponse =
-  //         await NewsletterDetailAPI().getNewsletterDetailGetResponse();
-  //     _newsletterDetailGetResponse = newsletterDetailGetResponse;
-  //     changeState(NewsletterDetailViewState.loaded);
-  //   } catch (e) {
-  //     changeState(NewsletterDetailViewState.error);
-  //   }
-  // }
+  NewsletterGetByIdResponse get newsletterGetByIdResponse =>
+      _newsletterGetByIdResponse;
+
+  getNewsletterGetByIdResponse(int id) async {
+    changeState(NewsletterDetailViewState.loading);
+    try {
+      final newsletterGetByIdResponse =
+          await NewsletterAPI().getNewsletterGetByIdResponse(id);
+      _newsletterGetByIdResponse = newsletterGetByIdResponse;
+      changeState(NewsletterDetailViewState.loaded);
+    } catch (e) {
+      changeState(NewsletterDetailViewState.error);
+    }
+  }
 }
