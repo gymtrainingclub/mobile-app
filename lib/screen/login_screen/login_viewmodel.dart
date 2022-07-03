@@ -37,7 +37,9 @@ class LoginViewModel with ChangeNotifier {
   String get role => _role;
 
   setRole(String value) {
+    _state = LoginViewState.loading;
     _role = value;
+    _state = LoginViewState.initial;
     notifyListeners();
   }
 

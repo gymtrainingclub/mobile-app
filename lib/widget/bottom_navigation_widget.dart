@@ -1,12 +1,12 @@
 import 'package:flutter/material.dart';
-import 'package:mobileapp/screen/admin_administrator_screen/admin_administrator_screen.dart';
-import 'package:mobileapp/screen/admin_content_screen/admin_content_screen.dart';
-import 'package:mobileapp/screen/admin_membership_screen/admin_membership_screen.dart';
+import 'package:mobileapp/screen/admin_menu_screen/admin_menu_screen.dart';
+import 'package:mobileapp/screen/admin_profile_screen/admin_profile_screen.dart';
 import 'package:mobileapp/screen/home_screen/home_screen.dart';
 import 'package:mobileapp/screen/profile_screen/profile_screen.dart';
 import 'package:mobileapp/screen/schedule_screen/schedule_screen.dart';
 
 import '../screen/admin_dashboard_screen/admin_dashboard_screen.dart';
+import '../screen/admin_notification_screen/admin_notification_screen.dart';
 import '../screen/newsletter_screen/newsletter_screen.dart';
 
 // ignore: must_be_immutable
@@ -48,21 +48,16 @@ class _BottomNavigationWidgetState extends State<BottomNavigationWidget> {
         ],
         if (widget.role == 'operator' || widget.role == 'admin') ...[
           const BottomNavigationBarItem(
-            icon: Icon(Icons.dashboard),
-            label: 'Dashboard',
-          ),
-          if (widget.role == 'admin')
-            const BottomNavigationBarItem(
-              icon: Icon(Icons.lock_person),
-              label: 'Admin',
-            ),
-          const BottomNavigationBarItem(
-            icon: Icon(Icons.card_membership),
-            label: 'Membership',
+            icon: Icon(Icons.home),
+            label: 'Home',
           ),
           const BottomNavigationBarItem(
-            icon: Icon(Icons.book),
-            label: 'Content',
+            icon: Icon(Icons.notifications),
+            label: 'Notification',
+          ),
+          const BottomNavigationBarItem(
+            icon: Icon(Icons.apps),
+            label: 'Menu',
           ),
           const BottomNavigationBarItem(
             icon: Icon(Icons.person),
@@ -89,22 +84,19 @@ class _BottomNavigationWidgetState extends State<BottomNavigationWidget> {
               Navigator.pushNamed(context, ProfileScreen.route);
               break;
           }
-        } else if (widget.role == 'operator') {
+        } else if (widget.role == 'operator' || widget.role == 'admin') {
           switch (index) {
             case 0:
               Navigator.pushNamed(context, AdminDashboardScreen.route);
               break;
             case 1:
-              Navigator.pushNamed(context, AdminAdministratorScreen.route);
+              Navigator.pushNamed(context, AdminNotificationScreen.route);
               break;
             case 2:
-              Navigator.pushNamed(context, AdminMembershipScreen.route);
+              Navigator.pushNamed(context, AdminMenuScreen.route);
               break;
             case 3:
-              Navigator.pushNamed(context, AdminContentScreen.route);
-              break;
-            case 4:
-              Navigator.pushNamed(context, ProfileScreen.route);
+              Navigator.pushNamed(context, AdminProfileScreen.route);
               break;
           }
         }

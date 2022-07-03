@@ -2,9 +2,15 @@
 
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:mobileapp/screen/admin_administrator_screen/admin_administrator_add_screen.dart';
 import 'package:mobileapp/screen/admin_administrator_screen/admin_administrator_screen.dart';
 import 'package:mobileapp/screen/admin_content_screen/admin_content_screen.dart';
+import 'package:mobileapp/screen/admin_instructor_screen/admin_instructor_viewmodel.dart';
 import 'package:mobileapp/screen/admin_membership_screen/admin_membership_screen.dart';
+import 'package:mobileapp/screen/admin_menu_screen/admin_menu_screen.dart';
+import 'package:mobileapp/screen/admin_menu_screen/admin_menu_viewmodel.dart';
+import 'package:mobileapp/screen/admin_profile_screen/admin_profile_screen.dart';
+import 'package:mobileapp/screen/admin_profile_screen/admin_profile_viewmodel.dart';
 import 'package:mobileapp/screen/class_booking_screen/claas_booking_viewmodel.dart';
 import 'package:mobileapp/screen/class_booking_screen/class_booking_screen.dart';
 import 'package:mobileapp/screen/class_screen/class_viewmodel.dart';
@@ -26,6 +32,9 @@ import '/screen/schedule_screen/schedule_screen.dart';
 import 'screen/admin_administrator_screen/admin_administrator_viewmodel.dart';
 import 'screen/admin_content_screen/admin_content_viewmodel.dart';
 import 'screen/admin_dashboard_screen/admin_dashboard_viewmodel.dart';
+import 'screen/admin_instructor_screen/admin_instructor_screen.dart';
+import 'screen/admin_notification_screen/admin_notification_screen.dart';
+import 'screen/admin_notification_screen/admin_notification_viewmodel.dart';
 import 'screen/category_screen/category_viewmodel.dart';
 import 'screen/home_screen/home_screen.dart';
 import 'screen/home_screen/home_viewmodel.dart';
@@ -114,6 +123,18 @@ void main() {
         ),
         ChangeNotifierProvider(
           create: (_) => NotificationViewModel(),
+        ),
+        ChangeNotifierProvider(
+          create: (_) => AdminInstructorViewModel(),
+        ),
+        ChangeNotifierProvider(
+          create: (_) => AdminNotificationViewModel(),
+        ),
+        ChangeNotifierProvider(
+          create: (_) => AdminMenuViewModel(),
+        ),
+        ChangeNotifierProvider(
+          create: (_) => AdminProfileViewModel(),
         ),
       ],
       child: const MyApp(),
@@ -216,6 +237,16 @@ class MyApp extends StatelessWidget {
             return routeBuilder(const MyProfileScreen(), set);
           case NotificationScreen.route:
             return routeBuilder(const NotificationScreen(), set);
+          case AdminInstructorScreen.route:
+            return routeBuilder(const AdminInstructorScreen(), set);
+          case AdminNotificationScreen.route:
+            return routeBuilder(const AdminNotificationScreen(), set);
+          case AdminMenuScreen.route:
+            return routeBuilder(const AdminMenuScreen(), set);
+          case AdminProfileScreen.route:
+            return routeBuilder(const AdminProfileScreen(), set);
+          case AdminAdministratorAddScreen.route:
+            return routeBuilder(const AdminAdministratorAddScreen(), set);
           default:
             return routeBuilder(const LogoScreen(), set);
         }

@@ -30,27 +30,29 @@ class _LoginScreenState extends State<LoginScreen> {
 
   bool isVisible = false;
   bool isChecked = false;
-  String isRole = 'member';
 
-  Widget stateBody(BuildContext context, LoginViewModel vm) {
-    final isLoading = vm.state == LoginViewState.loading;
-    final isLoaded = vm.state == LoginViewState.loaded;
-    final isError = vm.state == LoginViewState.error;
+  Widget stateBody(BuildContext context) {
+    final loginProvider = Provider.of<LoginViewModel>(context);
+    final isLoading = loginProvider.state == LoginViewState.loading;
+    final isLoaded = loginProvider.state == LoginViewState.loaded;
+    final isError = loginProvider.state == LoginViewState.error;
+    final isInitial = loginProvider.state == LoginViewState.initial;
+    if (loginProvider.role == '') {}
     if (isLoading) {
       return const Center(child: CircularProgressIndicator());
     } else if (isError) {
       return const Center(child: Text('Error'));
+    } else if (isLoaded) {
+      return _buildLoadedBody(context, loginProvider);
+    } else if (isInitial) {
+      return _buildInitialBody(context, loginProvider);
+    } else {
+      return const Center(child: Text('Unknown'));
     }
-    return Scaffold(
-      body: isLoaded
-          ? _buildLoadedBody(context, vm)
-          : _buildInitialBody(context, vm),
-    );
   }
 
   @override
   Widget build(BuildContext context) {
-    final loginProvider = Provider.of<LoginViewModel>(context);
     return Scaffold(
       backgroundColor: Colors.white,
       extendBodyBehindAppBar: true,
@@ -77,14 +79,17 @@ class _LoginScreenState extends State<LoginScreen> {
           onPressed: () => Navigator.of(context).pushNamed(StopScreen.route),
         ),
       ),
-      body: stateBody(context, loginProvider),
+      body: stateBody(context),
     );
   }
 
-  Widget _buildInitialBody(BuildContext context, LoginViewModel vm) {
-    final loginProvider = Provider.of<LoginViewModel>(context);
+  Widget _buildInitialBody(BuildContext context, LoginViewModel loginProvider) {
     TextEditingController currentEmail = loginProvider.emailController;
     TextEditingController currentPassword = loginProvider.passwordController;
+    String isRole = loginProvider.role;
+    if (isRole == '') {
+      isRole = 'member';
+    }
     return SingleChildScrollView(
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.stretch,
@@ -120,57 +125,107 @@ class _LoginScreenState extends State<LoginScreen> {
           const SizedBox(
             height: 20,
           ),
-          GestureDetector(
-            onTap: () {
-              setState(() {
-                if (isRole == 'member') {
-                  isRole = 'admin';
-                } else if (isRole == 'admin') {
-                  isRole = 'operator';
-                } else if (isRole == 'operator') {
-                  isRole = 'member';
-                }
-              });
-            },
-            child: Container(
-              padding: const EdgeInsets.symmetric(horizontal: 20),
-              child: Row(
-                mainAxisAlignment: MainAxisAlignment.end,
-                children: [
-                  if (isRole == 'member')
-                    const Text(
-                      'Login Admin',
-                      style: TextStyle(
-                        fontSize: 14,
-                      ),
-                      textAlign: TextAlign.center,
-                    ),
-                  if (isRole == 'admin' || isRole == 'operator')
-                    const Text(
-                      'Login User',
-                      style: TextStyle(
-                        fontSize: 14,
-                      ),
-                      textAlign: TextAlign.center,
-                    ),
-                  const SizedBox(
-                    width: 10,
-                  ),
-                  const Icon(
-                    Icons.arrow_forward,
-                    color: Colors.black87,
-                    size: 18,
-                  ),
-                ],
-              ),
-            ),
-          ),
-          const SizedBox(
-            height: 20,
-          ),
           Form(
             key: _formKey,
             child: _buildForm(currentEmail, currentPassword, isRole),
+          ),
+          Container(
+            padding: const EdgeInsets.symmetric(horizontal: 20),
+            child: Row(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                if (isRole == 'member') ...[
+                  RaisedButton(
+                    onPressed: () {
+                      loginProvider.setRole('admin');
+                      print(loginProvider.role);
+                    },
+                    color: Colors.white,
+                    shape: RoundedRectangleBorder(
+                      borderRadius: BorderRadius.circular(50.0),
+                      side: BorderSide(
+                        color: const Color.fromRGBO(121, 116, 126, 1),
+                        width: 1,
+                      ),
+                    ),
+                    padding: const EdgeInsets.symmetric(
+                        horizontal: 16.0, vertical: 8.0),
+                    child: Text(
+                      'Switch to ${isRole == 'member' ? 'Admin' : 'Member'}',
+                      style: TextStyle(
+                        fontSize: 14,
+                        fontWeight: FontWeight.bold,
+                        color: Color.fromRGBO(0, 103, 132, 1),
+                      ),
+                    ),
+                  ),
+                ],
+                if (isRole == 'admin' || isRole == 'operator') ...[
+                  RaisedButton(
+                    onPressed: () {
+                      loginProvider.setRole('member');
+                      print(loginProvider.role);
+                    },
+                    color: Colors.white,
+                    shape: RoundedRectangleBorder(
+                      borderRadius: BorderRadius.circular(50.0),
+                      side: BorderSide(
+                        color: const Color.fromRGBO(121, 116, 126, 1),
+                        width: 1,
+                      ),
+                    ),
+                    padding: const EdgeInsets.symmetric(
+                        horizontal: 16.0, vertical: 8.0),
+                    child: Text(
+                      'Switch to ${isRole == 'member' ? 'Admin' : 'Member'}',
+                      style: TextStyle(
+                        fontSize: 14,
+                        fontWeight: FontWeight.bold,
+                        color: Color.fromRGBO(0, 103, 132, 1),
+                      ),
+                    ),
+                  ),
+                ],
+              ],
+            ),
+          ),
+          SizedBox(
+            height: 20,
+          ),
+          GestureDetector(
+            child: const Text(
+              'Help?',
+              style: TextStyle(
+                decoration: TextDecoration.underline,
+              ),
+              textAlign: TextAlign.center,
+            ),
+            onTap: () {},
+          ),
+          const SizedBox(
+            height: 40,
+          ),
+          Row(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: [
+              Text('Don\'t have an account? '),
+              GestureDetector(
+                child: const Text(
+                  'Sign up',
+                  style: TextStyle(
+                    color: Color.fromRGBO(18, 106, 138, 1),
+                    fontWeight: FontWeight.bold,
+                  ),
+                  textAlign: TextAlign.center,
+                ),
+                onTap: () {
+                  Navigator.of(context).pushNamed('/register');
+                },
+              ),
+            ],
+          ),
+          const SizedBox(
+            height: 40,
           ),
         ],
       ),
@@ -322,6 +377,7 @@ class _LoginScreenState extends State<LoginScreen> {
           RaisedButton(
             onPressed: () {
               if (_formKey.currentState!.validate()) {
+                print('valid');
                 Provider.of<LoginViewModel>(context, listen: false)
                     .getLoginResponse(email.text, password.text, isRole);
               }
@@ -338,47 +394,19 @@ class _LoginScreenState extends State<LoginScreen> {
               ),
             ),
           ),
-          const SizedBox(
-            height: 40,
+          SizedBox(
+            height: 20,
           ),
-          GestureDetector(
-            child: const Text(
-              'Help?',
-              style: TextStyle(
-                decoration: TextDecoration.underline,
-              ),
-              textAlign: TextAlign.center,
-            ),
-            onTap: () {},
-          ),
-          const SizedBox(
-            height: 40,
-          ),
-          Row(
-            mainAxisAlignment: MainAxisAlignment.center,
-            children: [
-              Text('Don\'t have an account? '),
-              GestureDetector(
-                child: const Text(
-                  'Sign up',
-                  style: TextStyle(
-                    color: Color.fromRGBO(18, 106, 138, 1),
-                    fontWeight: FontWeight.bold,
-                  ),
-                  textAlign: TextAlign.center,
-                ),
-                onTap: () {
-                  Navigator.of(context).pushNamed('/register');
-                },
-              ),
-            ],
-          )
         ],
       ),
     );
   }
 
   _buildLoadedBody(BuildContext context, LoginViewModel vm) {
+    String isRole = vm.role;
+    if (isRole == '') {
+      isRole = 'member';
+    }
     if (isRole == 'member') {
       Timer(
         const Duration(seconds: 2),
