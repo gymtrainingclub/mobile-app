@@ -33,6 +33,8 @@ import 'screen/admin_administrator_screen/admin_administrator_viewmodel.dart';
 import 'screen/admin_content_screen/admin_content_viewmodel.dart';
 import 'screen/admin_dashboard_screen/admin_dashboard_viewmodel.dart';
 import 'screen/admin_instructor_screen/admin_instructor_screen.dart';
+import 'screen/admin_membership_screen/admin_membership_detail_screen.dart';
+import 'screen/admin_membership_screen/admin_membership_viewmodel.dart';
 import 'screen/admin_notification_screen/admin_notification_screen.dart';
 import 'screen/admin_notification_screen/admin_notification_viewmodel.dart';
 import 'screen/category_screen/category_viewmodel.dart';
@@ -136,13 +138,14 @@ void main() {
         ChangeNotifierProvider(
           create: (_) => AdminProfileViewModel(),
         ),
+        ChangeNotifierProvider(
+          create: (_) => AdminMembershipViewModel(),
+        ),
       ],
       child: const MyApp(),
     ),
   );
 }
-
-class AdminMembershipViewModel {}
 
 PageRouteBuilder routeBuilder(
   Widget widget,
@@ -247,6 +250,8 @@ class MyApp extends StatelessWidget {
             return routeBuilder(const AdminProfileScreen(), set);
           case AdminAdministratorAddScreen.route:
             return routeBuilder(const AdminAdministratorAddScreen(), set);
+          case AdminMembershipDetailScreen.route:
+            return routeBuilder(const AdminMembershipDetailScreen(), set);
           default:
             return routeBuilder(const LogoScreen(), set);
         }

@@ -11,6 +11,19 @@ class AdminMembershipViewModel with ChangeNotifier {
   AdminMembershipViewState _state = AdminMembershipViewState.initial;
   AdminMembershipViewState get state => _state;
 
+  String _menu = '';
+  String get menu => _menu;
+
+  set menu(String value) {
+    _menu = value;
+    notifyListeners();
+  }
+
+  changeMenu(String value) {
+    _menu = value;
+    notifyListeners();
+  }
+
   changeState(AdminMembershipViewState state) {
     _state = state;
     notifyListeners();

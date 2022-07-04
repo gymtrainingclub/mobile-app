@@ -26,6 +26,13 @@ class _AdminAdministratorScreenState extends State<AdminAdministratorScreen> {
           backgroundColor: const Color.fromRGBO(12, 48, 61, 1),
           automaticallyImplyLeading: false,
           elevation: 0,
+          leading: IconButton(
+            icon: Icon(
+              Icons.arrow_back,
+              color: Colors.white,
+            ),
+            onPressed: () => Navigator.pop(context),
+          ),
           actions: [
             Padding(
               padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 20),
