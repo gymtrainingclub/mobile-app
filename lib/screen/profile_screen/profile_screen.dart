@@ -1,6 +1,8 @@
 // ignore_for_file: deprecated_member_use, avoid_print, prefer_const_constructors
 
 import 'package:flutter/material.dart';
+import 'package:mobileapp/screen/about_screen/about_screen.dart';
+import 'package:mobileapp/screen/change_password_screen/change_password_screen.dart';
 import 'package:mobileapp/screen/stop_screen/stop_screen.dart';
 import 'package:provider/provider.dart';
 
@@ -122,6 +124,9 @@ class _ProfileScreenState extends State<ProfileScreen> {
               ),
               shadowColor: Colors.black,
               child: ListTile(
+                onTap: () {
+                  Navigator.pushNamed(context, ChangePasswordScreen.route);
+                },
                 title: Text(
                   'Change Password',
                   style: TextStyle(
@@ -160,8 +165,11 @@ class _ProfileScreenState extends State<ProfileScreen> {
               ),
               shadowColor: Colors.black,
               child: ListTile(
+                onTap: () {
+                  Navigator.pushNamed(context, AboutScreen.route);
+                },
                 title: Text(
-                  'About Us',
+                  'About App',
                   style: TextStyle(
                     fontSize: 16,
                   ),

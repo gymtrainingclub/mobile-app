@@ -4,6 +4,7 @@ import 'dart:async';
 
 import 'package:email_validator/email_validator.dart';
 import 'package:flutter/material.dart';
+import 'package:mobileapp/screen/forgot_password_screen/forgot_password_screen.dart';
 import 'package:mobileapp/screen/home_screen/home_screen.dart';
 import 'package:mobileapp/screen/stop_screen/stop_screen.dart';
 import 'package:provider/provider.dart';
@@ -366,7 +367,7 @@ class _LoginScreenState extends State<LoginScreen> {
                   textAlign: TextAlign.end,
                 ),
                 onTap: () {
-                  Navigator.of(context).pushNamed('/forgot-password');
+                  Navigator.pushNamed(context, ForgotPasswordScreen.route);
                 },
               ),
             ],

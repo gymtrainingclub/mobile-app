@@ -2,6 +2,7 @@
 
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:mobileapp/screen/about_screen/about_screen.dart';
 import 'package:mobileapp/screen/admin_administrator_screen/admin_administrator_add_screen.dart';
 import 'package:mobileapp/screen/admin_administrator_screen/admin_administrator_screen.dart';
 import 'package:mobileapp/screen/admin_content_screen/admin_content_screen.dart';
@@ -11,6 +12,7 @@ import 'package:mobileapp/screen/admin_menu_screen/admin_menu_screen.dart';
 import 'package:mobileapp/screen/admin_menu_screen/admin_menu_viewmodel.dart';
 import 'package:mobileapp/screen/admin_profile_screen/admin_profile_screen.dart';
 import 'package:mobileapp/screen/admin_profile_screen/admin_profile_viewmodel.dart';
+import 'package:mobileapp/screen/change_password_screen/change_password_screen.dart';
 import 'package:mobileapp/screen/class_booking_screen/claas_booking_viewmodel.dart';
 import 'package:mobileapp/screen/class_booking_screen/class_booking_screen.dart';
 import 'package:mobileapp/screen/class_screen/class_viewmodel.dart';
@@ -41,6 +43,7 @@ import 'screen/admin_membership_screen/admin_membership_viewmodel.dart';
 import 'screen/admin_notification_screen/admin_notification_screen.dart';
 import 'screen/admin_notification_screen/admin_notification_viewmodel.dart';
 import 'screen/category_screen/category_viewmodel.dart';
+import 'screen/forgot_password_screen/forgot_password_screen.dart';
 import 'screen/home_screen/home_screen.dart';
 import 'screen/home_screen/home_viewmodel.dart';
 import 'screen/login_screen/login_screen.dart';
@@ -262,6 +265,12 @@ class MyApp extends StatelessWidget {
             return routeBuilder(const AdminClassesScreen(), set);
           case AdminClassesAddScreen.route:
             return routeBuilder(const AdminClassesAddScreen(), set);
+          case AboutScreen.route:
+            return routeBuilder(const AboutScreen(), set);
+          case ChangePasswordScreen.route:
+            return routeBuilder(const ChangePasswordScreen(), set);
+          case ForgotPasswordScreen.route:
+            return routeBuilder(const ForgotPasswordScreen(), set);
           default:
             return routeBuilder(const LogoScreen(), set);
         }
