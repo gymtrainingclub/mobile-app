@@ -30,6 +30,9 @@ import '/screen/membership_screen/membership_screen.dart';
 import '/screen/schedule_detail_screen/schedule_detail_screen.dart';
 import '/screen/schedule_screen/schedule_screen.dart';
 import 'screen/admin_administrator_screen/admin_administrator_viewmodel.dart';
+import 'screen/admin_classes_screen/admin_classes_add_screen.dart';
+import 'screen/admin_classes_screen/admin_classes_screen.dart';
+import 'screen/admin_classes_screen/admin_classes_viewmodel.dart';
 import 'screen/admin_content_screen/admin_content_viewmodel.dart';
 import 'screen/admin_dashboard_screen/admin_dashboard_viewmodel.dart';
 import 'screen/admin_instructor_screen/admin_instructor_screen.dart';
@@ -140,6 +143,9 @@ void main() {
         ),
         ChangeNotifierProvider(
           create: (_) => AdminMembershipViewModel(),
+        ),
+        ChangeNotifierProvider(
+          create: (_) => AdminClassesViewModel(),
         ),
       ],
       child: const MyApp(),
@@ -252,6 +258,10 @@ class MyApp extends StatelessWidget {
             return routeBuilder(const AdminAdministratorAddScreen(), set);
           case AdminMembershipDetailScreen.route:
             return routeBuilder(const AdminMembershipDetailScreen(), set);
+          case AdminClassesScreen.route:
+            return routeBuilder(const AdminClassesScreen(), set);
+          case AdminClassesAddScreen.route:
+            return routeBuilder(const AdminClassesAddScreen(), set);
           default:
             return routeBuilder(const LogoScreen(), set);
         }

@@ -5,6 +5,7 @@ import 'package:mobileapp/screen/admin_administrator_screen/admin_administrator_
 import 'package:provider/provider.dart';
 
 import '../../widget/bottom_navigation_widget.dart';
+import '../admin_classes_screen/admin_classes_screen.dart';
 import '../admin_membership_screen/admin_membership_screen.dart';
 import '../login_screen/login_viewmodel.dart';
 
@@ -195,40 +196,49 @@ class _AdminMenuScreenState extends State<AdminMenuScreen> {
                   Row(
                     children: [
                       Expanded(
-                        child: Card(
-                          elevation: 4,
-                          shape: RoundedRectangleBorder(
-                            borderRadius: BorderRadius.circular(8),
-                          ),
-                          shadowColor: Colors.black,
-                          child: Container(
-                            height: 90,
-                            padding: const EdgeInsets.all(16),
-                            decoration: BoxDecoration(
-                              color: Colors.white,
-                              borderRadius: BorderRadius.circular(10),
+                        child: GestureDetector(
+                          onTap: () {
+                            Navigator.pushNamed(
+                              context,
+                              AdminClassesScreen.route,
+                              arguments: {'menu': 'online'},
+                            );
+                          },
+                          child: Card(
+                            elevation: 4,
+                            shape: RoundedRectangleBorder(
+                              borderRadius: BorderRadius.circular(8),
                             ),
-                            child: Column(
-                              mainAxisAlignment: MainAxisAlignment.start,
-                              crossAxisAlignment: CrossAxisAlignment.start,
-                              children: [
-                                Icon(
-                                  Icons.home_work_outlined,
-                                  color: Color.fromRGBO(12, 48, 61, 1),
-                                  size: 30,
-                                ),
-                                SizedBox(
-                                  height: 10,
-                                ),
-                                Text(
-                                  'Classes',
-                                  style: TextStyle(
-                                    fontSize: 14,
-                                    fontWeight: FontWeight.bold,
+                            shadowColor: Colors.black,
+                            child: Container(
+                              height: 90,
+                              padding: const EdgeInsets.all(16),
+                              decoration: BoxDecoration(
+                                color: Colors.white,
+                                borderRadius: BorderRadius.circular(10),
+                              ),
+                              child: Column(
+                                mainAxisAlignment: MainAxisAlignment.start,
+                                crossAxisAlignment: CrossAxisAlignment.start,
+                                children: [
+                                  Icon(
+                                    Icons.home_work_outlined,
                                     color: Color.fromRGBO(12, 48, 61, 1),
+                                    size: 30,
                                   ),
-                                ),
-                              ],
+                                  SizedBox(
+                                    height: 10,
+                                  ),
+                                  Text(
+                                    'Classes',
+                                    style: TextStyle(
+                                      fontSize: 14,
+                                      fontWeight: FontWeight.bold,
+                                      color: Color.fromRGBO(12, 48, 61, 1),
+                                    ),
+                                  ),
+                                ],
+                              ),
                             ),
                           ),
                         ),
@@ -352,6 +362,94 @@ class _AdminMenuScreenState extends State<AdminMenuScreen> {
                                 ),
                                 Text(
                                   'Contents',
+                                  style: TextStyle(
+                                    fontSize: 14,
+                                    fontWeight: FontWeight.bold,
+                                    color: Color.fromRGBO(12, 48, 61, 1),
+                                  ),
+                                ),
+                              ],
+                            ),
+                          ),
+                        ),
+                      ),
+                    ],
+                  ),
+                  SizedBox(
+                    height: 10,
+                  ),
+                  Row(
+                    children: [
+                      Expanded(
+                        child: Card(
+                          elevation: 4,
+                          shape: RoundedRectangleBorder(
+                            borderRadius: BorderRadius.circular(8),
+                          ),
+                          shadowColor: Colors.black,
+                          child: Container(
+                            height: 90,
+                            padding: const EdgeInsets.all(16),
+                            decoration: BoxDecoration(
+                              color: Colors.white,
+                              borderRadius: BorderRadius.circular(10),
+                            ),
+                            child: Column(
+                              mainAxisAlignment: MainAxisAlignment.start,
+                              crossAxisAlignment: CrossAxisAlignment.start,
+                              children: [
+                                Icon(
+                                  Icons.person_outline,
+                                  color: Color.fromRGBO(12, 48, 61, 1),
+                                  size: 30,
+                                ),
+                                SizedBox(
+                                  height: 10,
+                                ),
+                                Text(
+                                  'Instructor',
+                                  style: TextStyle(
+                                    fontSize: 14,
+                                    fontWeight: FontWeight.bold,
+                                    color: Color.fromRGBO(12, 48, 61, 1),
+                                  ),
+                                ),
+                              ],
+                            ),
+                          ),
+                        ),
+                      ),
+                      SizedBox(
+                        width: 10,
+                      ),
+                      Expanded(
+                        child: Card(
+                          elevation: 4,
+                          shape: RoundedRectangleBorder(
+                            borderRadius: BorderRadius.circular(8),
+                          ),
+                          shadowColor: Colors.black,
+                          child: Container(
+                            height: 90,
+                            padding: const EdgeInsets.all(16),
+                            decoration: BoxDecoration(
+                              color: Colors.white,
+                              borderRadius: BorderRadius.circular(10),
+                            ),
+                            child: Column(
+                              mainAxisAlignment: MainAxisAlignment.start,
+                              crossAxisAlignment: CrossAxisAlignment.start,
+                              children: [
+                                Icon(
+                                  Icons.category,
+                                  color: Color.fromRGBO(12, 48, 61, 1),
+                                  size: 30,
+                                ),
+                                SizedBox(
+                                  height: 10,
+                                ),
+                                Text(
+                                  'Category',
                                   style: TextStyle(
                                     fontSize: 14,
                                     fontWeight: FontWeight.bold,

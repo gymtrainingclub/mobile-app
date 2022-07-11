@@ -1,4 +1,4 @@
-// ignore_for_file: prefer_const_constructors, prefer_const_literals_to_create_immutables
+// ignore_for_file: prefer_const_constructors, prefer_const_literals_to_create_immutables, deprecated_member_use
 
 import 'package:flutter/material.dart';
 import 'package:jiffy/jiffy.dart';
@@ -112,7 +112,7 @@ class _MyProfileScreenState extends State<MyProfileScreen> {
     Jiffy jiffy = Jiffy(date);
     return SingleChildScrollView(
       child: Padding(
-        padding: const EdgeInsets.all(8.0),
+        padding: const EdgeInsets.all(16.0),
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.stretch,
           children: [
@@ -296,7 +296,25 @@ class _MyProfileScreenState extends State<MyProfileScreen> {
                   ),
                 ],
               ),
-            )
+            ),
+            SizedBox(height: 20),
+            RaisedButton(
+              onPressed: () {},
+              color: const Color.fromRGBO(0, 103, 132, 1),
+              shape: RoundedRectangleBorder(
+                borderRadius: BorderRadius.circular(50.0),
+              ),
+              padding:
+                  const EdgeInsets.symmetric(horizontal: 16.0, vertical: 16.0),
+              child: Text(
+                'Edit Profile',
+                style: TextStyle(
+                  fontSize: 16,
+                  fontWeight: FontWeight.bold,
+                  color: Colors.white,
+                ),
+              ),
+            ),
           ],
         ),
       ),

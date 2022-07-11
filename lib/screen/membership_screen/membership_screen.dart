@@ -54,6 +54,7 @@ class _MembershipScreenState extends State<MembershipScreen> {
     final isLoaded = membershipProvider.state == MembershipViewState.loaded;
     final isError = membershipProvider.state == MembershipViewState.error;
     final isInitial = membershipProvider.state == MembershipViewState.initial;
+    final isPayment = membershipProvider.state == MembershipViewState.payment;
     if (isLoading) {
       return const Center(
         child: CircularProgressIndicator(),
@@ -70,6 +71,10 @@ class _MembershipScreenState extends State<MembershipScreen> {
       return Center(
         child: _initialBody(context, loginProvider, membershipProvider),
       );
+    } else if (isPayment) {
+      return Center(
+        child: _paymentBody(context, loginProvider, membershipProvider),
+      );
     } else {
       return const Center(
         child: Text('Unknown'),
@@ -84,6 +89,7 @@ class _MembershipScreenState extends State<MembershipScreen> {
         crossAxisAlignment: CrossAxisAlignment.stretch,
         mainAxisAlignment: MainAxisAlignment.start,
         children: [
+          const SizedBox(height: 80),
           const Text(
             'Checkout Membership',
             style: TextStyle(
@@ -171,9 +177,65 @@ class _MembershipScreenState extends State<MembershipScreen> {
                 ListTile(
                   leading: const Icon(Icons.credit_card),
                   title: const Text('Select Payment Method'),
-                  subtitle: const Text('Briva, Go-Pay, etc'),
+                  subtitle: Text(membershipProvider.methodPayment == ''
+                      ? 'Briva, Go-Pay, etc'
+                      : membershipProvider.methodPayment),
                   trailing: const Icon(Icons.arrow_forward_ios),
-                  onTap: () {},
+                  onTap: () {
+                    showModalBottomSheet(
+                      context: context,
+                      isScrollControlled: true,
+                      builder: (context) {
+                        return Column(
+                          crossAxisAlignment: CrossAxisAlignment.stretch,
+                          children: [
+                            const SizedBox(
+                              height: 40,
+                            ),
+                            const Text(
+                              'Select Payment Method',
+                              style: TextStyle(
+                                fontSize: 20,
+                                fontWeight: FontWeight.bold,
+                              ),
+                              textAlign: TextAlign.center,
+                            ),
+                            const SizedBox(
+                              height: 16,
+                            ),
+                            Column(
+                              children: [
+                                ListTile(
+                                  leading: const Icon(Icons.credit_card),
+                                  title: const Text('Briva'),
+                                  trailing: const Icon(Icons.arrow_forward_ios),
+                                  onTap: () {
+                                    Navigator.pop(context);
+                                    membershipProvider.methodPayment = 'Briva';
+                                  },
+                                ),
+                                const SizedBox(
+                                  height: 16,
+                                ),
+                                ListTile(
+                                  leading: const Icon(Icons.credit_card),
+                                  title: const Text('Go-Pay'),
+                                  trailing: const Icon(Icons.arrow_forward_ios),
+                                  onTap: () {
+                                    Navigator.pop(context);
+                                    membershipProvider.methodPayment = 'Go-Pay';
+                                  },
+                                ),
+                                const SizedBox(
+                                  height: 16,
+                                ),
+                              ],
+                            )
+                          ],
+                        );
+                      },
+                    );
+                  },
                 ),
                 const SizedBox(
                   height: 16,
@@ -292,7 +354,11 @@ class _MembershipScreenState extends State<MembershipScreen> {
                   height: 20,
                 ),
                 RaisedButton(
-                  onPressed: () {},
+                  onPressed: () {
+                    membershipProvider.changeState(
+                      MembershipViewState.payment,
+                    );
+                  },
                   color: const Color.fromRGBO(0, 103, 132, 1),
                   shape: RoundedRectangleBorder(
                     borderRadius: BorderRadius.circular(50.0),
@@ -630,6 +696,58 @@ class _MembershipScreenState extends State<MembershipScreen> {
             )
           ],
         ),
+      ),
+    );
+  }
+
+  _paymentBody(BuildContext context, LoginViewModel loginProvider,
+      MembershipViewModel membershipProvider) {
+    return Padding(
+      padding: const EdgeInsets.all(16.0),
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.stretch,
+        children: [
+          const SizedBox(
+            height: 100,
+          ),
+          Text(
+            'Silahkan lakukan pembayaran melalui ${membershipProvider.methodPayment}',
+            style: TextStyle(
+              fontSize: 14,
+              fontWeight: FontWeight.normal,
+            ),
+            textAlign: TextAlign.center,
+          ),
+          const SizedBox(
+            height: 20,
+          ),
+          Image.network(
+            'https://id.qr-code-generator.com/wp-content/themes/qr/new_structure/markets/basic_market/generator/dist/generator/assets/images/websiteQRCode_noFrame.png',
+            height: 150,
+          ),
+          const SizedBox(
+            height: 20,
+          ),
+          RaisedButton(
+            onPressed: () {
+              Navigator.pop(context);
+            },
+            color: const Color.fromRGBO(0, 103, 132, 1),
+            shape: RoundedRectangleBorder(
+              borderRadius: BorderRadius.circular(50.0),
+            ),
+            padding:
+                const EdgeInsets.symmetric(horizontal: 16.0, vertical: 16.0),
+            child: Text(
+              'Gunakan aplikasi ini',
+              style: TextStyle(
+                fontSize: 16,
+                fontWeight: FontWeight.bold,
+                color: Colors.white,
+              ),
+            ),
+          ),
+        ],
       ),
     );
   }
