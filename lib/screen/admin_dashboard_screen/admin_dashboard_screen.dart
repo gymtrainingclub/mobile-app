@@ -149,17 +149,17 @@ class _AdminDashboardScreenState extends State<AdminDashboardScreen> {
               children: [
                 insightWidget(
                   title: 'Admin',
-                  value: '100',
+                  value: '4',
                   icon: Icons.person,
                 ),
                 insightWidget(
                   title: 'Members',
-                  value: '1,000',
+                  value: '133',
                   icon: Icons.people,
                 ),
                 insightWidget(
                   title: 'Classes',
-                  value: '1,000',
+                  value: '35',
                   icon: Icons.class_,
                 ),
               ],
