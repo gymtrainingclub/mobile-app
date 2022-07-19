@@ -20,21 +20,25 @@ class LogoScreen extends StatefulWidget {
 }
 
 class _LogoScreenState extends State<LogoScreen> {
-  late SharedPreferences prefs;
-  late String token = 'kosong';
-  late String role = 'kosong';
-  getSharedPreferences() async {
-    prefs = await SharedPreferences.getInstance();
-    // token = prefs.getString('token') ??
-    //     'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6ImltbWFudWVscGF5QGdtYWlsLmNvbSIsImV4cCI6MTY1NDE0MTY2MiwibmFtZSI6IkltYW51ZWwgUGF5Iiwicm9sZSI6OTksInVzZXJJZCI6MX0.4bpygfzn74hfjAE9TOApaHzVNGYXDq3BIdrSh7MiXiE';
-    // prefs.remove('token');
-    // prefs.remove('role');
-    role = prefs.getString('role') ?? 'kosong';
-    token = prefs.getString('token') ?? 'kosong';
-    print('token woe: $token');
-    print('role woe: $role');
-    // Provider.of<LogoViewModel>(context, listen: false).token = token;
-    // Provider.of<LogoViewModel>(context, listen: false).getVerifyResponse(token);
+  String _email = '';
+  String _password = '';
+  String _token = '';
+  String _role = '';
+  String _id = '';
+  String _name = '';
+
+  Future<void> getSharedPreferences() async {
+    final prefs = await SharedPreferences.getInstance();
+
+    if (prefs.containsKey('MyData')) {
+      final myData = prefs.getString('MyData') as Map<String, dynamic>;
+      _token = myData['token'];
+      _role = myData['role'];
+      _email = myData['email'];
+      _name = myData['name'];
+      _id = myData['id'];
+      _password = myData['password'];
+    }
   }
 
   @override
@@ -43,7 +47,15 @@ class _LogoScreenState extends State<LogoScreen> {
     super.initState();
   }
 
-  Widget stateScaffold(BuildContext context, LogoViewModel logoViewModel) {
+  Widget stateScaffold(
+      BuildContext context,
+      LogoViewModel logoViewModel,
+      String token,
+      String role,
+      String email,
+      String name,
+      String id,
+      String password) {
     final isLoading = logoViewModel.state == LogoViewState.loading;
     final isLoaded = logoViewModel.state == LogoViewState.loaded;
     final isError = logoViewModel.state == LogoViewState.error;
@@ -165,7 +177,7 @@ class _LogoScreenState extends State<LogoScreen> {
           const Duration(seconds: 2),
           () => Navigator.of(context).pushNamed(HomeScreen.route),
         );
-      } else if (role == 'kosong') {
+      } else if (role == '') {
         Timer(
           const Duration(seconds: 2),
           () => Navigator.of(context).pushNamedAndRemoveUntil(
@@ -190,14 +202,20 @@ class _LogoScreenState extends State<LogoScreen> {
   @override
   Widget build(BuildContext context) {
     final logoViewModel = Provider.of<LogoViewModel>(context);
-    print('token woe: $token');
-    print('role woe: $role');
-    print('token: $token');
+    print('token woe: ${logoViewModel.token}');
+    print('token: $_token');
+    print('role: $_role');
     print('token 2: ${logoViewModel.token}');
     print('status state: ${logoViewModel.state}');
     print('status : ${logoViewModel.verifyresponse.status}');
     print('data : ${logoViewModel.verifyresponse.data}');
     print('data : ${logoViewModel.verifyresponse.data!.name}');
-    return stateScaffold(context, logoViewModel);
+    return FutureBuilder(
+      future: getSharedPreferences(),
+      builder: (context, _) {
+        return stateScaffold(context, logoViewModel, _token, _role, _email,
+            _name, _id, _password);
+      },
+    );
   }
 }

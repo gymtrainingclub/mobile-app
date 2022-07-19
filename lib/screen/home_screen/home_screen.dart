@@ -1,5 +1,3 @@
-// ignore_for_file: prefer_const_literals_to_create_immutables, prefer_const_constructors, avoid_print
-
 import 'dart:async';
 
 import 'package:flutter/material.dart';
@@ -24,13 +22,7 @@ class HomeScreen extends StatefulWidget {
 
 class _HomeScreenState extends State<HomeScreen> {
   @override
-  void initState() {
-    super.initState();
-  }
-
-  @override
   Widget build(BuildContext context) {
-    final homeProvider = Provider.of<HomeViewModel>(context);
     return Consumer(builder: (context, LoginViewModel loginProvider, _) {
       return Scaffold(
         backgroundColor: Colors.white,
@@ -50,7 +42,7 @@ class _HomeScreenState extends State<HomeScreen> {
             ),
           ],
         ),
-        body: stateBody(context, homeProvider),
+        body: stateBody(context),
         bottomNavigationBar: BottomNavigationWidget(
           index: 0,
           role: loginProvider.role,
@@ -59,27 +51,12 @@ class _HomeScreenState extends State<HomeScreen> {
     });
   }
 
-  stateBody(BuildContext context, HomeViewModel homeProvider) {
+  stateBody(BuildContext context) {
+    final homeProvider = Provider.of<HomeViewModel>(context);
     final isLoading = homeProvider.state == HomeViewState.loading;
     final isError = homeProvider.state == HomeViewState.error;
     final isLoaded = homeProvider.state == HomeViewState.loaded;
     final isInitial = homeProvider.state == HomeViewState.initial;
-    if (isLoading) {
-      return Center(
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
-          crossAxisAlignment: CrossAxisAlignment.center,
-          children: [
-            CircularProgressIndicator(),
-            Text('Loading... progress'),
-          ],
-        ),
-      );
-    } else if (isError) {
-      return Center(
-        child: Text('Error'),
-      );
-    }
     if (isLoaded) {
       return Scaffold(
         body: Center(
@@ -96,7 +73,35 @@ class _HomeScreenState extends State<HomeScreen> {
           child: Column(
             mainAxisAlignment: MainAxisAlignment.center,
             crossAxisAlignment: CrossAxisAlignment.center,
-            children: [
+            children: const [
+              CircularProgressIndicator(),
+              SizedBox(height: 10),
+              Text('Loading...It will take few seconds'),
+            ],
+          ),
+        ),
+      );
+    } else if (isError) {
+      return Scaffold(
+        body: Center(
+          child: Column(
+            mainAxisAlignment: MainAxisAlignment.center,
+            crossAxisAlignment: CrossAxisAlignment.center,
+            children: const [
+              Text('Error'),
+              SizedBox(height: 10),
+              Text('Please try again'),
+            ],
+          ),
+        ),
+      );
+    } else if (isLoading) {
+      return Scaffold(
+        body: Center(
+          child: Column(
+            mainAxisAlignment: MainAxisAlignment.center,
+            crossAxisAlignment: CrossAxisAlignment.center,
+            children: const [
               CircularProgressIndicator(),
               SizedBox(height: 10),
               Text('Loading...It will take few seconds'),
@@ -105,8 +110,18 @@ class _HomeScreenState extends State<HomeScreen> {
         ),
       );
     } else {
-      return Center(
-        child: Text('Unknown'),
+      return Scaffold(
+        body: Center(
+          child: Column(
+            mainAxisAlignment: MainAxisAlignment.center,
+            crossAxisAlignment: CrossAxisAlignment.center,
+            children: const [
+              Text('Error'),
+              SizedBox(height: 10),
+              Text('Please try again'),
+            ],
+          ),
+        ),
       );
     }
   }
@@ -235,7 +250,7 @@ class _HomeScreenState extends State<HomeScreen> {
         itemBuilder: (context, index) {
           int i = index;
           return Container(
-            margin: EdgeInsets.only(right: 16),
+            margin: const EdgeInsets.only(right: 16),
             child: listItemCategory(context, homeProvider, i, kurang),
           );
         },
@@ -280,7 +295,7 @@ class _HomeScreenState extends State<HomeScreen> {
             ),
             Text(
               '${homeProvider.categoryGetResponse.data![i].name}',
-              style: TextStyle(
+              style: const TextStyle(
                   fontSize: 20,
                   color: Colors.white,
                   fontWeight: FontWeight.bold),
@@ -357,18 +372,18 @@ class _HomeScreenState extends State<HomeScreen> {
                 children: [
                   Text(
                     '${name?.toUpperCase()} MEMBER',
-                    style: TextStyle(
+                    style: const TextStyle(
                       fontSize: 20,
                       color: Colors.white,
                       fontWeight: FontWeight.w600,
                     ),
                   ),
-                  SizedBox(
+                  const SizedBox(
                     width: 8,
                   ),
                   Text(
                     '${homeProvider.profileGetResponse.data?.id.toString().padLeft(9, '0')}',
-                    style: TextStyle(
+                    style: const TextStyle(
                       color: Colors.white,
                       fontWeight: FontWeight.w600,
                     ),
@@ -380,7 +395,7 @@ class _HomeScreenState extends State<HomeScreen> {
                 children: [
                   Text(
                     '${homeProvider.profileGetResponse.data?.name}',
-                    style: TextStyle(
+                    style: const TextStyle(
                       fontSize: 14,
                       color: Colors.white,
                     ),
@@ -438,7 +453,7 @@ class _HomeScreenState extends State<HomeScreen> {
             ),
             Text(
               '${homeProvider.profileGetResponse.data?.name}',
-              style: TextStyle(
+              style: const TextStyle(
                 fontSize: 22,
                 color: Colors.white,
               ),
@@ -475,7 +490,7 @@ class _HomeScreenState extends State<HomeScreen> {
     );
     if (image
         .contains('https://cdn-icons-png.flaticon.com/512/2860/2860977.png')) {
-      imageWidget = DecorationImage(
+      imageWidget = const DecorationImage(
         image: AssetImage('assets/class/zumba.png'),
         fit: BoxFit.cover,
       );

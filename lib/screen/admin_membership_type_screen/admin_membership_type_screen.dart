@@ -4,22 +4,18 @@ import 'package:provider/provider.dart';
 import '../../widget/bottom_navigation_widget.dart';
 import '../login_screen/login_viewmodel.dart';
 
-class AdminContentScreen extends StatefulWidget {
-  const AdminContentScreen({Key? key}) : super(key: key);
-  static const String route = '/admin_content';
+class AdminMembershipTypeScreen extends StatefulWidget {
+  const AdminMembershipTypeScreen({Key? key}) : super(key: key);
+  static const route = '/admin_membership_type_screen';
 
   @override
-  State<AdminContentScreen> createState() => _AdminContentScreenState();
+  State<AdminMembershipTypeScreen> createState() =>
+      _AdminMembershipTypeScreenState();
 }
 
-class _AdminContentScreenState extends State<AdminContentScreen> {
+class _AdminMembershipTypeScreenState extends State<AdminMembershipTypeScreen> {
   @override
   Widget build(BuildContext context) {
-    final args =
-        ModalRoute.of(context)?.settings.arguments as Map<String, dynamic>;
-
-    String menu = args['menu'] == 'newsletter' ? 'newsletter' : 'content';
-
     return Consumer(builder: (context, LoginViewModel loginProvider, _) {
       return Scaffold(
         backgroundColor: Colors.white,
@@ -58,7 +54,7 @@ class _AdminContentScreenState extends State<AdminContentScreen> {
             ),
           ],
         ),
-        body: stateBody(context, loginProvider, menu),
+        body: stateBody(context, loginProvider),
         bottomNavigationBar: BottomNavigationWidget(
           index: 2,
           role: loginProvider.role,
@@ -67,12 +63,8 @@ class _AdminContentScreenState extends State<AdminContentScreen> {
     });
   }
 
-  stateBody(BuildContext context, LoginViewModel loginProvider, String menu) =>
-      loadedBody(context, loginProvider, menu);
+  stateBody(BuildContext context, LoginViewModel loginProvider) =>
+      loadedBody(context, loginProvider);
 
-  loadedBody(BuildContext context, LoginViewModel loginProvider, String menu) {
-    return Center(
-      child: Text(menu),
-    );
-  }
+  loadedBody(BuildContext context, LoginViewModel loginProvider) {}
 }

@@ -4,21 +4,21 @@ import 'package:provider/provider.dart';
 import '../../widget/bottom_navigation_widget.dart';
 import '../login_screen/login_viewmodel.dart';
 
-class AdminContentScreen extends StatefulWidget {
-  const AdminContentScreen({Key? key}) : super(key: key);
-  static const String route = '/admin_content';
+class AdminBookingScreen extends StatefulWidget {
+  const AdminBookingScreen({Key? key}) : super(key: key);
+  static const route = '/admin/booking';
 
   @override
-  State<AdminContentScreen> createState() => _AdminContentScreenState();
+  State<AdminBookingScreen> createState() => _AdminBookingScreenState();
 }
 
-class _AdminContentScreenState extends State<AdminContentScreen> {
+class _AdminBookingScreenState extends State<AdminBookingScreen> {
   @override
   Widget build(BuildContext context) {
     final args =
         ModalRoute.of(context)?.settings.arguments as Map<String, dynamic>;
 
-    String menu = args['menu'] == 'newsletter' ? 'newsletter' : 'content';
+    String menu = args['menu'] == 'online' ? 'online' : 'offline';
 
     return Consumer(builder: (context, LoginViewModel loginProvider, _) {
       return Scaffold(

@@ -16,7 +16,6 @@ class PostLoginUserRequest {
     return data;
   }
 }
-
 class PostLoginUserResponse {
   int? code;
   DataPostLoginUserResponse? data;
@@ -179,6 +178,70 @@ class PostRegisterUserRequest {
     data['handphone'] = handphone;
     data['name'] = name;
     data['password'] = password;
+    return data;
+  }
+}
+
+class PostRegisterUserResponse {
+  int? code;
+  DataPostRegisterUserResponse? data;
+  String? message;
+  String? status;
+
+  PostRegisterUserResponse({this.code, this.data, this.message, this.status});
+
+  PostRegisterUserResponse.fromJson(Map<String, dynamic> json) {
+    code = json['code'];
+    data = json['data'] != null ? DataPostRegisterUserResponse.fromJson(json['data']) : null;
+    message = json['message'];
+    status = json['status'];
+  }
+
+  Map<String, dynamic> toJson() {
+    final Map<String, dynamic> data = <String, dynamic>{};
+    data['code'] = code;
+    if (this.data != null) {
+      data['data'] = this.data!.toJson();
+    }
+    data['message'] = message;
+    data['status'] = status;
+    return data;
+  }
+}
+
+class DataPostRegisterUserResponse {
+  bool? active;
+  String? createdAt;
+  String? email;
+  String? gender;
+  String? handphone;
+  String? name;
+
+  DataPostRegisterUserResponse(
+      {this.active,
+      this.createdAt,
+      this.email,
+      this.gender,
+      this.handphone,
+      this.name});
+
+  DataPostRegisterUserResponse.fromJson(Map<String, dynamic> json) {
+    active = json['active'];
+    createdAt = json['created_at'];
+    email = json['email'];
+    gender = json['gender'];
+    handphone = json['handphone'];
+    name = json['name'];
+  }
+
+  Map<String, dynamic> toJson() {
+    final Map<String, dynamic> data = <String, dynamic>{};
+    data['active'] = active;
+    data['created_at'] = createdAt;
+    data['email'] = email;
+    data['gender'] = gender;
+    data['handphone'] = handphone;
+    data['name'] = name;
     return data;
   }
 }

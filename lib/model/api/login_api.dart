@@ -9,7 +9,7 @@ class LoginAPI {
             'https://virtserver.swaggerhub.com/imanuelpay/gym-api/1.0.0/login',
             data: LoginRequest(
               email: email,
-              password: '',
+              password: password,
             ),
           );
       return LoginResponse.fromJson(response.data);

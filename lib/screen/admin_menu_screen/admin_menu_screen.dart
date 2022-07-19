@@ -5,8 +5,13 @@ import 'package:mobileapp/screen/admin_administrator_screen/admin_administrator_
 import 'package:provider/provider.dart';
 
 import '../../widget/bottom_navigation_widget.dart';
+import '../admin_booking_screen/admin_booking_screen.dart';
+import '../admin_category_screen/admin_category_screen.dart';
 import '../admin_classes_screen/admin_classes_screen.dart';
+import '../admin_content_screen/admin_content_screen.dart';
 import '../admin_membership_screen/admin_membership_screen.dart';
+import '../admin_membership_type_screen/admin_membership_type_screen.dart';
+import '../admin_newsletter_screen/admin_newsletter_screen.dart';
 import '../login_screen/login_viewmodel.dart';
 
 class AdminMenuScreen extends StatefulWidget {
@@ -200,6 +205,112 @@ class _AdminMenuScreenState extends State<AdminMenuScreen> {
                           onTap: () {
                             Navigator.pushNamed(
                               context,
+                              AdminCategoryScreen.route,
+                              arguments: {'menu': 'cat'},
+                            );
+                          },
+                          child: Card(
+                            elevation: 4,
+                            shape: RoundedRectangleBorder(
+                              borderRadius: BorderRadius.circular(8),
+                            ),
+                            shadowColor: Colors.black,
+                            child: Container(
+                              height: 90,
+                              padding: const EdgeInsets.all(16),
+                              decoration: BoxDecoration(
+                                color: Colors.white,
+                                borderRadius: BorderRadius.circular(10),
+                              ),
+                              child: Column(
+                                mainAxisAlignment: MainAxisAlignment.start,
+                                crossAxisAlignment: CrossAxisAlignment.start,
+                                children: [
+                                  Icon(
+                                    Icons.category,
+                                    color: Color.fromRGBO(12, 48, 61, 1),
+                                    size: 30,
+                                  ),
+                                  SizedBox(
+                                    height: 10,
+                                  ),
+                                  Text(
+                                    'Category',
+                                    style: TextStyle(
+                                      fontSize: 14,
+                                      fontWeight: FontWeight.bold,
+                                      color: Color.fromRGBO(12, 48, 61, 1),
+                                    ),
+                                  ),
+                                ],
+                              ),
+                            ),
+                          ),
+                        ),
+                      ),
+                      SizedBox(
+                        width: 10,
+                      ),
+                      Expanded(
+                        child: GestureDetector(
+                          onTap: () {
+                            Navigator.pushNamed(
+                              context,
+                              AdminMembershipTypeScreen.route,
+                              arguments: {'menu': 'membership'},
+                            );
+                          },
+                          child: Card(
+                            elevation: 4,
+                            shape: RoundedRectangleBorder(
+                              borderRadius: BorderRadius.circular(8),
+                            ),
+                            shadowColor: Colors.black,
+                            child: Container(
+                              height: 90,
+                              padding: const EdgeInsets.all(16),
+                              decoration: BoxDecoration(
+                                color: Colors.white,
+                                borderRadius: BorderRadius.circular(10),
+                              ),
+                              child: Column(
+                                mainAxisAlignment: MainAxisAlignment.start,
+                                crossAxisAlignment: CrossAxisAlignment.start,
+                                children: [
+                                  Icon(
+                                    Icons.people,
+                                    color: Color.fromRGBO(12, 48, 61, 1),
+                                    size: 30,
+                                  ),
+                                  SizedBox(
+                                    height: 10,
+                                  ),
+                                  Text(
+                                    'Membership Type',
+                                    style: TextStyle(
+                                      fontSize: 14,
+                                      fontWeight: FontWeight.bold,
+                                      color: Color.fromRGBO(12, 48, 61, 1),
+                                    ),
+                                  ),
+                                ],
+                              ),
+                            ),
+                          ),
+                        ),
+                      ),
+                    ],
+                  ),
+                  SizedBox(
+                    height: 10,
+                  ),
+                  Row(
+                    children: [
+                      Expanded(
+                        child: GestureDetector(
+                          onTap: () {
+                            Navigator.pushNamed(
+                              context,
                               AdminClassesScreen.route,
                               arguments: {'menu': 'online'},
                             );
@@ -247,40 +358,49 @@ class _AdminMenuScreenState extends State<AdminMenuScreen> {
                         width: 10,
                       ),
                       Expanded(
-                        child: Card(
-                          elevation: 4,
-                          shape: RoundedRectangleBorder(
-                            borderRadius: BorderRadius.circular(8),
-                          ),
-                          shadowColor: Colors.black,
-                          child: Container(
-                            height: 90,
-                            padding: const EdgeInsets.all(16),
-                            decoration: BoxDecoration(
-                              color: Colors.white,
-                              borderRadius: BorderRadius.circular(10),
+                        child: GestureDetector(
+                          onTap: () {
+                            Navigator.pushNamed(
+                              context,
+                              AdminBookingScreen.route,
+                              arguments: {'menu': 'online'},
+                            );
+                          },
+                          child: Card(
+                            elevation: 4,
+                            shape: RoundedRectangleBorder(
+                              borderRadius: BorderRadius.circular(8),
                             ),
-                            child: Column(
-                              mainAxisAlignment: MainAxisAlignment.start,
-                              crossAxisAlignment: CrossAxisAlignment.start,
-                              children: [
-                                Icon(
-                                  Icons.confirmation_number_outlined,
-                                  color: Color.fromRGBO(12, 48, 61, 1),
-                                  size: 30,
-                                ),
-                                SizedBox(
-                                  height: 10,
-                                ),
-                                Text(
-                                  'Booking Class',
-                                  style: TextStyle(
-                                    fontSize: 14,
-                                    fontWeight: FontWeight.bold,
+                            shadowColor: Colors.black,
+                            child: Container(
+                              height: 90,
+                              padding: const EdgeInsets.all(16),
+                              decoration: BoxDecoration(
+                                color: Colors.white,
+                                borderRadius: BorderRadius.circular(10),
+                              ),
+                              child: Column(
+                                mainAxisAlignment: MainAxisAlignment.start,
+                                crossAxisAlignment: CrossAxisAlignment.start,
+                                children: [
+                                  Icon(
+                                    Icons.confirmation_number_outlined,
                                     color: Color.fromRGBO(12, 48, 61, 1),
+                                    size: 30,
                                   ),
-                                ),
-                              ],
+                                  SizedBox(
+                                    height: 10,
+                                  ),
+                                  Text(
+                                    'Booking Class',
+                                    style: TextStyle(
+                                      fontSize: 14,
+                                      fontWeight: FontWeight.bold,
+                                      color: Color.fromRGBO(12, 48, 61, 1),
+                                    ),
+                                  ),
+                                ],
+                              ),
                             ),
                           ),
                         ),
@@ -293,40 +413,49 @@ class _AdminMenuScreenState extends State<AdminMenuScreen> {
                   Row(
                     children: [
                       Expanded(
-                        child: Card(
-                          elevation: 4,
-                          shape: RoundedRectangleBorder(
-                            borderRadius: BorderRadius.circular(8),
-                          ),
-                          shadowColor: Colors.black,
-                          child: Container(
-                            height: 90,
-                            padding: const EdgeInsets.all(16),
-                            decoration: BoxDecoration(
-                              color: Colors.white,
-                              borderRadius: BorderRadius.circular(10),
+                        child: GestureDetector(
+                          onTap: () {
+                            Navigator.pushNamed(
+                              context,
+                              AdminNewsletterScreen.route,
+                              arguments: {'menu': 'newsletter'},
+                            );
+                          },
+                          child: Card(
+                            elevation: 4,
+                            shape: RoundedRectangleBorder(
+                              borderRadius: BorderRadius.circular(8),
                             ),
-                            child: Column(
-                              mainAxisAlignment: MainAxisAlignment.start,
-                              crossAxisAlignment: CrossAxisAlignment.start,
-                              children: [
-                                Icon(
-                                  Icons.newspaper_rounded,
-                                  color: Color.fromRGBO(12, 48, 61, 1),
-                                  size: 30,
-                                ),
-                                SizedBox(
-                                  height: 10,
-                                ),
-                                Text(
-                                  'News',
-                                  style: TextStyle(
-                                    fontSize: 14,
-                                    fontWeight: FontWeight.bold,
+                            shadowColor: Colors.black,
+                            child: Container(
+                              height: 90,
+                              padding: const EdgeInsets.all(16),
+                              decoration: BoxDecoration(
+                                color: Colors.white,
+                                borderRadius: BorderRadius.circular(10),
+                              ),
+                              child: Column(
+                                mainAxisAlignment: MainAxisAlignment.start,
+                                crossAxisAlignment: CrossAxisAlignment.start,
+                                children: [
+                                  Icon(
+                                    Icons.newspaper_rounded,
                                     color: Color.fromRGBO(12, 48, 61, 1),
+                                    size: 30,
                                   ),
-                                ),
-                              ],
+                                  SizedBox(
+                                    height: 10,
+                                  ),
+                                  Text(
+                                    'News',
+                                    style: TextStyle(
+                                      fontSize: 14,
+                                      fontWeight: FontWeight.bold,
+                                      color: Color.fromRGBO(12, 48, 61, 1),
+                                    ),
+                                  ),
+                                ],
+                              ),
                             ),
                           ),
                         ),
@@ -335,40 +464,49 @@ class _AdminMenuScreenState extends State<AdminMenuScreen> {
                         width: 10,
                       ),
                       Expanded(
-                        child: Card(
-                          elevation: 4,
-                          shape: RoundedRectangleBorder(
-                            borderRadius: BorderRadius.circular(8),
-                          ),
-                          shadowColor: Colors.black,
-                          child: Container(
-                            height: 90,
-                            padding: const EdgeInsets.all(16),
-                            decoration: BoxDecoration(
-                              color: Colors.white,
-                              borderRadius: BorderRadius.circular(10),
+                        child: GestureDetector(
+                          onTap: () {
+                            Navigator.pushNamed(
+                              context,
+                              AdminContentScreen.route,
+                              arguments: {'menu': 'content'},
+                            );
+                          },
+                          child: Card(
+                            elevation: 4,
+                            shape: RoundedRectangleBorder(
+                              borderRadius: BorderRadius.circular(8),
                             ),
-                            child: Column(
-                              mainAxisAlignment: MainAxisAlignment.start,
-                              crossAxisAlignment: CrossAxisAlignment.start,
-                              children: [
-                                Icon(
-                                  Icons.important_devices_sharp,
-                                  color: Color.fromRGBO(12, 48, 61, 1),
-                                  size: 30,
-                                ),
-                                SizedBox(
-                                  height: 10,
-                                ),
-                                Text(
-                                  'Contents',
-                                  style: TextStyle(
-                                    fontSize: 14,
-                                    fontWeight: FontWeight.bold,
+                            shadowColor: Colors.black,
+                            child: Container(
+                              height: 90,
+                              padding: const EdgeInsets.all(16),
+                              decoration: BoxDecoration(
+                                color: Colors.white,
+                                borderRadius: BorderRadius.circular(10),
+                              ),
+                              child: Column(
+                                mainAxisAlignment: MainAxisAlignment.start,
+                                crossAxisAlignment: CrossAxisAlignment.start,
+                                children: [
+                                  Icon(
+                                    Icons.important_devices_sharp,
                                     color: Color.fromRGBO(12, 48, 61, 1),
+                                    size: 30,
                                   ),
-                                ),
-                              ],
+                                  SizedBox(
+                                    height: 10,
+                                  ),
+                                  Text(
+                                    'Contents',
+                                    style: TextStyle(
+                                      fontSize: 14,
+                                      fontWeight: FontWeight.bold,
+                                      color: Color.fromRGBO(12, 48, 61, 1),
+                                    ),
+                                  ),
+                                ],
+                              ),
                             ),
                           ),
                         ),
@@ -422,46 +560,11 @@ class _AdminMenuScreenState extends State<AdminMenuScreen> {
                       SizedBox(
                         width: 10,
                       ),
-                      Expanded(
-                        child: Card(
-                          elevation: 4,
-                          shape: RoundedRectangleBorder(
-                            borderRadius: BorderRadius.circular(8),
-                          ),
-                          shadowColor: Colors.black,
-                          child: Container(
-                            height: 90,
-                            padding: const EdgeInsets.all(16),
-                            decoration: BoxDecoration(
-                              color: Colors.white,
-                              borderRadius: BorderRadius.circular(10),
-                            ),
-                            child: Column(
-                              mainAxisAlignment: MainAxisAlignment.start,
-                              crossAxisAlignment: CrossAxisAlignment.start,
-                              children: [
-                                Icon(
-                                  Icons.category,
-                                  color: Color.fromRGBO(12, 48, 61, 1),
-                                  size: 30,
-                                ),
-                                SizedBox(
-                                  height: 10,
-                                ),
-                                Text(
-                                  'Category',
-                                  style: TextStyle(
-                                    fontSize: 14,
-                                    fontWeight: FontWeight.bold,
-                                    color: Color.fromRGBO(12, 48, 61, 1),
-                                  ),
-                                ),
-                              ],
-                            ),
-                          ),
-                        ),
-                      ),
+                      Expanded(child: Container()),
                     ],
+                  ),
+                  SizedBox(
+                    height: 10,
                   ),
                 ],
               ),

@@ -32,6 +32,10 @@ import '/screen/membership_screen/membership_screen.dart';
 import '/screen/schedule_detail_screen/schedule_detail_screen.dart';
 import '/screen/schedule_screen/schedule_screen.dart';
 import 'screen/admin_administrator_screen/admin_administrator_viewmodel.dart';
+import 'screen/admin_booking_screen/admin_booking_screen.dart';
+import 'screen/admin_booking_screen/admin_booking_viewmodel.dart';
+import 'screen/admin_category_screen/admin_category_screen.dart';
+import 'screen/admin_category_screen/admin_category_viewmodel.dart';
 import 'screen/admin_classes_screen/admin_classes_add_screen.dart';
 import 'screen/admin_classes_screen/admin_classes_screen.dart';
 import 'screen/admin_classes_screen/admin_classes_viewmodel.dart';
@@ -40,6 +44,10 @@ import 'screen/admin_dashboard_screen/admin_dashboard_viewmodel.dart';
 import 'screen/admin_instructor_screen/admin_instructor_screen.dart';
 import 'screen/admin_membership_screen/admin_membership_detail_screen.dart';
 import 'screen/admin_membership_screen/admin_membership_viewmodel.dart';
+import 'screen/admin_membership_type_screen/admin_membership_type_screen.dart';
+import 'screen/admin_membership_type_screen/admin_membership_type_viewmodel.dart';
+import 'screen/admin_newsletter_screen/admin_newsletter_screen.dart';
+import 'screen/admin_newsletter_screen/admin_newsletter_viewmodel.dart';
 import 'screen/admin_notification_screen/admin_notification_screen.dart';
 import 'screen/admin_notification_screen/admin_notification_viewmodel.dart';
 import 'screen/category_screen/category_viewmodel.dart';
@@ -149,6 +157,18 @@ void main() {
         ),
         ChangeNotifierProvider(
           create: (_) => AdminClassesViewModel(),
+        ),
+        ChangeNotifierProvider(
+          create: (_) => AdminMembershipTypeViewModel(),
+        ),
+        ChangeNotifierProvider(
+          create: (_) => AdminCategoryViewModel(),
+        ),
+        ChangeNotifierProvider(
+          create: (_) => AdminBookingViewModel(),
+        ),
+        ChangeNotifierProvider(
+          create: (_) => AdminNewsletterViewModel(),
         ),
       ],
       child: const MyApp(),
@@ -271,6 +291,14 @@ class MyApp extends StatelessWidget {
             return routeBuilder(const ChangePasswordScreen(), set);
           case ForgotPasswordScreen.route:
             return routeBuilder(const ForgotPasswordScreen(), set);
+          case AdminMembershipTypeScreen.route:
+            return routeBuilder(const AdminMembershipTypeScreen(), set);
+          case AdminCategoryScreen.route:
+            return routeBuilder(const AdminCategoryScreen(), set);
+          case AdminBookingScreen.route:
+            return routeBuilder(const AdminBookingScreen(), set);
+          case AdminNewsletterScreen.route:
+            return routeBuilder(const AdminNewsletterScreen(), set);
           default:
             return routeBuilder(const LogoScreen(), set);
         }

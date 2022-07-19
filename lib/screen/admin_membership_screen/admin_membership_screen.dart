@@ -1,4 +1,4 @@
-// ignore_for_file: prefer_const_literals_to_create_immutables, prefer_const_constructors, unused_local_variable, deprecated_member_use
+// ignore_for_file: deprecated_member_use
 
 import 'package:flutter/material.dart';
 import 'package:jiffy/jiffy.dart';
@@ -7,7 +7,6 @@ import 'package:provider/provider.dart';
 
 import '../../widget/bottom_navigation_widget.dart';
 import '../login_screen/login_viewmodel.dart';
-import 'admin_membership_viewmodel.dart';
 
 class AdminMembershipScreen extends StatefulWidget {
   const AdminMembershipScreen({Key? key}) : super(key: key);
@@ -20,11 +19,6 @@ class AdminMembershipScreen extends StatefulWidget {
 class _AdminMembershipScreenState extends State<AdminMembershipScreen> {
   @override
   Widget build(BuildContext context) {
-    final adminMembershipProvider = Provider.of<AdminMembershipViewModel>(
-      context,
-      listen: false,
-    );
-
     final args =
         ModalRoute.of(context)?.settings.arguments as Map<String, dynamic>;
 
@@ -38,15 +32,15 @@ class _AdminMembershipScreenState extends State<AdminMembershipScreen> {
           automaticallyImplyLeading: false,
           elevation: 0,
           leading: IconButton(
-            icon: Icon(
+            icon: const Icon(
               Icons.arrow_back,
               color: Colors.white,
             ),
             onPressed: () => Navigator.pop(context),
           ),
-          actions: [
+          actions: const [
             Padding(
-              padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 20),
+              padding: EdgeInsets.symmetric(horizontal: 16, vertical: 20),
               child: Text(
                 'Cleo Zambrano',
                 style: TextStyle(
@@ -86,21 +80,21 @@ class _AdminMembershipScreenState extends State<AdminMembershipScreen> {
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.stretch,
         children: [
-          Text(
+          const Text(
             'Membership',
             style: TextStyle(
               fontSize: 24,
               fontWeight: FontWeight.bold,
             ),
           ),
-          SizedBox(
+          const SizedBox(
             height: 20,
           ),
-          Divider(
+          const Divider(
             color: Colors.grey,
             height: 1,
           ),
-          SizedBox(
+          const SizedBox(
             height: 20,
           ),
           SizedBox(
@@ -144,7 +138,7 @@ class _AdminMembershipScreenState extends State<AdminMembershipScreen> {
                                   : const Color.fromRGBO(12, 48, 61, 1),
                               size: 30,
                             ),
-                            SizedBox(
+                            const SizedBox(
                               height: 10,
                             ),
                             Text(
@@ -163,7 +157,7 @@ class _AdminMembershipScreenState extends State<AdminMembershipScreen> {
                     ),
                   ),
                 ),
-                SizedBox(
+                const SizedBox(
                   width: 10,
                 ),
                 Expanded(
@@ -203,7 +197,7 @@ class _AdminMembershipScreenState extends State<AdminMembershipScreen> {
                                   : const Color.fromRGBO(12, 48, 61, 1),
                               size: 30,
                             ),
-                            SizedBox(
+                            const SizedBox(
                               height: 10,
                             ),
                             Text(
@@ -225,14 +219,14 @@ class _AdminMembershipScreenState extends State<AdminMembershipScreen> {
               ],
             ),
           ),
-          SizedBox(
+          const SizedBox(
             height: 20,
           ),
-          Divider(
+          const Divider(
             color: Colors.grey,
             height: 1.5,
           ),
-          SizedBox(
+          const SizedBox(
             height: 20,
           ),
           _menuSwitch(menu),
@@ -249,15 +243,15 @@ class _AdminMembershipScreenState extends State<AdminMembershipScreen> {
           children: [
             Text(
               menu == 'membership' ? 'Membership Data' : 'History Payment',
-              style: TextStyle(
+              style: const TextStyle(
                 fontSize: 20,
                 fontWeight: FontWeight.bold,
               ),
             ),
-            SizedBox(
+            const SizedBox(
               height: 10,
             ),
-            Divider(
+            const Divider(
               color: Colors.grey,
               height: 1.5,
             ),
@@ -268,16 +262,16 @@ class _AdminMembershipScreenState extends State<AdminMembershipScreen> {
                   padding:
                       const EdgeInsets.symmetric(horizontal: 8, vertical: 4),
                   decoration: BoxDecoration(
-                    color: Color.fromRGBO(12, 48, 61, 1),
+                    color: const Color.fromRGBO(12, 48, 61, 1),
                     borderRadius: BorderRadius.circular(4),
                   ),
                   child: Expanded(
                     child: Row(
                       children: [
                         RaisedButton(
-                          color: Color.fromRGBO(241, 90, 36, 1),
+                          color: const Color.fromRGBO(241, 90, 36, 1),
                           onPressed: () {},
-                          child: Text(
+                          child: const Text(
                             'Gold',
                             style: TextStyle(
                               fontSize: 14,
@@ -286,13 +280,13 @@ class _AdminMembershipScreenState extends State<AdminMembershipScreen> {
                             ),
                           ),
                         ),
-                        SizedBox(
+                        const SizedBox(
                           width: 10,
                         ),
                         RaisedButton(
                           onPressed: () {},
-                          color: Color.fromRGBO(12, 48, 61, 1),
-                          child: Text(
+                          color: const Color.fromRGBO(12, 48, 61, 1),
+                          child: const Text(
                             'Silver',
                             style: TextStyle(
                               fontSize: 14,
@@ -301,13 +295,13 @@ class _AdminMembershipScreenState extends State<AdminMembershipScreen> {
                             ),
                           ),
                         ),
-                        SizedBox(
+                        const SizedBox(
                           width: 10,
                         ),
                         RaisedButton(
                           onPressed: () {},
-                          color: Color.fromRGBO(12, 48, 61, 1),
-                          child: Text(
+                          color: const Color.fromRGBO(12, 48, 61, 1),
+                          child: const Text(
                             'Bronze',
                             style: TextStyle(
                               fontSize: 14,
@@ -322,39 +316,40 @@ class _AdminMembershipScreenState extends State<AdminMembershipScreen> {
                 ),
               ],
             ),
-            SizedBox(
+            const SizedBox(
               height: 10,
             ),
             Row(
               children: [
-                Expanded(
+                const Expanded(
                   child: TextField(
                     decoration: InputDecoration(
                       labelText: 'Search',
                       prefixIcon: Icon(Icons.search),
                       border: OutlineInputBorder(),
-                      contentPadding: const EdgeInsets.symmetric(
+                      contentPadding: EdgeInsets.symmetric(
                         horizontal: 16,
                         vertical: 10,
                       ),
                     ),
                   ),
                 ),
-                SizedBox(
+                const SizedBox(
                   width: 20,
                 ),
                 TextButton(
                   onPressed: () {},
                   style: TextButton.styleFrom(
                     primary: Colors.white,
-                    backgroundColor: Color.fromRGBO(12, 48, 61, 1),
-                    padding: EdgeInsets.symmetric(horizontal: 8, vertical: 14),
+                    backgroundColor: const Color.fromRGBO(12, 48, 61, 1),
+                    padding:
+                        const EdgeInsets.symmetric(horizontal: 8, vertical: 14),
                   ),
-                  child: Text('Search'),
+                  child: const Text('Search'),
                 ),
               ],
             ),
-            SizedBox(
+            const SizedBox(
               height: 10,
             ),
             for (var i = 0; i < 10; i++)
@@ -412,20 +407,20 @@ class _AdminMembershipScreenState extends State<AdminMembershipScreen> {
                     subtitle: Column(
                       children: [
                         Table(
-                          columnWidths: {
+                          columnWidths: const {
                             0: FlexColumnWidth(2),
                             1: FlexColumnWidth(3),
                           },
                           children: [
                             TableRow(
                               children: [
-                                Text('ID'),
+                                const Text('ID'),
                                 Text('0011311394$i'),
                               ],
                             ),
                             TableRow(
                               children: [
-                                Text('Join'),
+                                const Text('Join'),
                                 Text(Jiffy(DateTime.now())
                                     .subtract(
                                       duration: Duration(
@@ -435,7 +430,7 @@ class _AdminMembershipScreenState extends State<AdminMembershipScreen> {
                                     .format('MMMM yyyy')),
                               ],
                             ),
-                            TableRow(
+                            const TableRow(
                               children: [
                                 Text('Membership'),
                                 Text('Gold'),
@@ -451,7 +446,7 @@ class _AdminMembershipScreenState extends State<AdminMembershipScreen> {
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
                         IconButton(
-                          icon: Icon(
+                          icon: const Icon(
                             Icons.edit,
                             size: 20,
                           ),
@@ -488,7 +483,7 @@ class _AdminMembershipScreenState extends State<AdminMembershipScreen> {
                           },
                         ),
                         IconButton(
-                          icon: Icon(
+                          icon: const Icon(
                             Icons.delete,
                             size: 20,
                           ),
@@ -498,7 +493,7 @@ class _AdminMembershipScreenState extends State<AdminMembershipScreen> {
                               builder: (context) => Card(
                                 child: AlertDialog(
                                   title: Column(
-                                    children: [
+                                    children: const [
                                       SizedBox(
                                         height: 20,
                                       ),
@@ -515,10 +510,10 @@ class _AdminMembershipScreenState extends State<AdminMembershipScreen> {
                                       ),
                                     ],
                                   ),
-                                  content: Text(
+                                  content: const Text(
                                       'Deleting this file will be permanent.'),
                                   actionsAlignment: MainAxisAlignment.center,
-                                  actionsPadding: EdgeInsets.all(10),
+                                  actionsPadding: const EdgeInsets.all(10),
                                   actions: [
                                     FlatButton(
                                       child: TextButton(
@@ -526,14 +521,14 @@ class _AdminMembershipScreenState extends State<AdminMembershipScreen> {
                                           Navigator.pop(context);
                                         },
                                         style: TextButton.styleFrom(
-                                          primary:
-                                              Color.fromRGBO(12, 48, 61, 1),
-                                          padding: EdgeInsets.symmetric(
+                                          primary: const Color.fromRGBO(
+                                              12, 48, 61, 1),
+                                          padding: const EdgeInsets.symmetric(
                                             horizontal: 16,
                                             vertical: 14,
                                           ),
                                           shape: RoundedRectangleBorder(
-                                            side: BorderSide(
+                                            side: const BorderSide(
                                               color:
                                                   Color.fromRGBO(12, 48, 61, 1),
                                               width: 1,
@@ -543,7 +538,7 @@ class _AdminMembershipScreenState extends State<AdminMembershipScreen> {
                                             ),
                                           ),
                                         ),
-                                        child: Text('Cancel'),
+                                        child: const Text('Cancel'),
                                       ),
                                       onPressed: () {
                                         Navigator.pop(context);
@@ -556,14 +551,14 @@ class _AdminMembershipScreenState extends State<AdminMembershipScreen> {
                                         },
                                         style: TextButton.styleFrom(
                                           primary: Colors.white,
-                                          backgroundColor:
-                                              Color.fromRGBO(12, 48, 61, 1),
-                                          padding: EdgeInsets.symmetric(
+                                          backgroundColor: const Color.fromRGBO(
+                                              12, 48, 61, 1),
+                                          padding: const EdgeInsets.symmetric(
                                             horizontal: 16,
                                             vertical: 14,
                                           ),
                                         ),
-                                        child: Text('Delete'),
+                                        child: const Text('Delete'),
                                       ),
                                       onPressed: () {
                                         Navigator.pop(context);

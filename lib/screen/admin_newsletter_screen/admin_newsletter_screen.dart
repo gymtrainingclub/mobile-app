@@ -4,15 +4,15 @@ import 'package:provider/provider.dart';
 import '../../widget/bottom_navigation_widget.dart';
 import '../login_screen/login_viewmodel.dart';
 
-class AdminContentScreen extends StatefulWidget {
-  const AdminContentScreen({Key? key}) : super(key: key);
-  static const String route = '/admin_content';
+class AdminNewsletterScreen extends StatefulWidget {
+  const AdminNewsletterScreen({Key? key}) : super(key: key);
+  static const route = '/admin/newsletter';
 
   @override
-  State<AdminContentScreen> createState() => _AdminContentScreenState();
+  State<AdminNewsletterScreen> createState() => _AdminNewsletterScreenState();
 }
 
-class _AdminContentScreenState extends State<AdminContentScreen> {
+class _AdminNewsletterScreenState extends State<AdminNewsletterScreen> {
   @override
   Widget build(BuildContext context) {
     final args =

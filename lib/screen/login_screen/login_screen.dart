@@ -1,6 +1,7 @@
 // ignore_for_file: deprecated_member_use, avoid_print, prefer_const_constructors
 
 import 'dart:async';
+import 'dart:convert';
 
 import 'package:email_validator/email_validator.dart';
 import 'package:flutter/material.dart';
@@ -8,6 +9,7 @@ import 'package:mobileapp/screen/forgot_password_screen/forgot_password_screen.d
 import 'package:mobileapp/screen/home_screen/home_screen.dart';
 import 'package:mobileapp/screen/stop_screen/stop_screen.dart';
 import 'package:provider/provider.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 import '../admin_dashboard_screen/admin_dashboard_screen.dart';
 import 'login_viewmodel.dart';
@@ -22,6 +24,12 @@ class LoginScreen extends StatefulWidget {
 
 class _LoginScreenState extends State<LoginScreen> {
   final _formKey = GlobalKey<FormState>();
+  static String _email = '';
+  static String _password = '';
+  static String _token = '';
+  static String _role = '';
+  static String _id = '';
+  static String _name = '';
 
   @override
   void initState() {
@@ -29,16 +37,35 @@ class _LoginScreenState extends State<LoginScreen> {
     // Provider.of<LoginViewModel>(context, listen: false).getLoginResponse();
   }
 
+  Future<void> setSharedPreferences() async {
+    final prefs = await SharedPreferences.getInstance();
+
+    if (prefs.containsKey('MyData')) {
+      prefs.clear();
+    }
+
+    final myData = json.encode({
+      'token': 'token',
+      'role': 'admin',
+      'email': 'email',
+      'name': 'name',
+      'id': 'id',
+      'password': 'password',
+    });
+    prefs.setString('MyData', myData);
+    setState(() {});
+  }
+
   bool isVisible = false;
   bool isChecked = false;
 
-  Widget stateBody(BuildContext context) {
+  Widget stateBody(BuildContext context, String token, String role,
+      String email, String name, String id, String password) {
     final loginProvider = Provider.of<LoginViewModel>(context);
     final isLoading = loginProvider.state == LoginViewState.loading;
     final isLoaded = loginProvider.state == LoginViewState.loaded;
     final isError = loginProvider.state == LoginViewState.error;
     final isInitial = loginProvider.state == LoginViewState.initial;
-    if (loginProvider.role == '') {}
     if (isLoading) {
       return const Center(child: CircularProgressIndicator());
     } else if (isError) {
@@ -80,7 +107,7 @@ class _LoginScreenState extends State<LoginScreen> {
           onPressed: () => Navigator.of(context).pushNamed(StopScreen.route),
         ),
       ),
-      body: stateBody(context),
+      body: stateBody(context, _token, _role, _email, _name, _id, _password),
     );
   }
 
@@ -379,6 +406,13 @@ class _LoginScreenState extends State<LoginScreen> {
             onPressed: () {
               if (_formKey.currentState!.validate()) {
                 print('valid');
+                _email = email.text;
+                _password = password.text;
+                _role = isRole;
+                _id = _email.replaceAll('@', '').replaceAll('.', '');
+                _name = _email.split('@')[0];
+                _token = '123456789';
+                setSharedPreferences();
                 Provider.of<LoginViewModel>(context, listen: false)
                     .getLoginResponse(email.text, password.text, isRole);
               }
@@ -405,25 +439,19 @@ class _LoginScreenState extends State<LoginScreen> {
 
   _buildLoadedBody(BuildContext context, LoginViewModel vm) {
     String isRole = vm.role;
-    if (isRole == '') {
-      isRole = 'member';
-    }
     if (isRole == 'member') {
       Timer(
-        const Duration(seconds: 2),
-        () => Navigator.of(context).pushReplacementNamed(HomeScreen.route),
+        Duration(seconds: 3),
+        () {
+          Navigator.pushNamed(context, HomeScreen.route);
+        },
       );
     } else if (isRole == 'admin') {
       Timer(
-        const Duration(seconds: 2),
-        () => Navigator.of(context)
-            .pushReplacementNamed(AdminDashboardScreen.route),
-      );
-    } else {
-      Timer(
-        const Duration(seconds: 2),
-        () => Navigator.of(context)
-            .pushReplacementNamed(AdminDashboardScreen.route),
+        Duration(seconds: 1),
+        () {
+          Navigator.pushNamed(context, AdminDashboardScreen.route);
+        },
       );
     }
     return Scaffold(
