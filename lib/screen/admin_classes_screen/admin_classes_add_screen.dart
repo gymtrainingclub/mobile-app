@@ -1,4 +1,4 @@
-// ignore_for_file: prefer_const_constructors, prefer_const_literals_to_create_immutables, deprecated_member_use
+// ignore_for_file: deprecated_member_use
 
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
@@ -86,9 +86,9 @@ class _AdminClassesAddScreenState extends State<AdminClassesAddScreen> {
           backgroundColor: const Color.fromRGBO(12, 48, 61, 1),
           automaticallyImplyLeading: false,
           elevation: 0,
-          actions: [
+          actions: const [
             Padding(
-              padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 20),
+              padding: EdgeInsets.symmetric(horizontal: 16, vertical: 20),
               child: Text(
                 'Cleo Zambrano',
                 style: TextStyle(
@@ -116,7 +116,7 @@ class _AdminClassesAddScreenState extends State<AdminClassesAddScreen> {
   }
 
   stateBody(BuildContext context, Map<String, dynamic> args) {
-    String menu = args['menu'];
+    String menu = args['state'];
     if (menu == 'add') {
       return _loadedBody(context, args);
     } else if (menu == 'edit') {
@@ -135,8 +135,8 @@ class _AdminClassesAddScreenState extends State<AdminClassesAddScreen> {
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.stretch,
         children: [
-          Padding(
-            padding: const EdgeInsets.symmetric(vertical: 16.0),
+          const Padding(
+            padding: EdgeInsets.symmetric(vertical: 16.0),
             child: Text(
               'Classes',
               style: TextStyle(
@@ -145,7 +145,7 @@ class _AdminClassesAddScreenState extends State<AdminClassesAddScreen> {
               ),
             ),
           ),
-          Divider(
+          const Divider(
             color: Colors.grey,
             thickness: 1,
           ),
@@ -155,7 +155,7 @@ class _AdminClassesAddScreenState extends State<AdminClassesAddScreen> {
                 onPressed: () {
                   Navigator.pop(context);
                 },
-                icon: Icon(Icons.arrow_back),
+                icon: const Icon(Icons.arrow_back),
               ),
               const SizedBox(
                 width: 16,
@@ -163,7 +163,7 @@ class _AdminClassesAddScreenState extends State<AdminClassesAddScreen> {
               Expanded(
                 child: Text(
                   args['menu'] == 'add' ? 'New Class' : 'Edit Class',
-                  style: TextStyle(
+                  style: const TextStyle(
                     fontSize: 16,
                     fontWeight: FontWeight.bold,
                   ),
@@ -178,34 +178,34 @@ class _AdminClassesAddScreenState extends State<AdminClassesAddScreen> {
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.stretch,
                   children: [
-                    SizedBox(
+                    const SizedBox(
                       height: 10,
                     ),
-                    Text(
+                    const Text(
                       'Class Name',
                       style:
                           TextStyle(fontSize: 16, fontWeight: FontWeight.bold),
                     ),
-                    SizedBox(
+                    const SizedBox(
                       height: 10,
                     ),
                     TextField(
-                      decoration: InputDecoration(
+                      decoration: const InputDecoration(
                         border: OutlineInputBorder(),
                       ),
                       controller: TextEditingController(
                         text: args['nameClass'],
                       ),
                     ),
-                    SizedBox(
+                    const SizedBox(
                       height: 20,
                     ),
-                    Text(
+                    const Text(
                       'Type of Class',
                       style:
                           TextStyle(fontSize: 16, fontWeight: FontWeight.bold),
                     ),
-                    SizedBox(
+                    const SizedBox(
                       height: 10,
                     ),
                     DropdownButtonFormField(
@@ -223,15 +223,15 @@ class _AdminClassesAddScreenState extends State<AdminClassesAddScreen> {
                       },
                       items: dropdownItemsTypeClass,
                     ),
-                    SizedBox(
+                    const SizedBox(
                       height: 20,
                     ),
-                    Text(
+                    const Text(
                       'Trainer',
                       style:
                           TextStyle(fontSize: 16, fontWeight: FontWeight.bold),
                     ),
-                    SizedBox(
+                    const SizedBox(
                       height: 10,
                     ),
                     DropdownButtonFormField(
@@ -249,21 +249,22 @@ class _AdminClassesAddScreenState extends State<AdminClassesAddScreen> {
                       },
                       items: dropdownItemsTrainer,
                     ),
-                    SizedBox(
+                    const SizedBox(
                       height: 20,
                     ),
-                    Text(
+                    const Text(
                       'Dates of Class',
                       style:
                           TextStyle(fontSize: 16, fontWeight: FontWeight.bold),
                     ),
-                    SizedBox(
+                    const SizedBox(
                       height: 10,
                     ),
                     SizedBox(
                       height: 120,
                       child: GridView.builder(
-                        gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+                        gridDelegate:
+                            const SliverGridDelegateWithFixedCrossAxisCount(
                           crossAxisCount: 3,
                           childAspectRatio: 4,
                           crossAxisSpacing: 10,
@@ -292,7 +293,7 @@ class _AdminClassesAddScreenState extends State<AdminClassesAddScreen> {
                             child: Center(
                               child: Text(
                                 dates[index],
-                                style: TextStyle(
+                                style: const TextStyle(
                                   fontSize: 16,
                                   fontWeight: FontWeight.bold,
                                 ),
@@ -302,21 +303,22 @@ class _AdminClassesAddScreenState extends State<AdminClassesAddScreen> {
                         },
                       ),
                     ),
-                    SizedBox(
+                    const SizedBox(
                       height: 20,
                     ),
-                    Text(
+                    const Text(
                       'Time of Class',
                       style:
                           TextStyle(fontSize: 16, fontWeight: FontWeight.bold),
                     ),
-                    SizedBox(
+                    const SizedBox(
                       height: 10,
                     ),
                     SizedBox(
                       height: 200,
                       child: GridView.builder(
-                        gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+                        gridDelegate:
+                            const SliverGridDelegateWithFixedCrossAxisCount(
                           crossAxisCount: 4,
                           childAspectRatio: 4,
                           crossAxisSpacing: 10,
@@ -345,7 +347,7 @@ class _AdminClassesAddScreenState extends State<AdminClassesAddScreen> {
                             child: Center(
                               child: Text(
                                 times[index],
-                                style: TextStyle(
+                                style: const TextStyle(
                                   fontSize: 16,
                                   fontWeight: FontWeight.bold,
                                 ),
@@ -355,19 +357,19 @@ class _AdminClassesAddScreenState extends State<AdminClassesAddScreen> {
                         },
                       ),
                     ),
-                    SizedBox(
+                    const SizedBox(
                       height: 20,
                     ),
-                    Text(
+                    const Text(
                       'Location / Link of Class',
                       style:
                           TextStyle(fontSize: 16, fontWeight: FontWeight.bold),
                     ),
-                    SizedBox(
+                    const SizedBox(
                       height: 10,
                     ),
                     TextField(
-                      decoration: InputDecoration(
+                      decoration: const InputDecoration(
                         border: OutlineInputBorder(),
                       ),
                       controller: TextEditingController(
@@ -376,7 +378,7 @@ class _AdminClassesAddScreenState extends State<AdminClassesAddScreen> {
                             : args['location'],
                       ),
                     ),
-                    SizedBox(
+                    const SizedBox(
                       height: 20,
                     ),
                     RaisedButton(
@@ -389,14 +391,14 @@ class _AdminClassesAddScreenState extends State<AdminClassesAddScreen> {
                           horizontal: 16.0, vertical: 16.0),
                       child: Text(
                         args['state'] == 'add' ? 'Add Admin' : 'Save Changes',
-                        style: TextStyle(
+                        style: const TextStyle(
                           fontSize: 16,
                           fontWeight: FontWeight.bold,
                           color: Colors.white,
                         ),
                       ),
                     ),
-                    SizedBox(
+                    const SizedBox(
                       height: 20,
                     ),
                   ],

@@ -1,4 +1,4 @@
-// ignore_for_file: prefer_const_constructors, prefer_const_literals_to_create_immutables, deprecated_member_use, unused_local_variable
+// ignore_for_file: deprecated_member_use
 
 import 'package:flutter/material.dart';
 import 'package:jiffy/jiffy.dart';
@@ -7,7 +7,6 @@ import 'package:provider/provider.dart';
 import '../../widget/bottom_navigation_widget.dart';
 import '../login_screen/login_viewmodel.dart';
 import 'admin_classes_add_screen.dart';
-import 'admin_classes_viewmodel.dart';
 
 class AdminClassesScreen extends StatefulWidget {
   const AdminClassesScreen({Key? key}) : super(key: key);
@@ -20,11 +19,6 @@ class AdminClassesScreen extends StatefulWidget {
 class _AdminClassesScreenState extends State<AdminClassesScreen> {
   @override
   Widget build(BuildContext context) {
-    final adminClassesProvider = Provider.of<AdminClassesViewModel>(
-      context,
-      listen: false,
-    );
-
     final args =
         ModalRoute.of(context)?.settings.arguments as Map<String, dynamic>;
 
@@ -38,15 +32,15 @@ class _AdminClassesScreenState extends State<AdminClassesScreen> {
           automaticallyImplyLeading: false,
           elevation: 0,
           leading: IconButton(
-            icon: Icon(
+            icon: const Icon(
               Icons.arrow_back,
               color: Colors.white,
             ),
             onPressed: () => Navigator.pop(context),
           ),
-          actions: [
+          actions: const [
             Padding(
-              padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 20),
+              padding: EdgeInsets.symmetric(horizontal: 16, vertical: 20),
               child: Text(
                 'Cleo Zambrano',
                 style: TextStyle(
@@ -87,21 +81,21 @@ class _AdminClassesScreenState extends State<AdminClassesScreen> {
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.stretch,
         children: [
-          Text(
-            'Clases',
+          const Text(
+            'Classes',
             style: TextStyle(
               fontSize: 24,
               fontWeight: FontWeight.bold,
             ),
           ),
-          SizedBox(
+          const SizedBox(
             height: 20,
           ),
-          Divider(
+          const Divider(
             color: Colors.grey,
             height: 2,
           ),
-          SizedBox(
+          const SizedBox(
             height: 20,
           ),
           SizedBox(
@@ -145,7 +139,7 @@ class _AdminClassesScreenState extends State<AdminClassesScreen> {
                                   : const Color.fromRGBO(12, 48, 61, 1),
                               size: 30,
                             ),
-                            SizedBox(
+                            const SizedBox(
                               height: 10,
                             ),
                             Text(
@@ -164,7 +158,7 @@ class _AdminClassesScreenState extends State<AdminClassesScreen> {
                     ),
                   ),
                 ),
-                SizedBox(
+                const SizedBox(
                   width: 10,
                 ),
                 Expanded(
@@ -204,7 +198,7 @@ class _AdminClassesScreenState extends State<AdminClassesScreen> {
                                   : const Color.fromRGBO(12, 48, 61, 1),
                               size: 30,
                             ),
-                            SizedBox(
+                            const SizedBox(
                               height: 10,
                             ),
                             Text(
@@ -226,14 +220,14 @@ class _AdminClassesScreenState extends State<AdminClassesScreen> {
               ],
             ),
           ),
-          SizedBox(
+          const SizedBox(
             height: 20,
           ),
-          Divider(
+          const Divider(
             color: Colors.grey,
             height: 1.5,
           ),
-          SizedBox(
+          const SizedBox(
             height: 20,
           ),
           _menuSwitch(menu),
@@ -253,13 +247,13 @@ class _AdminClassesScreenState extends State<AdminClassesScreen> {
               children: [
                 Text(
                   menu == 'online' ? 'Online Classes' : 'Offline Classes',
-                  style: TextStyle(
+                  style: const TextStyle(
                     fontSize: 20,
                     fontWeight: FontWeight.bold,
                   ),
                 ),
                 IconButton(
-                  icon: Icon(
+                  icon: const Icon(
                     Icons.add_circle_outline,
                     size: 30,
                   ),
@@ -275,10 +269,10 @@ class _AdminClassesScreenState extends State<AdminClassesScreen> {
                 ),
               ],
             ),
-            SizedBox(
+            const SizedBox(
               height: 10,
             ),
-            Divider(
+            const Divider(
               color: Colors.grey,
               height: 1.5,
             ),
@@ -289,16 +283,16 @@ class _AdminClassesScreenState extends State<AdminClassesScreen> {
                   padding:
                       const EdgeInsets.symmetric(horizontal: 8, vertical: 4),
                   decoration: BoxDecoration(
-                    color: Color.fromRGBO(12, 48, 61, 1),
+                    color: const Color.fromRGBO(12, 48, 61, 1),
                     borderRadius: BorderRadius.circular(4),
                   ),
                   child: Expanded(
                     child: Row(
                       children: [
                         RaisedButton(
-                          color: Color.fromRGBO(241, 90, 36, 1),
+                          color: const Color.fromRGBO(241, 90, 36, 1),
                           onPressed: () {},
-                          child: Text(
+                          child: const Text(
                             'Cardio',
                             style: TextStyle(
                               fontSize: 14,
@@ -307,13 +301,13 @@ class _AdminClassesScreenState extends State<AdminClassesScreen> {
                             ),
                           ),
                         ),
-                        SizedBox(
+                        const SizedBox(
                           width: 10,
                         ),
                         RaisedButton(
                           onPressed: () {},
-                          color: Color.fromRGBO(12, 48, 61, 1),
-                          child: Text(
+                          color: const Color.fromRGBO(12, 48, 61, 1),
+                          child: const Text(
                             'Body & Mind',
                             style: TextStyle(
                               fontSize: 14,
@@ -322,13 +316,13 @@ class _AdminClassesScreenState extends State<AdminClassesScreen> {
                             ),
                           ),
                         ),
-                        SizedBox(
+                        const SizedBox(
                           width: 10,
                         ),
                         RaisedButton(
                           onPressed: () {},
-                          color: Color.fromRGBO(12, 48, 61, 1),
-                          child: Text(
+                          color: const Color.fromRGBO(12, 48, 61, 1),
+                          child: const Text(
                             'Strength',
                             style: TextStyle(
                               fontSize: 14,
@@ -343,39 +337,40 @@ class _AdminClassesScreenState extends State<AdminClassesScreen> {
                 ),
               ],
             ),
-            SizedBox(
+            const SizedBox(
               height: 10,
             ),
             Row(
               children: [
-                Expanded(
+                const Expanded(
                   child: TextField(
                     decoration: InputDecoration(
                       labelText: 'Search',
                       prefixIcon: Icon(Icons.search),
                       border: OutlineInputBorder(),
-                      contentPadding: const EdgeInsets.symmetric(
+                      contentPadding: EdgeInsets.symmetric(
                         horizontal: 16,
                         vertical: 10,
                       ),
                     ),
                   ),
                 ),
-                SizedBox(
+                const SizedBox(
                   width: 20,
                 ),
                 TextButton(
                   onPressed: () {},
                   style: TextButton.styleFrom(
                     primary: Colors.white,
-                    backgroundColor: Color.fromRGBO(12, 48, 61, 1),
-                    padding: EdgeInsets.symmetric(horizontal: 8, vertical: 14),
+                    backgroundColor: const Color.fromRGBO(12, 48, 61, 1),
+                    padding:
+                        const EdgeInsets.symmetric(horizontal: 8, vertical: 14),
                   ),
-                  child: Text('Search'),
+                  child: const Text('Search'),
                 ),
               ],
             ),
-            SizedBox(
+            const SizedBox(
               height: 10,
             ),
             for (var i = 0; i < 10; i++)
@@ -413,18 +408,18 @@ class _AdminClassesScreenState extends State<AdminClassesScreen> {
                     subtitle: Column(
                       children: [
                         Table(
-                          columnWidths: {
+                          columnWidths: const {
                             0: FlexColumnWidth(2),
                             1: FlexColumnWidth(3),
                           },
                           children: [
-                            TableRow(
+                            const TableRow(
                               children: [
                                 Text('Link'),
                                 Text('https://meet.google.com/'),
                               ],
                             ),
-                            TableRow(
+                            const TableRow(
                               children: [
                                 Text('Dates'),
                                 Text('Senin, Selasa, Rabu'),
@@ -432,11 +427,11 @@ class _AdminClassesScreenState extends State<AdminClassesScreen> {
                             ),
                             TableRow(
                               children: [
-                                Text('Time'),
+                                const Text('Time'),
                                 Column(
                                   crossAxisAlignment:
                                       CrossAxisAlignment.stretch,
-                                  children: [
+                                  children: const [
                                     Text('07:00 - 08:00'),
                                     Text('08:00 - 09:00'),
                                     Text('09:00 - 10:00'),
@@ -446,7 +441,7 @@ class _AdminClassesScreenState extends State<AdminClassesScreen> {
                             ),
                             TableRow(
                               children: [
-                                Text('Trainer'),
+                                const Text('Trainer'),
                                 Text('Trainer $i'),
                               ],
                             ),
@@ -460,7 +455,7 @@ class _AdminClassesScreenState extends State<AdminClassesScreen> {
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
                         IconButton(
-                          icon: Icon(
+                          icon: const Icon(
                             Icons.edit,
                             size: 20,
                           ),
@@ -497,7 +492,7 @@ class _AdminClassesScreenState extends State<AdminClassesScreen> {
                           },
                         ),
                         IconButton(
-                          icon: Icon(
+                          icon: const Icon(
                             Icons.delete,
                             size: 20,
                           ),
@@ -507,7 +502,7 @@ class _AdminClassesScreenState extends State<AdminClassesScreen> {
                               builder: (context) => Card(
                                 child: AlertDialog(
                                   title: Column(
-                                    children: [
+                                    children: const [
                                       SizedBox(
                                         height: 20,
                                       ),
@@ -524,10 +519,10 @@ class _AdminClassesScreenState extends State<AdminClassesScreen> {
                                       ),
                                     ],
                                   ),
-                                  content: Text(
+                                  content: const Text(
                                       'Deleting this file will be permanent.'),
                                   actionsAlignment: MainAxisAlignment.center,
-                                  actionsPadding: EdgeInsets.all(10),
+                                  actionsPadding: const EdgeInsets.all(10),
                                   actions: [
                                     FlatButton(
                                       child: TextButton(
@@ -535,14 +530,14 @@ class _AdminClassesScreenState extends State<AdminClassesScreen> {
                                           Navigator.pop(context);
                                         },
                                         style: TextButton.styleFrom(
-                                          primary:
-                                              Color.fromRGBO(12, 48, 61, 1),
-                                          padding: EdgeInsets.symmetric(
+                                          primary: const Color.fromRGBO(
+                                              12, 48, 61, 1),
+                                          padding: const EdgeInsets.symmetric(
                                             horizontal: 16,
                                             vertical: 14,
                                           ),
                                           shape: RoundedRectangleBorder(
-                                            side: BorderSide(
+                                            side: const BorderSide(
                                               color:
                                                   Color.fromRGBO(12, 48, 61, 1),
                                               width: 1,
@@ -552,7 +547,7 @@ class _AdminClassesScreenState extends State<AdminClassesScreen> {
                                             ),
                                           ),
                                         ),
-                                        child: Text('Cancel'),
+                                        child: const Text('Cancel'),
                                       ),
                                       onPressed: () {
                                         Navigator.pop(context);
@@ -565,14 +560,14 @@ class _AdminClassesScreenState extends State<AdminClassesScreen> {
                                         },
                                         style: TextButton.styleFrom(
                                           primary: Colors.white,
-                                          backgroundColor:
-                                              Color.fromRGBO(12, 48, 61, 1),
-                                          padding: EdgeInsets.symmetric(
+                                          backgroundColor: const Color.fromRGBO(
+                                              12, 48, 61, 1),
+                                          padding: const EdgeInsets.symmetric(
                                             horizontal: 16,
                                             vertical: 14,
                                           ),
                                         ),
-                                        child: Text('Delete'),
+                                        child: const Text('Delete'),
                                       ),
                                       onPressed: () {
                                         Navigator.pop(context);

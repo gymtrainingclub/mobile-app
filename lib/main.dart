@@ -5,6 +5,7 @@ import 'package:google_fonts/google_fonts.dart';
 import 'package:mobileapp/screen/about_screen/about_screen.dart';
 import 'package:mobileapp/screen/admin_administrator_screen/admin_administrator_add_screen.dart';
 import 'package:mobileapp/screen/admin_administrator_screen/admin_administrator_screen.dart';
+import 'package:mobileapp/screen/admin_booking_screen/admin_booking_add_screen.dart';
 import 'package:mobileapp/screen/admin_content_screen/admin_content_screen.dart';
 import 'package:mobileapp/screen/admin_instructor_screen/admin_instructor_viewmodel.dart';
 import 'package:mobileapp/screen/admin_membership_screen/admin_membership_screen.dart';
@@ -39,6 +40,7 @@ import 'screen/admin_category_screen/admin_category_viewmodel.dart';
 import 'screen/admin_classes_screen/admin_classes_add_screen.dart';
 import 'screen/admin_classes_screen/admin_classes_screen.dart';
 import 'screen/admin_classes_screen/admin_classes_viewmodel.dart';
+import 'screen/admin_content_screen/admin_content_add_screen.dart';
 import 'screen/admin_content_screen/admin_content_viewmodel.dart';
 import 'screen/admin_dashboard_screen/admin_dashboard_viewmodel.dart';
 import 'screen/admin_instructor_screen/admin_instructor_screen.dart';
@@ -46,6 +48,7 @@ import 'screen/admin_membership_screen/admin_membership_detail_screen.dart';
 import 'screen/admin_membership_screen/admin_membership_viewmodel.dart';
 import 'screen/admin_membership_type_screen/admin_membership_type_screen.dart';
 import 'screen/admin_membership_type_screen/admin_membership_type_viewmodel.dart';
+import 'screen/admin_newsletter_screen/admin_newsletter_add_screen.dart';
 import 'screen/admin_newsletter_screen/admin_newsletter_screen.dart';
 import 'screen/admin_newsletter_screen/admin_newsletter_viewmodel.dart';
 import 'screen/admin_notification_screen/admin_notification_screen.dart';
@@ -299,6 +302,12 @@ class MyApp extends StatelessWidget {
             return routeBuilder(const AdminBookingScreen(), set);
           case AdminNewsletterScreen.route:
             return routeBuilder(const AdminNewsletterScreen(), set);
+          case AdminBookingAddScreen.route:
+            return routeBuilder(const AdminBookingAddScreen(), set);
+          case AdminNewsletterAddScreen.route:
+            return routeBuilder(const AdminNewsletterAddScreen(), set);
+          case AdminContentAddScreen.route:
+            return routeBuilder(const AdminContentAddScreen(), set);
           default:
             return routeBuilder(const LogoScreen(), set);
         }
